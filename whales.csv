@@ -1,0 +1,474 @@
+X,species,name,sex,accuracy,birthYear,acquisition,originDate,originLocation,mother,father,currently,region,status,transfer,entryDate
+1,Bottlenose,Dazzle,F,a,1989,Born,1989-04-07,Marineland Florida,Betty III,Davy II,Marineland Florida,US,Alive,US,1989-04-07
+2,Bottlenose,Tursi,F,a,1973,Born,1973-11-26,Dolphin Research Center,Little Bit,Mr. Gipper,Dolphin Research Center,US,Alive,US,1973-11-26
+3,Bottlenose,Starbuck,M,a,1978,Born,1978-05-13,SeaWorld San Diego,Cindy (T.t. gilli),Sambo,SeaWorld Orlando,US,Alive,US,1978-05-13
+6,Bottlenose,Nacha,F,a,1980,Born,1980-10-10,SeaWorld San Diego,Notchfin,Jethro (T.t. gilli),SeaWorld San Antonio,US,Alive,US,1980-10-10
+7,Bottlenose,Kama,M,a,1981,Born,1981-03-27,SeaWorld San Diego,Jiffy,Jethro (T.t. gilli),U.S. Navy,US,Alive,US,1981-03-27
+9,Bottlenose,Duffy,M,a,1982,Born,1982-10-16,SeaWorld San Diego,Priscilla,Clicker,Theater of the Sea,US,Alive,US,1982-10-16
+10,Bottlenose,Astra,F,a,1983,Born,1983-03-07,SeaWorld San Diego,Cindy,Clicker,Discovery Cove,US,Alive,US,1983-03-07
+11,Bottlenose,Sunny,M,a,1984,Born,1984-01-12,Marineland Florida,Nellie,Rusty (blonde),Marineland Florida,US,Alive,US,1984-01-12
+12,Bottlenose,Yoyo,F,a,1984,Born,1984-03-06,SeaWorld San Diego,Maggie,Gouda,SeaWorld San Antonio,US,Alive,US,1984-03-06
+13,Bottlenose,Phil,M,a,1984,Born,1984-08-12,SeaWorld Orlando,Tanya,Ralph,SeaWorld Orlando,US,Alive,US,1984-08-12
+14,Bottlenose,Merina,F,a,1984,Born,1984-11-21,Dolphin Research Center,Bee,Delphi,Dolphin Research Center,US,Alive,US,1984-11-21
+15,Bottlenose,Aleta,F,a,1984,Born,1984-12-21,Dolphin Research Center,Misty,Delphi,Dolphin Research Center,US,Alive,US,1984-12-21
+16,Bottlenose,Santini,F,a,1986,Born,1986-11-30,Dolphin Research Center,Theresa,Delphi,Dolphin Research Center,US,Alive,US,1986-11-30
+17,Bottlenose,Allie,F,a,1987,Born,1987-04-01,Dolphin Connection,April,Merlin,Brookfield Zoo,US,Alive,US,1987-04-01
+18,Bottlenose,Dottie,F,a,1987,Born,1987-04-26,SeaWorld Orlando,Darla,Ralph,SeaWorld San Diego,US,Alive,US,1987-04-26
+19,Bottlenose,Clyde,M,a,1988,Born,1988-03-16,SeaWorld Orlando, Bonnie,Ralph,SeaWorld Orlando,US,Alive,US,1988-03-16
+20,Bottlenose,Sparky,M,a,1988,Born,1988-04-08,SeaWorld San Diego,Sharkey,Semo,U.S. Navy,US,Alive,US,1988-04-08
+21,Bottlenose,A.J.,M,a,1988,Born,1988-05-23,Dolphin Research Center,Aphrodite,Joe,Dolphin Research Center,US,Alive,US,1988-05-23
+22,Killer Whale; Orca,Orkid,F,a,1988,Born,1988-09-23,SeaWorld San Diego,Kandu V,Orky II,SeaWorld San Diego,US,Alive,US,1988-09-23
+23,Killer Whale; Orca,Kayla,F,a,1988,Born,1988-11-26,SeaWorld San Antonio,Kenau,Orky II,SeaWorld Orlando,US,Alive,US,1988-11-26
+24,Bottlenose,Razzle,M,a,1989,Born,1989-04-06,Marineland Florida,Mary,Davy II,SeaWorld San Diego,US,Alive,US,1989-04-06
+25,Bottlenose,Belle,M,a,1989,Born,1989-08-16,SeaWorld San Antonio,Alice,Guy,SeaWorld San Diego,US,Alive,US,1989-08-16
+26,Bottlenose,Melanie,F,a,1989,Born,1989-08-26,SeaWorld San Diego,Scarback,Jethro (T.t. gilli),SeaWorld San Diego,US,Alive,US,1989-08-26
+27,Bottlenose,Tasha,F,a,1990,Born,1990-02-15,SeaWorld Aurora,Astra,Domino,SeaWorld Orlando,US,Alive,US,1990-02-15
+28,Bottlenose,Bubba,M,a,1990,Born,1990-04-04,SeaWorld San Diego,Sandy (Bubbles),Crunch,SeaWorld Orlando,US,Alive,US,1990-04-04
+29,Bottlenose,Steime,F,a,1990,Born,1990-04-08,SeaWorld Orlando,Spanky,Ralph,SeaWorld San Diego,US,Alive,US,1990-04-08
+30,Bottlenose,Talon,M,a,1990,Born,1990-06-08,Dolphin Research Center,Tursi,Delphi,Dolphin Research Center,US,Alive,US,1990-06-08
+31,Bottlenose,Baretta,M,a,1990,Born,1990-08-13,SeaWorld San Diego,Cometta,Kai (T.t. gilli),SeaWorld Orlando,US,Alive,US,1990-08-13
+32,Bottlenose,Roxy,F,a,1990,Born,1990-08-26,Marineland Florida,Pebbles,Chubby,Marineland Florida,US,Alive,US,1990-08-26
+33,Killer Whale; Orca,Shouka,F,a,1990,Born,1993-02-25,Marineland Antibes,Sharkan,Kim II,SeaWorld San Diego,US,Alive,US,1993-02-25
+34,Bottlenose,Hoku,M,a,1991,Born,1991-03-30,Kahala Hilton Oahu,Iwa,Maka,Dolphin Quest Oahu,US,Alive,US,1991-03-30
+35,Bottlenose,Latoya,F,a,1991,Born,1991-05-20,SeaWorld Orlando,Tanya,Ralph,Discovery Cove,US,Alive,US,1991-05-20
+36,Bottlenose,Thelma,F,a,1991,Born,1991-05-23,SeaWorld Orlando,Louise,Ralph,Discovery Cove,US,Alive,US,1991-05-23
+37,Killer Whale; Orca,Takara,F,a,1991,Born,1991-07-09,SeaWorld San Diego,Kasatka,Kotar,SeaWorld San Antonio,US,Alive,US,1991-07-09
+38,Killer Whale; Orca,Kyuquot,M,a,1991,Born,1991-12-24,Sealand of the Pacific,Haida II,Tilikum,SeaWorld San Antonio,US,Alive,US,1991-12-24
+40,Bottlenose,Khyber,M,a,1992,Born,1992-04-05,Dolphin Connection,April,Pepper,EPCOT The Seas,US,Alive,US,1992-04-05
+41,Bottlenose,Shadow,M,a,1992,Born,1992-07-23,Minnesota Zoo,Rio,Semo,Texas State Aquarium,US,Alive,US,1992-07-23
+42,Beluga,Beethoven,M,a,1992,Born,1992-08-08,SeaWorld San Antonio,Bandit,Shadow,Shedd Aquarium,US,Alive,US,1992-08-08
+43,Hybrid,C.J.,M,a,1992,Born,1992-11-05,SeaWorld San Diego,Jenny,Cooper (D. capensis),SeaWorld Orlando,US,Alive,US,1992-11-05
+44,Killer Whale; Orca,Keet,M,a,1993,Born,1993-02-02,SeaWorld San Antonio,Kalina,Kotar,SeaWorld San Diego,US,Alive,US,1993-02-02
+45,Bottlenose,Alejandro,M,a,1993,Born,1993-03-21,SeaWorld San Antonio,Alice,Capricorn,SeaWorld Orlando,US,Alive,US,1993-03-21
+46,Commerson's,Pepe,M,a,1993,Born,1993-05-23,SeaWorld San Diego,Betsy,Pancho,Aquatica Orlando,US,Alive,US,1993-05-23
+47,Bottlenose,Alfonz,M,a,1993,Born,1993-07-25,Dolphins Plus Oceanside,Genie,Fonzie,Dolphins Plus Oceanside,US,Alive,US,1993-07-25
+48,Bottlenose,Calvin,M,a,1994,Born,1994-04-04,Dolphin Connection,Schooner,Pepper,EPCOT The Seas,US,Alive,US,1994-04-04
+49,Bottlenose,Avalon,M,a,1994,Born,1994-04-23,Six Flags Discovery Kingdom,Jasmine,Bayou,Six Flags Discovery Kingdom,US,Alive,US,1994-04-23
+50,Bottlenose,Brisby,M,a,1994,Born,1994-05-12,Six Flags Discovery Kingdom,Chelsea,Bayou,Six Flags Discovery Kingdom,US,Alive,US,1994-05-12
+51,Bottlenose,Tyler,M,a,1994,Born,1994-05-29,SeaWorld Orlando,Tanya,Lester,SeaWorld Orlando,US,Alive,US,1994-05-29
+52,Bottlenose,Niele,M,a,1994,Born,1994-06-30,Sea Life Park,Nihoa,Amiko,Georgia Aquarium,US,Alive,US,1994-06-30
+53,Bottlenose,Kolohe,M,a,1994,Born,1994-07-12,Dolphin Quest Hawaii,Shaka,Hobi,Dolphin Quest Oahu,US,Alive,US,1994-07-12
+54,Bottlenose,Bob,M,a,1994,Born,1994-07-28,Dolphins Plus Oceanside,Jessica,Little Bit,Dolphins Plus Oceanside,US,Alive,US,1994-07-28
+55,Bottlenose,Kai,M,a,1994,Born,1994-10-11,Brookfield Zoo,Windy,Gibbs*,Texas State Aquarium,US,Alive,US,1994-10-11
+56,Bottlenose,Liho,M,a,1995,Born,1995-01-22,Sea Life Park,Iwa,Maka,Dolphin Quest Oahu,US,Alive,US,1995-01-22
+57,Bottlenose,Zac,M,a,1995,Born,1995-02-23,Gulfarium,Delilah,Panama,Marineland Florida,US,Alive,US,1995-02-23
+58,Bottlenose,Kendall,F,a,1995,Born,1995-06-07,Marineland Florida,Bunny,Davy II,Discovery Cove,US,Alive,US,1995-06-07
+59,Bottlenose,Yoko,F,a,1995,Born,1995-07-19,SeaWorld San Antonio,Yoyo,Capricorn,Discovery Cove,US,Alive,US,1995-07-19
+60,Bottlenose,Ripley,F,a,1996,Born,1996-04-20,SeaWorld San Antonio,Puka,Capricorn,SeaWorld San Diego,US,Alive,US,1996-04-20
+61,Bottlenose,Rose,F,a,1996,Born,1996-04-27,SeaWorld San Antonio,Alice,Capricorn,Discovery Cove,US,Alive,US,1996-04-27
+62,Bottlenose,Natalie,F,a,1996,Born,1996-05-17,SeaWorld San Antonio,Punta,Capricorn,Discovery Cove,US,Alive,US,1996-05-17
+63,Bottlenose,Hutch,M,a,1996,Born,1996-06-24,SeaWorld Orlando,Starkey,Lester,Discovery Cove,US,Alive,US,1996-06-24
+64,Bottlenose,Griffith,F,a,1996,Born,1996-08-01,SeaWorld San Diego,Melanie,Crunch,SeaWorld Orlando,US,Alive,US,1996-08-01
+65,Bottlenose,Sebastian,M,a,1996,Born,1996-08-27,SeaWorld Orlando,Sabrina,Stein,Gulfarium Marine Adventure,US,Alive,US,1996-08-27
+66,Bottlenose,Kai'nalu,M,a,1996,Born,1996-10-03,Dolphin Quest Hawaii,Leilani,Hobi,Dolphinaris Arizona,US,Alive,US,1996-10-03
+67,Bottlenose,Pax,M,a,1997,Born,1997-03-30,Dolphin Research Center,Tursi,Rainbow,Dolphin Research Center,US,Alive,US,1997-03-30
+68,Bottlenose,Marble,M,a,1997,Born,1997-05-13,SeaWorld Orlando,Tasha,Beachie,SeaWorld Orlando,US,Alive,US,1997-05-13
+69,Bottlenose,Rascal,M,a,1997,Born,1997-05-25,SeaWorld Aurora,Steime,Nalu,SeaWorld Orlando,US,Alive,US,1997-05-25
+70,Bottlenose,Clipper,F,a,1997,Born,1997-05-26,SeaWorld Orlando,Louise,Lester,Discovery Cove,US,Alive,US,1997-05-26
+71,Bottlenose,Dash,F,a,1997,Born,1997-05-27,Sea World of Ohio,Dottie,Clyde,Discovery Cove,US,Alive,US,1997-05-27
+72,Bottlenose,Nainoa,M,a,1997,Born,1997-10-31,Dolphin Quest Hawaii,Kona,Hobi,Dolphin Quest Oahu,US,Alive,US,1997-10-31
+73,Bottlenose,Pandora,F,a,1997,Born,1997-11-22,Dolphin Research Center,Merina,Kibby,Dolphin Research Center,US,Alive,US,1997-11-22
+74,Bottlenose,Diego,M,a,1997,Born,1997-12-26,SeaWorld San Diego,Sandy (Bubbles),Stein,SeaWorld Orlando,US,Alive,US,1997-12-26
+75,Bottlenose,Sherman,M,a,1998,Born,1998-02-03,Theater of the Sea,Sherry,Stormy,Theater of the Sea,US,Alive,US,1998-02-03
+76,Bottlenose,Calla,F,a,1998,Born,1998-02-24,SeaWorld Orlando,Lily,Lester,SeaWorld Orlando,US,Alive,US,1998-02-24
+77,Bottlenose,Malibu,F,a,1998,Born,1998-03-10,SeaWorld San Diego,Bacardi,Stein,SeaWorld San Diego,US,Alive,US,1998-03-10
+78,Bottlenose,Roxy,F,a,1998,Born,1998-06-19,SeaWorld Aurora,Thelma,Clyde,Discovery Cove,US,Alive,US,1998-06-19
+79,Bottlenose,Oscar,M,a,1998,Born,1998-06-30,SeaWorld Aurora,Latoya,Nalu,SeaWorld Orlando,US,Alive,US,1998-06-30
+80,Bottlenose,Ping,F,a,1998,Born,1998-07-03,SeaWorld San Antonio,Alice,Capricorn,Dolphinaris Arizona,US,Alive,US,1998-07-03
+81,Bottlenose,Fathom,M,a,1998,Born,1998-08-17,SeaWorld San Antonio,Puka,Capricorn,SeaWorld San Antonio,US,Alive,US,1998-08-17
+82,Commerson's,Ross,M,a,1998,Born,1998-09-01,SeaWorld San Diego,Betsy,Juan,Aquatica Orlando,US,Alive,US,1998-09-01
+83,"White-sided, Pacific",Avalon,F,a,1999,Born,1999-07-18,SeaWorld San Antonio,Catalina,Jump-Jump,SeaWorld San Antonio,US,Alive,US,1999-07-18
+84,"White-sided, Pacific",Avalon,F,a,1999,Born,1993-09-05,SeaWorld San Antonio,Catalina,Jump-Jump,SeaWorld San Antonio,US,Alive,US,1993-09-05
+85,Bottlenose,Nimbus,M,a,1999,Born,1999-06-14,Dolphin Quest Bermuda,Cirrus,Gibbs*,Dolphin Quest Hawai'i,US,Alive,Foreign,2010-03-03
+86,Killer Whale; Orca,Tuar,M,a,1999,Born,1999-06-22,SeaWorld Orlando,Kalina,Tilikum,SeaWorld San Antonio,US,Alive,US,1999-06-22
+87,Bottlenose,Daphne,F,a,1999,Born,1999-07-20,SeaWorld San Diego,Steime,Clyde,SeaWorld San Diego,US,Alive,US,1999-07-20
+88,Bottlenose,Kenobi,M,a,1999,Born,1999-07-21,SeaWorld San Diego,Tobie,Clyde,Georgia Aquarium,US,Alive,US,1999-07-21
+89,Beluga,Whisper,F,a,1999,Born,1999-07-25,SeaWorld San Antonio,Crissy,Luke,SeaWorld Orlando,US,Alive,US,1999-07-25
+90,Beluga,Kayavak,F,a,1999,Born,1999-08-03,Shedd Aquarium,Immiayuk,Inuk,Shedd Aquarium,US,Alive,US,1999-08-03
+91,"White-sided, Pacific",Hailey,F,a,1999,Born,1999-08-28,SeaWorld San Antonio,Betty,Jump-Jump,SeaWorld San Antonio,US,Alive,US,1999-08-28
+92,Bottlenose,Brady,M,a,1999,Born,1999-10-28,SeaWorld San Antonio,Punta,Capricorn,SeaWorld San Antonio,US,Alive,US,1999-10-28
+93,Bottlenose,Brandy,M,a,2000,Born,2000-03-04,Gulfarium,Delilah,Prince,Six Flags Discovery Kingdom,US,Alive,US,2000-03-04
+95,Bottlenose,Madison,F,a,2000,Born,2000-03-31,SeaWorld San Diego,Melanie,Phil,Discovery Cove,US,Alive,US,2000-03-31
+96,Bottlenose,Polka,M,a,2000,Born,2000-05-21,SeaWorld San Diego,Dottie,Bodine (T.t. gilli),Georgia Aquarium,US,Alive,US,2000-05-21
+97,Bottlenose,Malabar,M,a,2000,Born,2000-06-13,Dolphin Quest Bermuda,Bailey,Gibbs*,EPCOT The Seas,US,Alive,Foreign,2005-11-21
+98,Bottlenose,Tango,M,a,2000,Born,2000-07-09,SeaWorld Orlando,Tasha,Belle,U.S. Navy,US,Alive,US,2000-07-09
+99,Commerson's,Ringer,F,a,2000,Born,2000-07-10,SeaWorld San Diego,Oreo,Juan,Aquatica Orlando,US,Alive,US,2000-07-10
+100,Beluga,Luna,F,a,2000,Born,2000-07-24,SeaWorld San Antonio,Martina,Luke,SeaWorld San Antonio,US,Alive,US,2000-07-24
+101,Bottlenose,Corona,F,a,2000,Born,2000-08-12,SeaWorld San Diego,Cometta,Crunch,SeaWorld San Diego,US,Alive,US,2000-08-12
+102,Bottlenose,Tiger,M,a,2000,Born,2000-08-20,SeaWorld Orlando,Lily,Belle,SeaWorld Orlando,US,Alive,US,2000-08-20
+103,Bottlenose,Jag,M,a,2000,Born,2000-08-25,SeaWorld Orlando,Jenever,Capricorn,SeaWorld Orlando,US,Alive,US,2000-08-25
+104,Bottlenose,Keo,F,a,2000,Born,2000-09-01,Dolphin Quest Hawaii,Pele,Lono,Dolphin Quest Hawai'i,US,Alive,US,2000-09-01
+105,Bottlenose,Liko,M,a,2000,Born,2000-09-08,Dolphin Quest Hawaii,Kona,Lono,Dolphinaris Arizona,US,Alive,US,2000-09-08
+106,Bottlenose,Coral,F,a,2000,Born,2000-10-04,Discovery Cove,Jenny,Phil,Discovery Cove,US,Alive,US,2000-10-04
+107,Bottlenose,Sydney,M,a,2000,Born,2000-10-09,SeaWorld San Diego,Sandy,Baretta,Georgia Aquarium,US,Alive,US,2000-10-09
+108,Bottlenose,Pacino,M,a,2000,Born,2000-10-13,SeaWorld San Diego,Scarback,Crunch,Georgia Aquarium,US,Alive,US,2000-10-13
+109,"White-sided, Pacific",Munchkin,F,a,2000,Born,2000-10-21,SeaWorld San Antonio,Lavern,Jump-Jump,Shedd Aquarium,US,Alive,US,2000-10-21
+110,Bottlenose,Bella,F,a,2000,Born,2000-11-03,Dolphins Plus Oceanside,Sarah,Fonzie,Dolphins Plus Oceanside,US,Alive,US,2000-11-03
+111,Bottlenose,Kalei,F,a,2000,Born,2000-11-16,Indianapolis Zoo,Nova,Sundance,Indianapolis Zoo,US,Alive,US,2000-11-16
+112,Bottlenose,Calusa,F,a,2001,Born,2001-02-15,Dolphin Research Center,Merina,Rainbow,Dolphin Research Center,US,Alive,US,2001-02-15
+113,Bottlenose,Nikki,F,a,2001,Born,2001-04-13,SeaWorld San Antonio,Nacha,Kai (T.t. gilli),SeaWorld San Antonio,US,Alive,US,2001-04-13
+114,Bottlenose,Deke,M,a,2001,Born,2001-05-07,SeaWorld Orlando,Nova,Hekili,Six Flags Discovery Kingdom,US,Alive,US,2001-05-07
+115,Bottlenose,Sadie,F,a,2001,Born,2001-08-04,SeaWorld San Antonio,Puka,Kai (T.t. gilli),SeaWorld San Diego,US,Alive,US,2001-08-04
+116,Bottlenose,Indy,F,a,2001,Born,2001-08-20,Indianapolis Zoo,China,Sundance,Indianapolis Zoo,US,Alive,US,2001-08-20
+117,Killer Whale; Orca,Nakai,M,a,2001,Born,2001-09-01,SeaWorld San Diego,Kasatka,"A.I., Tilikum",SeaWorld San Diego,US,Alive,US,2001-09-01
+118,Bottlenose,Naia,F,a,2002,Born,2002-01-08,Discovery Cove,Scarlet,Lester,SeaWorld Orlando,US,Alive,US,2002-01-08
+119,Bottlenose,Neo,M,a,2002,Born,2002-01-30,Discovery Cove,Astra,Lester,SeaWorld Orlando,US,Alive,US,2002-01-30
+120,Bottlenose,Jett,M,a,2002,Born,2002-02-02,Indianapolis Zoo,Ripley,Sundance,Indianapolis Zoo,US,Alive,US,2002-02-02
+121,Bottlenose,Tanner,M,a,2002,Born,2002-03-13,Dolphin Research Center,Santini,A.J.,Dolphin Research Center,US,Alive,US,2002-03-13
+122,Bottlenose,Alpha,M,a,2002,Born,2002-04-19,SeaWorld Orlando,Ariel,Razzle,SeaWorld Orlando,US,Alive,US,2002-04-19
+123,Bottlenose,Casique,F,a,2002,Born,2002-04-30,Marineland Florida,Dazzle,Chubby,Marineland Florida,US,Alive,US,2002-04-30
+124,Bottlenose,Phebe,F,a,2002,Born,2002-05-05,Marineland Florida,Betty,Chubby,Georgia Aquarium,US,Alive,US,2002-05-05
+126,Bottlenose,Spree,F,a,2002,Born,2002-08-16,Minnesota Zoo,Rio,Semo,Brookfield Zoo,US,Alive,US,2002-08-16
+127,Killer Whale; Orca,Ikaika,M,a,2002,Born,2002-08-25,SeaWorld Orlando,Katina,"A.I., Tilikum",SeaWorld San Diego,US,Alive,US,2002-08-25
+128,Bottlenose,Marea,F,a,2003,Born,2003-02-06,Discovery Cove,Thelma,Akai,Discovery Cove,US,Alive,US,2003-02-06
+129,Bottlenose,Maverick,M,a,2003,Born,2003-02-27,Mirage Dolphin Habitat,Duchess,Banjo,Mirage Dolphin Habitat,US,Alive,US,2003-02-27
+130,Bottlenose,Pukanala,F,a,2003,Born,2003-03-03,Dolphin Quest Hawaii,Iwa,Lono,Georgia Aquarium,US,Alive,US,2003-03-03
+131,Bottlenose,Charlie,M,a,2003,Born,2003-05-18,SeaWorld San Diego,Purina,Tacoma,U.S. Navy,US,Alive,US,2003-05-18
+132,Bottlenose,Maguire,M,a,2003,Born,2003-05-29,SeaWorld San Diego,Tobie,"A.I., Tacoma",SeaWorld San Diego,US,Alive,US,2003-05-29
+133,Bottlenose,Nitro,M,a,2003,Born,2003-06-14,SeaWorld San Diego,Dottie,Stein,U.S. Navy,US,Alive,US,2003-06-14
+134,Bottlenose,Zana,F,a,2003,Born,2003-06-17,SeaWorld San Diego,Steime,Stein,SeaWorld San Diego,US,Alive,US,2003-06-17
+136,Bottlenose,Leo,M,a,2003,Born,2003-07-29,Dolphins Plus Bayside,Nicky,Alfonz,Dolphins Plus Oceanside,US,Alive,US,2003-07-29
+137,Bottlenose,Yar,F,a,2003,Born,2003-08-03,SeaWorld Orlando,Tasha,Duncan,SeaWorld Orlando,US,Alive,US,2003-08-03
+138,Bottlenose,Yoshe,F,a,2003,Born,2003-08-15,SeaWorld Orlando,Mimi,Belle,Six Flags Discovery Kingdom,US,Alive,US,2003-08-15
+139,Bottlenose,Cosmo,M,a,2003,Born,2003-08-20,SeaWorld Orlando,Nova,Belle,Gulfarium Marine Adventure,US,Alive,US,2003-08-20
+140,Bottlenose,Balla,M,a,2003,Born,2003-09-01,Dolphin Connection,Allie,Sebastian,Dolphin Connection,US,Alive,US,2003-09-01
+141,Bottlenose,Kei,M,a,2003,Born,2003-10-18,Dolphin Quest Hawaii,Kona,Lono,Georgia Aquarium,US,Alive,US,2003-10-18
+142,Bottlenose,Noelani,F,a,2003,Born,2003-10-30,Brookfield Zoo,Tapeko,Lucky,Brookfield Zoo,US,Alive,US,2003-10-30
+143,Bottlenose,Makana,M,a,2003,Born,2003-11-09,Dolphin Quest Hawaii,Pele,Lono,Georgia Aquarium,US,Alive,US,2003-11-09
+144,Bottlenose,Briland,M,a,2004,Born,2004-03-17,Dolphin Experience,Cocoon,Scarab,Georgia Aquarium,US,Alive,US,2004-03-17
+145,Bottlenose,Kaylee,F,a,2004,Born,2004-03-21,Discovery Cove,Clipper,Scotia,Discovery Cove,US,Alive,US,2004-03-21
+146,Bottlenose,Tatem,M,a,2004,Born,2004-04-08,Dolphin Quest Bermuda,Caliban (Casey),Khyber,Dolphin Connection,US,Alive,Foreign,2010-09-04
+147,Bottlenose,Lily,F,a,2004,Born,2004-04-09,Dolphin Quest Bermuda,Cirrus,Khyber,Marineland Florida,US,Alive,Foreign,2010-07-25
+148,Bottlenose,Dexter,M,a,2004,Born,2004-05-07,Discovery Cove,Dixie,Lester,SeaWorld Orlando,US,Alive,US,2004-05-07
+149,Bottlenose,Nica,F,a,2004,Born,2004-06-02,Dolphins Plus Oceanside,Jessica,Kimbit,Dolphins Plus Bayside,US,Alive,US,2004-06-02
+150,Bottlenose,Fiji,M,a,2004,Born,2004-06-25,Dolphins Plus Oceanside,Squirt,Fonzie,Dolphins Plus Oceanside,US,Alive,US,2004-06-25
+151,Bottlenose,Dot,F,a,2004,Born,2004-07-06,SeaWorld Orlando,Dash,Duncan,Discovery Cove,US,Alive,US,2004-07-06
+152,Bottlenose,Venus,F,a,2004,Born,2004-07-14,SeaWorld San Diego,Cometta,Crunch,SeaWorld San Diego,US,Alive,US,2004-07-14
+153,Bottlenose,Scott,M,a,2004,Born,2004-08-18,SeaWorld Orlando,Griffith,Duncan,SeaWorld Orlando,US,Alive,US,2004-08-18
+154,Bottlenose,Bella,F,a,2004,Born,2004-09-01,Six Flags Discovery Kingdom,Chelsea,Merlin,Six Flags Discovery Kingdom,US,Alive,US,2004-09-01
+155,Bottlenose,Salvador,M,a,2004,Born,2004-09-28,Dolphin Experience,Robala,Scarab,Georgia Aquarium,US,Alive,US,2004-09-28
+156,Killer Whale; Orca,Kalia,F,a,2004,Born,2004-12-21,SeaWorld San Diego,Kasatka,Keet,SeaWorld San Diego,US,Alive,US,2004-12-21
+157,Bottlenose,Nate,M,a,2004,Born,2004-03-19,Discovery Cove,Natalie,Scotia,Gulf World Marine Park,US,Alive,US,2004-03-19
+158,Backcross,Aries,F,a,2005,Born,2005-03-28,Discovery Cove,Astra,"C.J.  (Hybrid, TTxDC)",Discovery Cove,US,Alive,US,2005-03-28
+159,Bottlenose,Bugs,F,a,2005,Born,2005-06-14,SeaWorld Orlando,Bunny,Hekili,SeaWorld San Diego,US,Alive,US,2005-06-14
+160,Bottlenose,Kan,M,a,2005,Born,2005-06-28,U.S. Navy,April,Nihoa,U.S. Navy,US,Alive,US,2005-06-28
+162,Bottlenose,Stella,F,a,2005,Born,2005-07-14,SeaWorld Orlando,Starkey,Hekili,Discovery Cove,US,Alive,US,2005-07-14
+163,Bottlenose,Potter,M,a,2005,Born,2005-07-15,SeaWorld Orlando,Lily,Hekili,SeaWorld Orlando,US,Alive,US,2005-07-15
+164,Bottlenose,Osbourne,M,a,2005,Born,2005-08-05,SeaWorld San Antonio,Nacha,Gilly,Mirage Dolphin Habitat,US,Alive,US,2005-08-05
+165,Bottlenose,Jackson,M,a,2005,Born,2005-08-18,SeaWorld Orlando,Kendall,Duffy,SeaWorld Orlando,US,Alive,US,2005-08-18
+167,Bottlenose,Mattie,F,a,2005,Born,2005-10-04,Six Flags Discovery Kingdom,Sadie,Merlin,Six Flags Discovery Kingdom,US,Alive,US,2005-10-04
+168,Bottlenose,Sofi,F,a,2005,Born,2005-10-06,SeaWorld San Diego,Sandy,Sparky,Mirage Dolphin Habitat,US,Alive,US,2005-10-06
+169,Bottlenose,Allison,F,a,2005,Born,2005-11-03,Brookfield Zoo,Tapeko,Hastings,Brookfield Zoo,US,Alive,US,2005-11-03
+170,Bottlenose,Calypso,F,a,2005,Born,2005-11-08,SeaWorld Orlando,Calli,Hekili,Discovery Cove,US,Alive,US,2005-11-08
+171,Bottlenose,Captain,M,a,2005,Born,2005-11-17,SeaWorld San Diego,Beaker,Crunch,SeaWorld San Diego,US,Alive,US,2005-11-17
+172,Killer Whale; Orca,Trua,M,a,2005,Born,2005-11-23,SeaWorld Orlando,Takara,Taku,SeaWorld Orlando,US,Alive,US,2005-11-23
+174,Beluga,Bella,F,a,2006,Born,2006-07-17,Shedd Aquarium,Puiji,Naluark,Shedd Aquarium,US,Alive,US,2006-07-17
+175,Bottlenose,Sasha,F,a,2006,Born,2006-08-01,SeaWorld Orlando,Tasha,Hekili,Discovery Cove,US,Alive,US,2006-08-01
+176,Killer Whale; Orca,Nalani,F,a,2006,Born,2006-09-18,SeaWorld Orlando,Katina,Taku,SeaWorld Orlando,US,Alive,US,2006-09-18
+177,Bottlenose,Cayo,F,a,2006,Born,2006-12-13,Dolphin Research Center,Merina,"A.I., Noel",Dolphin Research Center,US,Alive,US,2006-12-13
+178,Bottlenose,Gypsi,F,a,2007,Born,2007-01-06,Dolphin Research Center,Tursi,Rainbow,Dolphin Research Center,US,Alive,US,2007-01-06
+179,Killer Whale; Orca,Malia,F,a,2007,Born,2007-03-12,SeaWorld Orlando,Taima,Tilikum,SeaWorld Orlando,US,Alive,US,2007-03-12
+180,Bottlenose,Schooner,M,a,2007,Born,2007-03-19,Discovery Cove,Clipper,Lester,Texas State Aquarium,US,Alive,US,2007-03-19
+181,Bottlenose,Maui,F,a,2007,Born,2007-04-20,Discovery Cove,Roxy,Capricorn,Discovery Cove,US,Alive,US,2007-04-20
+182,Bottlenose,Frankie,F,a,2007,Born,2007-05-11,SeaWorld San Diego,Steime,Stein,Discovery Cove,US,Alive,US,2007-05-11
+183,Bottlenose,Luna,F,a,2007,Born,2007-05-23,Dolphin Quest Bermuda,Cirrus,"A.I., Stein",Georgia Aquarium,US,Alive,Foreign,2010-07-25
+184,Bottlenose,Catalina,F,a,2007,Born,2007-06-04,Discovery Cove,Thelma,Capricorn,Discovery Cove,US,Alive,US,2007-06-04
+185,Bottlenose,Bermudiana,F,a,2007,Born,2007-06-06,Dolphin Quest Bermuda,Caliban,Crunch,Georgia Aquarium,US,Alive,Foreign,2010-07-25
+186,Bottlenose,Cisco,M,a,2007,Born,2007-06-07,SeaWorld San Antonio,Puka,Gilly,SeaWorld San Antonio,US,Alive,US,2007-06-07
+187,Bottlenose,Csh,M,a,2007,Born,2007-06-09,U.S. Navy,Blue,Tacoma,U.S. Navy,US,Alive,US,2007-06-09
+188,Bottlenose,Ansley,M,a,2007,Born,2007-06-11,SeaWorld San Antonio,Ping,Gilly,SeaWorld San Antonio,US,Alive,US,2007-06-11
+189,Beluga,Oliver,M,a,2007,Born,2007-06-23,SeaWorld San Antonio,Martina,Nanuq,SeaWorld San Antonio,US,Alive,US,2007-06-23
+190,Beluga,Grayson,M,a,2007,Born,2007-06-26,SeaWorld San Antonio,Martha,Nanuq,Shedd Aquarium,US,Alive,US,2007-06-26
+191,Bottlenose,Liko,M,a,2007,Born,2007-06-26,Discovery Cove,Latoya,Capricorn,Texas State Aquarium,US,Alive,US,2007-06-26
+192,Bottlenose,Nueces,F,a,2007,Born,2007-07-12,SeaWorld San Antonio,Nikki,Gilly,Discovery Cove,US,Alive,US,2007-07-12
+193,Bottlenose,Damara,F,a,2007,Born,2007-08-11,SeaWorld Orlando,Dash,Sebastian,Discovery Cove,US,Alive,US,2007-08-11
+194,Bottlenose,Julie,F,a,2007,Born,2007-08-19,Dolphins Plus Oceanside,Dinghy,Little Bit,Dolphins Plus Bayside,US,Alive,US,2007-08-19
+195,Bottlenose,Ige,M,a,2007,Born,2007-09-06,Discovery Cove,Natalie,Akai,Dolphins Plus Bayside,US,Alive,US,2007-09-06
+196,Bottlenose,Hali'a,F,a,2007,Born,2007-10-09,Dolphin Quest Hawaii,Kona,"A.I., Sparky",Dolphin Quest Hawai'i,US,Alive,US,2007-10-09
+197,Bottlenose,Gala,F,a,2007,Born,2007-10-12,SeaWorld Orlando,Griffith,Hekili,Discovery Cove,US,Alive,US,2007-10-12
+198,Bottlenose,Mavrick,M,a,2007,Born,2007-11-03,Six Flags Discovery Kingdom,Chelsea,Merlin,Six Flags Discovery Kingdom,US,Alive,US,2007-11-03
+199,Bottlenose,Alia,F,a,2007,Born,2007-12-04,SeaWorld Orlando,Ariel,Sebastian,Dolphinaris Arizona,US,Alive,US,2007-12-04
+200,Bottlenose,Hua,M,a,2008,Born,2008-03-23,Dolphin Quest Hawaii,Pele,Lono,Dolphin Quest Oahu,US,Alive,US,2008-03-23
+201,Bottlenose,Khloe,F,a,2008,Born,2008-04-18,SeaWorld Orlando,Kendall,Hekili,Dolphinaris Arizona,US,Alive,US,2008-04-18
+202,Bottlenose,Luna,F,a,2008,Born,2008-05-04,Discovery Cove,Marea,Lester,Discovery Cove,US,Alive,US,2008-05-04
+203,Bottlenose,Brie,F,a,2008,Born,2008-06-07,SeaWorld San Antonio,Mattie,Hacksaw,SeaWorld San Antonio,US,Alive,US,2008-06-07
+205,Bottlenose,Tocoi,F,a,2008,Born,2008-06-11,Marineland Florida,Roxy,Alvin,Marineland Florida,US,Alive,US,2008-06-11
+206,Bottlenose,Aqe,M,a,2008,Born,2008-06-17,Marineland Florida,Betty III,Alvin,Marineland Florida,US,Alive,US,2008-06-17
+207,Bottlenose,Tomo,M,a,2008,Born,2008-06-26,Marineland Florida,Dazzle,Alvin,Marineland Florida,US,Alive,US,2008-06-26
+208,Bottlenose,Grace,F,a,2008,Born,2008-07-11,Dolphins Plus Oceanside,Sarah,Little Bit,Dolphins Plus Oceanside,US,Alive,US,2008-07-11
+209,Beluga,Qinu,F,a,2008,Born,2008-07-31,SeaWorld San Antonio,Sikku,Nanuq,Georgia Aquarium,US,Alive,US,2008-07-31
+210,Bottlenose,Lotus,F,a,2008,Born,2008-08-27,Dolphins Plus Oceanside,Squirt,Bob,Dolphins Plus Oceanside,US,Alive,US,2008-08-27
+211,Bottlenose,Bella,F,a,2008,Born,2008-09-06,Mirage Dolphin Habitat,Huf-n-Puf,Lightning,Mirage Dolphin Habitat,US,Alive,US,2008-09-06
+212,Bottlenose,Cocoa,F,a,2008,Born,2008-11-28,SeaWorld San Diego,Tobie,Crunch,SeaWorld San Diego,US,Alive,US,2008-11-28
+213,Bottlenose,Sonny,M,a,2009,Born,2000-06-11,Six Flags Discovery Kingdom,Chelsea,Schooner,Dolphinaris Arizona,US,Alive,US,2000-06-11
+214,Bottlenose,Kailani,F,a,2009,Born,2009-06-03,Discovery Cove,Coral,Akai,Discovery Cove,US,Alive,US,2009-06-03
+215,Bottlenose,Brigg,M,a,2009,Born,2009-06-06,Discovery Cove,Clipper,Capricorn,Dolphins Plus Bayside,US,Alive,US,2009-06-06
+216,Bottlenose,Kyla,F,a,2009,Born,2009-06-07,Discovery Cove,Copper,Capricorn,Discovery Cove,US,Alive,US,2009-06-07
+217,Bottlenose,Turk,M,a,2009,Born,2009-06-09,SeaWorld Orlando,Tasha,Hekili,Gulf World Marine Park,US,Alive,US,2009-06-09
+218,Bottlenose,Kali,F,a,2009,Born,2009-06-10,SeaWorld San Diego,Malibu,Belle,SeaWorld San Diego,US,Alive,US,2009-06-10
+219,Bottlenose,Soleil,F,a,2009,Born,2009-06-19,SeaWorld Orlando,Starkey,Hekili,Discovery Cove,US,Alive,US,2009-06-19
+220,Bottlenose,Amara,F,a,2009,Born,2009-06-22,Discovery Cove,Astra,Akai,Discovery Cove,US,Alive,US,2009-06-22
+221,Bottlenose,Roka,M,a,2009,Born,2009-07-11,Discovery Cove,Yar,Lester,SeaWorld Orlando,US,Alive,US,2009-07-11
+222,Bottlenose,Avalon,F,a,2009,Born,2009-07-26,SeaWorld San Diego,Beaker,Crunch,SeaWorld San Diego,US,Alive,US,2009-07-26
+224,"White-sided, Pacific",Bolt,M,a,2009,Born,2009-09-13,SeaWorld San Antonio,Catalina,"A.I., Arrow",SeaWorld San Antonio,US,Alive,US,2009-09-13
+225,Bottlenose,Neelee,F,a,2009,Born,2009-09-17,SeaWorld San Antonio,Nacha,"A.I., Hacksaw",SeaWorld San Antonio,US,Alive,US,2009-09-17
+226,Bottlenose,Delta,M,a,2009,Born,2009-11-22,Dolphin Research Center,Aleta,Kibby,Dolphin Research Center,US,Alive,US,2009-11-22
+227,Beluga,Nunavik,M,a,2009,Born,2009-12-14,Shedd Aquarium,Puiji,Naluark,Georgia Aquarium,US,Alive,US,2009-12-14
+229,Killer Whale; Orca,Sakari,F,a,2010,Born,2010-01-07,SeaWorld San Antonio,Takara,Tilikum,SeaWorld San Antonio,US,Alive,US,2010-01-07
+230,Bottlenose,Luna,F,a,2010,Born,2010-01-29,Dolphin Research Center,Pandora,A.J.,Dolphin Research Center,US,Alive,US,2010-01-29
+231,Bottlenose,Cobalt,U,a,2010,Born,2010-03-19,Miami Seaquarium,Panama,Indigo,Miami Seaquarium,US,Alive,US,2010-03-19
+232,Bottlenose,Squirt,U,a,2010,Born,2010-04-13,Miami Seaquarium,Skye,Sundance,Miami Seaquarium,US,Alive,US,2010-04-13
+233,Bottlenose,Hurlee,M,a,2010,Born,2010-04-20,Discovery Cove,Thelma,Akai,Dolphins Plus Bayside,US,Alive,US,2010-04-20
+234,Bottlenose,Axl,M,a,2010,Born,2010-05-16,Discovery Cove,Rose,Hutch,Dolphins Plus Bayside,US,Alive,US,2010-05-16
+235,Bottlenose,Ipanema,F,a,2010,Born,2010-05-17,Discovery Cove,Natalie,Akai,Discovery Cove,US,Alive,US,2010-05-17
+236,Bottlenose,Bodie,M,a,2010,Born,2010-06-07,Six Flags Discovery Kingdom,Chelsea,"A.I., Rainbow",Dolphinaris Arizona,US,Alive,US,2010-06-07
+237,Beluga,Pearl,F,a,2010,Born,2010-06-23,SeaWorld San Diego,Ruby,Nanuq,SeaWorld San Diego,US,Alive,US,2010-06-23
+238,Beluga,Atla,F,a,2010,Born,2010-06-23,SeaWorld San Antonio,Luna,"A.I., Nanuq",SeaWorld San Diego,US,Alive,US,2010-06-23
+241,Bottlenose,Noelani,F,a,2010,Born,2010-08-05,Dolphin Quest Hawaii,Pele,-,Dolphinaris Arizona,US,Alive,US,2010-08-05
+242,Killer Whale; Orca,Makaio,M,a,2010,Born,2010-10-09,SeaWorld Orlando,Katina,Tilikum,SeaWorld Orlando,US,Alive,US,2010-10-09
+243,Bottlenose,Capri,F,a,2010,Born,2010-10-21,SeaWorld San Antonio,Ping,"A.I., Gilly (sex selected)",SeaWorld San Antonio,US,Alive,US,2010-10-21
+244,Bottlenose,Gambit,M,a,2010,Born,2010-11-05,Dolphin Research Center,Tursi,Kibby,Dolphin Research Center,US,Alive,US,2010-11-05
+245,Bottlenose,Ringo,U,a,2010,Born,2010-11-13,Miami Seaquarium,Samantha,Noel,Miami Seaquarium,US,Alive,US,2010-11-13
+246,Bottlenose,Flagler,M,a,2010,Born,2010-11-15,Dolphin Research Center,Merina,"A.I., Stormy",Dolphin Research Center,US,Alive,US,2010-11-15
+249,Bottlenose,Isaac,M,a,2011,Born,2011-06-01,Dolphins Plus Bayside,Samantha,Kimbit,Dolphins Plus Bayside,US,Alive,US,2011-06-01
+250,Bottlenose,K2,U,a,2011,Born,2011-07-03,Mirage Dolphin Habitat,Duchess,Lightning,Mirage Dolphin Habitat,US,Alive,US,2011-07-03
+251,Bottlenose,Blyss,F,a,2011,Born,2011-07-16,SeaWorld San Antonio,Mattie,Hacksaw,SeaWorld San Antonio,US,Alive,US,2011-07-16
+252,Bottlenose,Koko,F,a,2011,Born,2011-07-17,SeaWorld San Antonio,Yoyo,Kai (T.t. gilli),SeaWorld San Antonio,US,Alive,US,2011-07-17
+254,Bottlenose,Miramar,U,a,2011,Born,2011-08-20,Mirage Dolphin Habitat,Huf-n-Puf,Lightning,Mirage Dolphin Habitat,US,Alive,US,2011-08-20
+255,Bottlenose,Ipo,M,a,2011,Born,2011-08-20,Dolphin Quest Hawaii,Iwa,Nimbus,Dolphin Quest Hawai'i,US,Alive,US,2011-08-20
+257,Bottlenose,Hemingway,M,a,2011,Born,2011-09-05,Marineland Florida,Dazzle,Alvin,Marineland Florida,US,Alive,US,2011-09-05
+258,Bottlenose,Chopper,M,a,2011,Born,2011-09-21,Gulf World Marine Park,Maia,Sebastian,Gulfarium Marine Adventure,US,Alive,US,2011-09-21
+262,Bottlenose,Azul,M,a,2012,Born,2012-05-13,Miami Seaquarium,Rioux,J.J.,Miami Seaquarium,US,Alive,US,2012-05-13
+263,"White-sided, Pacific",Sagu,M,a,2012,Born,2012-05-28,Shedd Aquarium,Piquet,Li'i,Shedd Aquarium,US,Alive,US,2012-05-28
+264,Bottlenose,Starla,F,a,2012,Born,2012-06-30,SeaWorld Orlando,Starkey,Nate,Discovery Cove,US,Alive,US,2012-06-30
+265,Bottlenose,Orin,M,a,2012,Born,2012-07-12,Indianapolis Zoo,China,Jett,Indianapolis Zoo,US,Alive,US,2012-07-12
+267,Bottlenose,Tashi,M,a,2012,Born,2012-08-13,Dolphins Plus Oceanside,Squirt,Bob,Dolphins Plus Oceanside,US,Alive,US,2012-08-13
+268,Beluga,Kimalu,F,a,2012,Born,2012-08-27,Shedd Aquarium,Mauyak,Naluark,Shedd Aquarium,US,Alive,US,2012-08-27
+269,Bottlenose,Lehua,F,a,2012,Born,2012-09-17,Dolphin Quest Hawaii,Keo,Nimbus,Dolphin Quest Hawai'i,US,Alive,US,2012-09-17
+270,Bottlenose,Malu,M,a,2012,Born,2012-09-26,Dolphin Quest Hawaii,Pele,Nimbus,Dolphin Quest Hawai'i,US,Alive,US,2012-09-26
+271,Bottlenose,Nahele,M,a,2012,Born,2012-10-15,Dolphin Quest Hawaii,Kona,Nimbus,Dolphin Quest Hawai'i,US,Alive,US,2012-10-15
+273,Bottlenose,Bimini,F,a,2012,Born,2012-11-30,Discovery Cove,Clipper,"A.I., Gilly",Discovery Cove,US,Alive,US,2012-11-30
+274,Bottlenose,Reese,M,a,2012,Born,2012-12-03,Dolphin Research Center,Santini,"A.I., Brisby",Dolphin Research Center,US,Alive,US,2012-12-03
+275,Killer Whale; Orca,Makani,M,a,2013,Born,2013-02-14,SeaWorld San Diego,Kasatka,"A.I., Kshamenk",SeaWorld San Diego,US,Alive,US,2013-02-14
+276,Bottlenose,Finn,M,a,2013,Born,2013-02-25,Discovery Cove,Kendall,Lester,Discovery Cove,US,Alive,US,2013-02-25
+277,Bottlenose,Zeke,M,a,2013,Born,2013-05-22,Gulf World Marine Park,Indie,Zac ,Gulfarium Marine Adventure,US,Alive,US,2013-05-22
+278,Bottlenose,Haven,F,a,2013,Born,2013-05-24,SeaWorld San Antonio,Alice,"A.I., Belle",SeaWorld San Antonio,US,Alive,US,2013-05-24
+280,Beluga,Samson,M,a,2013,Born,2013-07-09,SeaWorld San Antonio,Luna,Imaq,SeaWorld San Antonio,US,Alive,US,2013-07-09
+281,Bottlenose,Nala,F,a,2013,Born,2013-08-24,SeaWorld San Antonio,Nikki,"A.I., Razzle",SeaWorld San Antonio,US,Alive,US,2013-08-24
+282,Bottlenose,Merlin,M,a,2013,Born,2013-10-16,Brookfield Zoo,Tapeko,Chinook,Brookfield Zoo,US,Alive,US,2013-10-16
+283,Bottlenose,Magic,M,a,2013,Born,2013-10-28,Brookfield Zoo,Spree,Chinook,Brookfield Zoo,US,Alive,US,2013-10-28
+284,Bottlenose,Sparrow,F,a,2013,Born,2013-11-01,SeaWorld Orlando,Yar,Nate,SeaWorld Orlando,US,Alive,US,2013-11-01
+286,Bottlenose,Diva,F,a,2013,Born,2013-11-06,Dolphin Research Center,Aleta,"A.I., Gilly",Dolphin Research Center,US,Alive,US,2013-11-06
+287,Bottlenose,Windley,F,a,2013,Born,2013-11-12,Dolphin Research Center,Merina,"A.I., Fathom",Dolphin Research Center,US,Alive,US,2013-11-12
+288,Bottlenose,Lanikai,F,a,2013,Born,2013-11-12,SeaWorld San Diego,Kolohe (T.t. gilli),Crunch,SeaWorld San Diego,US,Alive,US,2013-11-12
+289,Bottlenose,Crystal,F,a,2013,Born,2013-11-25,Theater of the Sea,Nikki,"A.I., Belle",Theater of the Sea,US,Alive,US,2013-11-25
+290,Killer Whale; Orca,Kamea,F,a,2013,Born,2013-12-06,SeaWorld San Antonio,Takara,"A.I, Kshamenk",SeaWorld San Antonio,US,Alive,US,2013-12-06
+291,Bottlenose,Prim,F,a,2014,Born,2014-02-12,Discovery Cove,Rose,"A.I., Razzle",Discovery Cove,US,Alive,US,2014-02-12
+292,Bottlenose,Isadora,F,a,2014,Born,2014-03-18,Discovery Cove,Natalie,"A.I., Belle",Discovery Cove,US,Alive,US,2014-03-18
+295,Bottlenose,Calypso,F,a,2014,Born,2014-04-11,Miami Seaquarium,Panama,Sundance,Miami Seaquarium,US,Alive,US,2014-04-11
+296,Bottlenose,Coquina,F,a,2014,Born,2014-05-22,Marineland Florida,Dazzle,Zac,Marineland Florida,US,Alive,US,2014-05-22
+297,Bottlenose,Yuri,F,a,2014,Born,2014-06-03,SeaWorld San Antonio,Yoyo,Scotia,SeaWorld San Antonio,US,Alive,US,2014-06-03
+304,Bottlenose,Bodie,M,a,2014,Born,2014-10-17,SeaWorld San Diego,Sadie,Bodine (T.t. gilli),SeaWorld San Diego,US,Alive,US,2014-10-17
+305,Killer Whale; Orca,Amaya,F,a,2014,Born,2014-12-02,SeaWorld San Diego,Kalia,Ulises,SeaWorld San Diego,US,Alive,US,2014-12-02
+306,Bottlenose,Maxine,F,a,2014,Born,2014-12-16,Brookfield Zoo,Allie,Chinook,Brookfield Zoo,US,Alive,US,2014-12-16
+307,Bottlenose,Reef,F,a,2015,Born,2015-02-07,Discovery Cove,Coral,"A.I., Kenobi",Discovery Cove,US,Alive,US,2015-02-07
+308,Bottlenose,Calypso,F,a,2015,Born,2015-04-24,Indianapolis Zoo,Kalei,Kimo,Indianapolis Zoo,US,Alive,US,2015-04-24
+310,"White-sided, Pacific",Makoa,M,a,2015,Born,2015-06-01,Shedd Aquarium,Piquet,Li'i,Shedd Aquarium,US,Alive,US,2015-06-01
+313,"White-sided, Pacific",Ipo,M,a,2015,Born,2015-07-18,Miami Seaquarium,Loke,Li'i,Miami Seaquarium,US,Alive,US,2015-07-18
+314,Bottlenose,Boomer,M,a,2015,Born,2015-09-02,Marineland Florida,Shaka,Sunny,Marineland Florida,US,Alive,US,2015-09-02
+318,Bottlenose,Skye,F,a,2016,Born,2016-02-23,Discovery Cove,Astra,"A.I., Kenobi",Discovery Cove,US,Alive,US,2016-02-23
+319,Bottlenose,Delilah,F,a,2016,Born,2016-03-21,Discovery Cove,Damara,Alpha,Discovery Cove,US,Alive,US,2016-03-21
+320,"White-sided, Pacific",Kukdlaa,M,a,2016,Born,2016-04-18,Shedd Aquarium,Katrl,Li'i,Shedd Aquarium,US,Alive,US,2016-04-18
+322,Bottlenose,Ole,M,a,2016,Born,2016-07-08,Marineland Florida,Lily,-,Marineland Florida,US,Alive,US,2016-07-08
+324,Backcross,Titan,M,a,2016,Born,2016-08-06,Discovery Cove,Calypso,"C.J.  (Hybrid, TTxDC)",Discovery Cove,US,Alive,US,2016-08-06
+325,Beluga,Kenai,M,a,2016,Born,2016-08-11,SeaWorld San Antonio,Luna,Imaq,SeaWorld San Antonio,US,Alive,US,2016-08-11
+404,Bottlenose,Nihoa,M,a,1978,Born,1978-08-14,U.S. Navy,Dash,Ben,U.S. Navy,US,Alive,US,1978-08-14
+405,Bottlenose,Slooper,F,a,1979,Born,1979-06-07,U.S. Navy,Slan,Snooper,U.S. Navy,US,Alive,US,1979-06-07
+406,Bottlenose,April,F,a,1984,Born,1984-04-15,U.S. Navy,Jenny,Maui,U.S. Navy,US,Alive,US,1984-04-15
+407,Bottlenose,Andrea,F,a,1988,Born,1988-03-04,U.S. Navy,Lisa,Ben,U.S. Navy,US,Alive,US,1988-03-04
+408,Bottlenose,Koa,M,a,1991,Born,1991-09-13,U.S. Navy,Ellie,Ben,U.S. Navy,US,Alive,US,1991-09-13
+409,Bottlenose,Akki,M,a,1992,Born,1992-04-23,U.S. Navy,Opai,Ben,U.S. Navy,US,Alive,US,1992-04-23
+410,Bottlenose,Maddie,F,a,1993,Born,1993-04-29,U.S. Navy,Mu,Maui,U.S. Navy,US,Alive,US,1993-04-29
+411,Bottlenose,Naia,F,a,1994,Born,1994-05-07,U.S. Navy,Noriko,Maui,U.S. Navy,US,Alive,US,1994-05-07
+414,Bottlenose,Dakota,M,a,1998,Born,1998-11-14,U.S. Navy,Opai,Rake,U.S. Navy,US,Alive,US,1998-11-14
+415,Bottlenose,Baily,F,a,2000,Born,2000-04-30,U.S. Navy,Snapper,Rake,U.S. Navy,US,Alive,US,2000-04-30
+416,Bottlenose,Annie,F,a,2001,Born,2001-06-09,U.S. Navy,Nina,Ekahi,U.S. Navy,US,Alive,US,2001-06-09
+417,Bottlenose,Cole,M,a,2001,Born,2001-06-16,U.S. Navy,POP (T.t. gilli),Nihoa,U.S. Navy,US,Alive,US,2001-06-16
+418,Bottlenose,Pele,F,a,2001,Born,2001-06-19,U.S. Navy,Mu,Nihoa,U.S. Navy,US,Alive,US,2001-06-19
+419,Bottlenose,Champlain,M,a,2002,Born,2002-05-31,U.S. Navy,Opai,Jake,U.S. Navy,US,Alive,US,2002-05-31
+420,Bottlenose,Hornet,F,a,2002,Born,2002-06-06,U.S. Navy,Shasta,Nihoa,U.S. Navy,US,Alive,US,2002-06-06
+421,Bottlenose,Constance,F,a,2002,Born,2002-06-16,U.S. Navy,Kolohe (T.t. gilli),Nihoa,U.S. Navy,US,Alive,US,2002-06-16
+422,Bottlenose,Independence,M,a,2002,Born,2002-06-18,U.S. Navy,April,Ekahi,U.S. Navy,US,Alive,US,2002-06-18
+423,Bottlenose,Randall,M,a,2002,Born,2002-12-11,U.S. Navy,Cascade,Rake,U.S. Navy,US,Alive,US,2002-12-11
+424,Bottlenose,Whipper,M,a,2004,Born,2004-04-28,U.S. Navy,Snapper,Ekahi,U.S. Navy,US,Alive,US,2004-04-28
+425,Bottlenose,Lark,F,a,2004,Born,2004-07-30,U.S. Navy,Mu,Ekahi,U.S. Navy,US,Alive,US,2004-07-30
+426,Bottlenose,Austin,M,a,2005,Born,2005-12-18,U.S. Navy,Shasta,Nihoa,U.S. Navy,US,Alive,US,2005-12-18
+427,Bottlenose,Bowie,M,a,2007,Born,2007-06-09,U.S. Navy,Hornet,Hapa,U.S. Navy,US,Alive,US,2007-06-09
+428,Bottlenose,Crockett,M,a,2007,Born,2007-06-24,U.S. Navy,Snapper,Nihoa,U.S. Navy,US,Alive,US,2007-06-24
+430,Bottlenose,Koa,F,a,2009,Born,2009-06-13,SeaWorld San Diego,Sadie,Bodine (T.t. gilli),SeaWorld San Diego,US,Alive,US,2009-06-13
+432,Bottlenose,Haley,F,a,2010,Born,2010-07-23,SeaWorld Orlando,Bossa,Jag,Discovery Cove,US,Alive,US,2010-07-23
+433,Bottlenose,Connie,F,a,2011,Born,2011-08-23,SeaWorld San Diego,Cometta,Crunch,SeaWorld San Diego,US,Alive,US,2011-08-23
+434,Bottlenose,B.B. ,F,a,2011,Born,2011-09-13,Dolphins Plus Oceanside,Dinghy,L.B.,Dolphins Plus Oceanside,US,Alive,US,2011-09-13
+435,Bottlenose,Sara,F,a,2015,Born,2015-10-18,SeaWorld San Diego,Tobie,"A.I., Fathom",SeaWorld San Diego,US,Alive,US,2015-10-18
+469,Commerson's,Fabio,M,a,1993,Born,1993-09-16,SeaWorld San Diego,Oreo,Juan,Aquatica Orlando,US,Died,US,1993-09-16
+470,Commerson's,Keebler,M,a,1998,Born,1998-10-23,SeaWorld San Diego,Oreo,Juan,Aquatica Orlando,US,Died,US,1998-10-23
+479,Bottlenose,Windy's Calf,M,a,1990,Born,1990-08-30,Brookfield Zoo,Windy,Gibbs*,Brookfield Zoo,US,Died,US,1990-08-30
+480,Bottlenose,Windy's Calf,M,a,1991,Born,1991-10-05,Brookfield Zoo,Windy,Gibbs*,Brookfield Zoo,US,Died,US,1991-10-05
+481,Bottlenose,Tapeko's Calf,M,a,1992,Born,1992-04-28,Brookfield Zoo,Tapeko,Gibbs*,Brookfield Zoo,US,Died,US,1992-04-28
+482,Bottlenose,Connie's Calf,F,a,1992,Miscarriage,1992-05-11,Brookfield Zoo,Connie,Gibbs*,Brookfield Zoo,US,Miscarriage,US,1992-05-11
+483,Bottlenose,Windy's Calf,M,a,1993,Born,1993-09-03,Brookfield Zoo,Windy,Gibbs*,Brookfield Zoo,US,Died,US,1993-09-03
+484,Bottlenose,Kaylee,F,a,1993,Born,1993-09-17,Brookfield Zoo,Tapeko,Nemo,Brookfield Zoo,US,Died,US,1993-09-17
+485,Bottlenose,Tapeko's Calf,F,a,2000,Born,2000-02-01,Brookfield Zoo,Tapeko,Nemo,Brookfield Zoo,US,Died,US,2000-02-01
+486,Bottlenose,Tapeko's Calf,M,a,2001,Miscarriage,2001-10-04,Brookfield Zoo,Tapeko,Chinook,Brookfield Zoo,US,Miscarriage,US,2001-10-04
+487,Bottlenose,Micco,M,a,2001,Born,2001-10-19,Brookfield Zoo,Kaylee,Chinook,Brookfield Zoo,US,Died,US,2001-10-19
+488,Bottlenose,Kaylee's Calf,F,a,2004,Born,2004-06-03,Brookfield Zoo,Kaylee,Lucky,Brookfield Zoo,US,Died,US,2004-06-03
+489,Bottlenose,Nea,F,a,2007,Born,2007-06-03,Dolphin Quest Bermuda,Bailey,"A.I., Stein",Brookfield Zoo,US,Died,Foreign,2010-09-04
+490,Bottlenose,Tapeko's Calf,M,a,2011,Born,2011-10-30,Brookfield Zoo,Tapeko,Chinook,Brookfield Zoo,US,Died,US,2011-10-30
+491,Bottlenose,Allie's Calf,F,a,2013,Born,2013-08-02,Brookfield Zoo,Allie,Semo,Brookfield Zoo,US,Died,US,2013-08-02
+492,Bottlenose,Noelani's Calf,M,a,2014,Born,2014-12-05,Brookfield Zoo,Noelani,Chinook,Brookfield Zoo,US,Died,US,2014-12-05
+493,Bottlenose,Allison's Calf,M,a,2014,Born,2014-12-12,Brookfield Zoo,Allison,Chinook,Brookfield Zoo,US,Died,US,2014-12-12
+502,Bottlenose,Scarlet,F,a,1979,Born,1979-10-18,SeaWorld San Diego,Scarback,Doc,Discovery Cove,US,Died,US,1979-10-18
+506,Bottlenose,Penny,F,a,1989,Born,1989-05-06,SeaWorld San Diego,Jenny,Stein,Discovery Cove,US,Died,US,1989-05-06
+507,Bottlenose,Zinger,M,a,1991,Born,1991-08-05,SeaWorld San Antonio,Punta,Guy,Discovery Cove,US,Died,US,1991-08-05
+508,Bottlenose,Marius,M,a,1995,Born,1995-08-15,SeaWorld San Antonio,Nacha,Capricorn,Discovery Cove,US,Died,US,1995-08-15
+509,Bottlenose,Haley,F,a,1996,Born,1996-07-15,SeaWorld San Diego,Cometta,Zippy,Discovery Cove,US,Died,US,1996-07-15
+510,Bottlenose,Copper,F,a,1999,Born,1999-08-04,SeaWorld San Diego,Penny,Bodine(T.t. gilli),Discovery Cove,US,Died,US,1999-08-04
+513,Bottlenose,Nero,M,a,2016,Born,2016-08-07,Discovery Cove,Nueces,Scott,Discovery Cove,US,Died,US,2016-08-07
+522,Bottlenose,Akeakamai,F,a,1990,Born,1990-03-31,Dolphin Connection,April,Merlin,Dolphin Connection,US,Died,US,1990-03-31
+524,Bottlenose,Wilson,M,a,2001,Born,2001-04-18,Dolphin Connection,April,Sebastian,Dolphin Connection,US,Escaped (Found Dead),US,2001-04-18
+529,Bottlenose,Pele's Calf,F,a,1994,Stillbirth,1994-07-01,Dolphin Quest Hawaii,Pele,Hobi,Dolphin Quest Hawai'i,US,Stillbirth,US,1994-07-01
+530,Bottlenose,Malia,F,a,1995,Born,1995-08-21,Dolphin Quest Hawaii,Pele,Hobi,Dolphin Quest Hawai'i,US,Died,US,1995-08-21
+531,Bottlenose,Shaka's Calf,F,a,1996,Stillbirth,1996-09-26,Dolphin Quest Hawaii,Shaka,Hobi,Dolphin Quest Hawai'i,US,Stillbirth,US,1996-09-26
+532,Bottlenose,Hanale,M,a,1997,Born,1997-10-25,Dolphin Quest Hawaii,Pele,Hobi,Dolphin Quest Hawai'i,US,Died,US,1997-10-25
+533,Bottlenose,Shaka's Calf,U,a,1997,Born,1997-11-03,Dolphin Quest Hawaii,Shaka,Hobi,Dolphin Quest Hawai'i,US,Died,US,1997-11-03
+534,Bottlenose,Somers,M,a,1998,Born,1998-05-22,Dolphin Quest Bermuda,Bailey,Gibbs*,Dolphin Quest Hawai'i,US,Died,Foreign,2010-03-03
+535,Bottlenose,Shaka's Calf,F,a,2000,Stillbirth,2000-09-01,Dolphin Quest Hawaii,Shaka,Lono,Dolphin Quest Hawai'i,US,Stillbirth,US,2000-09-01
+536,Bottlenose,Poliahu's Calf,F,a,2001,Stillbirth,2001-03-15,Dolphin Quest Hawaii,Poliahu,Lono,Dolphin Quest Hawai'i,US,Stillbirth,US,2001-03-15
+537,Bottlenose,Iwa's Calf,F,a,2002,Stillbirth,2001-03-27,Dolphin Quest Hawaii,Iwa,Lono,Dolphin Quest Hawai'i,US,Stillbirth,US,2001-03-27
+571,Bottlenose,Annessa,M,a,1981,Born,1981-09-25,Dolphin Research Center,Bee,Delphi,Dolphin Research Center,US,Escaped,US,1981-09-25
+584,Bottlenose,Omega,F,a,1987,Born,1987-11-20,Dolphin Research Center,Bee,Delphi,Dolphin Research Center,US,Died,US,1987-11-20
+590,Bottlenose,Aphro's Calf,M,a,1992,Stillbirth,1992-11-23,Dolphin Research Center,Aphrodite,Rainbow,Dolphin Research Center,US,Stillbirth,US,1992-11-23
+591,Bottlenose,Theresa's Calf,F,a,1993,Born,1993-10-06,Dolphin Research Center,Theresa,Rainbow,Dolphin Research Center,US,Died,US,1993-10-06
+592,Bottlenose,Picara,F,a,1994,Born,1994-09-02,Dolphin Research Center,Cindy,Dimples II,Dolphin Research Center,US,Died,US,1994-09-02
+593,Bottlenose,Theresa's Calf,F,a,1997,Born,1997-06-18,Dolphin Research Center,Theresa,Buck,Dolphin Research Center,US,Died,US,1997-06-18
+594,Bottlenose,Destiny,F,a,2001,Born,2001-03-07,Dolphin Research Center,Aleta,Rainbow,Dolphin Research Center,US,Died,US,2001-03-07
+595,Bottlenose,Havana,M,a,2001,Born,2001-03-20,Dolphin Research Center,Tursi,Rainbow,Dolphin Research Center,US,Died,US,2001-03-20
+596,Bottlenose,Aleta's Calf,F,a,2002,Born,2002-04-04,Dolphin Research Center,Aleta,Kibby,Dolphin Research Center,US,Died,US,2002-04-04
+597,Bottlenose,Molly's Calf,F,a,2002,Born,2002-04-05,Dolphin Research Center,Molly,Kibby,Dolphin Research Center,US,Died,US,2002-04-05
+598,Bottlenose,Merina's Calf,M,a,2004,Born,2004-09-23,Dolphin Research Center,Merina,Rainbow,Dolphin Research Center,US,Died,US,2004-09-23
+599,Bottlenose,Tursi's Calf,F,a,2004,Stillbirth,2004-10-28,Dolphin Research Center,Tursi,Kibby,Dolphin Research Center,US,Stillbirth,US,2004-10-28
+600,Bottlenose,Santini's Calf,M,a,2005,Born,2005-10-24,Dolphin Research Center,Santini,Rainbow,Dolphin Research Center,US,Died,US,2005-10-24
+601,Bottlenose,Ras,M,a,2006,Born,2006-11-24,Dolphin Research Center,Santini,Kibby,Dolphin Research Center,US,Died,US,2006-11-24
+602,Bottlenose,Calusa's Calf,U,a,2010,Born,2010-11-13,Dolphin Research Center,Calusa,"A.I., Merlin",Dolphin Research Center,US,Died,US,2010-11-13
+603,Bottlenose,Kai'nalu,M,a,1996,Born,1996-10-03,Dolphin Quest Hawaii,Leilani,Hobi,Dolphinaris Arizona,US,Unknown,US,1996-10-03
+604,Bottlenose,Ping,F,a,1998,Born,1998-07-03,SeaWorld San Antonio,Alice,Capricorn,Dolphinaris Arizona,US,Unknown,US,1998-07-03
+605,Bottlenose,Sonny,M,a,2009,Born,2000-06-11,Six Flags Discovery Kingdom,Chelsea,Schooner,Dolphinaris Arizona,US,Unknown,US,2000-06-11
+606,Bottlenose,Liko,M,a,2000,Born,2000-09-08,Dolphin Quest Hawaii,Kona,Lono,Dolphinaris Arizona,US,Unknown,US,2000-09-08
+607,Bottlenose,Alia,F,a,2007,Born,2007-12-04,SeaWorld Orlando,Ariel,Sebastian,Dolphinaris Arizona,US,Unknown,US,2007-12-04
+608,Bottlenose,Khloe,F,a,2008,Born,2008-04-18,SeaWorld Orlando,Kendall,Hekili,Dolphinaris Arizona,US,Unknown,US,2008-04-18
+609,Bottlenose,Bodie,M,a,2010,Born,2010-06-07,Six Flags Discovery Kingdom,Chelsea,"A.I., Rainbow",Dolphinaris Arizona,US,Unknown,US,2010-06-07
+610,Bottlenose,Noelani,F,a,2010,Born,2010-08-05,Dolphin Quest Hawaii,Pele,-,Dolphinaris Arizona,US,Unknown,US,2010-08-05
+628,Bottlenose,Dinghy's Calf,F,a,1999,Miscarriage,1999-05-29,Dolphins Plus Oceanside,Dingy,Fonzie,Dolphins Plus Oceanside,US,Miscarriage,US,1999-05-29
+629,Bottlenose,Sarah's Calf,F,a,1999,Born,1999-07-01,Dolphins Plus Oceanside,Sarah,L.B.,Dolphins Plus Oceanside,US,Died,US,1999-07-01
+630,Bottlenose,Elvis,M,a,2004,Born,2004-08-05,Dolphins Plus Oceanside,Spunky,Alfonz,Dolphins Plus Oceanside,US,Died,US,2004-08-05
+632,Bottlenose,Marley,F,a,2008,Born,2008-08-01,Dolphins Plus Oceanside,Samantha,Bob,Dolphins Plus Oceanside,US,Died,US,2008-08-01
+640,Beluga,Maris,F,a,1994,Capture,1994-07-28,New York Aquarium,Natasha,Winston,Georgia Aquarium,US,Died,US,1994-07-28
+642,Beluga,Maris' Calf,F,a,2015,Born,2015-05-10,Georgia Aquarium,Maris,Beethoven,Georgia Aquarium,US,Died,US,2015-05-10
+651,Bottlenose,Ripley's Calf,F,a,2000,Born,2000-08-30,Indianapolis Zoo,Ripley,Sundance,Indianapolis Zoo,US,Died,US,2000-08-30
+652,Bottlenose,Nova's Calf,M,a,2011,Born,2011-06-03,Indianapolis Zoo,Nova,Kimo,Indianapolis Zoo,US,Died,US,2011-06-03
+658,Bottlenose,Nellie,F,a,1953,Born,1953-02-27,Marineland Florida,Susie,Happy,Marineland Florida,US,Died,US,1953-02-27
+693,Bottlenose,June Iii,F,a,1978,Born,1978-06-28,Marineland Florida,Nellie,Rusty,Marineland Florida,US,Died,US,1978-06-28
+696,Bottlenose,Racy,M,a,1985,Born,1985-02-28,Marineland Florida,Lilly,Rusty,Marineland Florida,US,Died,US,1985-02-28
+698,Bottlenose,Taxi,M,a,1987,Born,1987-04-15,Marineland Florida,Mary,Davy II,Marineland Florida,US,Died,US,1987-04-15
+700,Bottlenose,Melba Ii,F,a,1989,Born,1989-05-04,Marineland Florida,Lilly,Rusty,Marineland Florida,US,Died,US,1989-05-04
+707,Bottlenose,Roxy's Calf,F,a,2002,Born,2002-05-08,Marineland Florida,Roxy,Alvin,Marineland Florida,US,Died,US,2002-05-08
+715,Bottlenose,Squirt,M,a,1991,Born,1991-04-05,Mirage Dolphin Habitat,Duchess,Merlin,Mirage Dolphin Habitat,US,Died,US,1991-04-05
+716,Bottlenose,Darla's Calf,U,a,1991,Born,1991-04-07,Mirage Dolphin Habitat,Darla,Merlin,Mirage Dolphin Habitat,US,Died,US,1991-04-07
+718,Bottlenose,Picabo,F,a,1994,Born,1994-03-14,Mirage Dolphin Habitat,Darla,Merlin,Mirage Dolphin Habitat,US,Died,US,1994-03-14
+720,Bottlenose,Sage,F,a,1997,Born,1997-05-24,Mirage Dolphin Habitat,Darla,Banjo,Mirage Dolphin Habitat,US,Died,US,1997-05-24
+721,Bottlenose,Rascal,M,a,2001,Born,2001-05-15,Mirage Dolphin Habitat,Picabo,Banjo,Mirage Dolphin Habitat,US,Died,US,2001-05-15
+722,Bottlenose,Beetle,M,a,2003,Born,2003-08-11,SeaWorld Orlando,Bailey,Belle,Mirage Dolphin Habitat,US,Died,US,2003-08-11
+723,Bottlenose,Sgt. Pepper,M,a,2007,Born,2007-06-08,Mirage Dolphin Habitat,Duchess,Lightning,Mirage Dolphin Habitat,US,Died,US,2007-06-08
+780,Bottlenose,Orion,M,a,1982,Born,1982-02-22,New England Aquarium,Spit,Neptune,SeaWorld Orlando,US,Died,US,1982-02-22
+792,Killer Whale; Orca,Kalina,F,a,1985,Born,1985-09-26,SeaWorld Orlando,Katina,Winston,SeaWorld Orlando,US,Died,US,1985-09-26
+795,Bottlenose,Shaleste,F,a,1986,Born,1986-06-26,SeaWorld Orlando,Shannon,Lester,SeaWorld Orlando,US,Died,US,1986-06-26
+802,Killer Whale; Orca,Taima,F,a,1989,Born,1989-07-11,SeaWorld Orlando,Gudrun,Kanduke,SeaWorld Orlando,US,Died,US,1989-07-11
+803,Bottlenose,Bailey,F,a,1989,Born,1989-11-24,SeaWorld San Antonio,Notchfin,Guy,SeaWorld Orlando,US,Died,US,1989-11-24
+805,Bottlenose,Neptune,M,a,1990,Born,1990-01-21,SeaWorld Aurora,Scarlet,Domino,SeaWorld Orlando,US,Died,US,1990-01-21
+808,Bottlenose,Jenson,M,a,1992,Born,1992-09-01,SeaWorld San Antonio,Jenever,Guy,SeaWorld Orlando,US,Died,US,1992-09-01
+809,Bottlenose,Peanut,F,a,1992,Born,1992-11-27,SeaWorld San Diego,Sabrina,Crunch,SeaWorld Orlando,US,Died,US,1992-11-27
+810,Pseudorca,Akira,F,a,1993,Born,1993-12-24,SeaWorld Orlando,Suki,Teri,SeaWorld Orlando,US,Died,US,1993-12-24
+811,Killer Whale; Orca,Nyar,F,a,1993,Born,1993-12-31,SeaWorld Orlando,Gudrun,Tilikum,SeaWorld Orlando,US,Died,US,1993-12-31
+812,Pseudorca,Jozu,F,a,1994,Born,1994-09-03,SeaWorld Orlando,Hana,Teri,SeaWorld Orlando,US,Died,US,1994-09-03
+814,Bottlenose,Bossa,F,a,1997,Born,1997-05-30,SeaWorld Orlando,Nova,Beachie,SeaWorld Orlando,US,Died,US,1997-05-30
+815,Bottlenose,Kiwi,M,a,1999,Born,1999-06-22,SeaWorld Orlando,Starkey,Lester,SeaWorld Orlando,US,Died,US,1999-06-22
+816,Beluga,Spooky’s Calf,U,a,1999,Born,1999-07-01,SeaWorld Orlando,Spooky,Luke,SeaWorld Orlando,US,Died,US,1999-07-01
+817,Beluga,Hudnall,M,a,1999,Born,1999-07-27,SeaWorld Orlando,Bandit,Luke,SeaWorld Orlando,US,Died,US,1999-07-27
+818,Bottlenose,Kato,M,a,2002,Born,2002-04-19,SeaWorld Orlando,Kendall,Razzle,SeaWorld Orlando,US,Died,US,2002-04-19
+819,Bottlenose,T.K.,M,a,2002,Born,2002-07-13,SeaWorld Orlando,Tanya,Hekili,SeaWorld Orlando,US,Died,US,2002-07-13
+820,Bottlenose,Cinco,F,a,2005,Born,2005-05-05,SeaWorld Orlando,Ariel,Duffy,SeaWorld Orlando,US,Died,US,2005-05-05
+821,Bottlenose,Lagos,M,a,2007,Born,2007-10-08,SeaWorld Orlando,Lily,Sebastian,SeaWorld Orlando,US,Died,US,2007-10-08
+822,Bottlenose,Rhett,M,a,2009,Born,2009-07-18,Discovery Cove,Naia,Capricorn,SeaWorld Orlando,US,Died,US,2009-07-18
+823,Bottlenose,Cocoa,F,a,2010,Born,2010-09-14,SeaWorld Orlando,Calla,Jag,SeaWorld Orlando,US,Died,US,2010-09-14
+835,Bottlenose,Jiffy Pop,M,a,1978,Born,1978-09-25,SeaWorld San Diego,Jiffy,Doc,SeaWorld San Antonio,US,Died,US,1978-09-25
+844,Bottlenose,Sprite,F,a,1981,Born,1981-06-14,SeaWorld Orlando,Mary,TT-7709,SeaWorld San Antonio,US,Died,US,1981-06-14
+847,Bottlenose,Puka,F,a,1982,Born,1982-08-19,SeaWorld San Diego,Punta,Clicker,SeaWorld San Antonio,US,Died,US,1982-08-19
+860,Killer Whale; Orca,Katerina,F,a,1988,Born,1988-11-04,SeaWorld Orlando,Katina,Kanduke,SeaWorld San Antonio,US,Died,US,1988-11-04
+861,Bottlenose,Scotia,M,a,1992,Born,1992-06-08,SeaWorld Orlando,Nova,Ralph,SeaWorld San Antonio,US,Died,US,1992-06-08
+865,Killer Whale; Orca,Taku,M,a,1993,Born,1993-09-09,SeaWorld Orlando,Katina,Tilikum,SeaWorld San Antonio,US,Died,US,1993-09-09
+870,"White-sided, Pacific",Cassie,F,a,1996,Born,1996-10-11,SeaWorld San Antonio,Thetis,Jump-Jump,SeaWorld San Antonio,US,Died,US,1996-10-11
+871,Killer Whale; Orca,Unna,F,a,1996,Born,1996-12-27,SeaWorld Orlando,Katina,Tilikum,SeaWorld San Antonio,US,Died,US,1996-12-27
+873,Beluga,Olivia,F,a,1998,Born,1998-06-19,SeaWorld San Antonio,Martina,Shadow,SeaWorld San Antonio,US,Died,US,1998-06-19
+875,Bottlenose,Jovi,M,a,1999,Born,1999-08-17,SeaWorld San Antonio,Yoyo,Capricorn,SeaWorld San Antonio,US,Died,US,1999-08-17
+877,Bottlenose,Max,M,a,2001,Born,2001-04-22,SeaWorld San Antonio,Mattie,Kai(T.t. gilli),SeaWorld San Antonio,US,Died,US,2001-04-22
+878,Bottlenose,Yoki,F,a,2003,Born,2003-07-29,SeaWorld San Antonio,Yoyo,Kai(T.t. gilli),SeaWorld San Antonio,US,Died,US,2003-07-29
+879,"White-sided, Pacific",Dart,M,a,2003,Born,2003-09-08,SeaWorld San Antonio,Lorelai,"A.I., Arrow",SeaWorld San Antonio,US,Died,US,2003-09-08
+880,"White-sided, Pacific",Jet,M,a,2003,Born,2003-09-11,SeaWorld San Antonio,Betty,"A.I., Arrow",SeaWorld San Antonio,US,Died,US,2003-09-11
+883,Beluga,Whisper's Calf,F,a,2008,Born,2008-07-27,SeaWorld San Antonio,Whisper,Nanuq,SeaWorld San Antonio,US,Died,US,2008-07-27
+884,Beluga,Bella,F,a,2009,Born,2009-06-12,SeaWorld San Antonio,Crissy,"A.I., Nanuq",SeaWorld San Antonio,US,Died,US,2009-06-12
+885,Beluga,Crissy's Calf,F,a,2009,Stillbirth,2009-06-12,SeaWorld San Antonio,Crissy,"A.I., Nanuq",SeaWorld San Antonio,US,Stillbirth,US,2009-06-12
+886,Bottlenose,Naiya,F,a,2010,Born,2010-09-29,SeaWorld San Antonio,Nikki,"A.I., Stein",SeaWorld San Antonio,US,Died,US,2010-09-29
+887,Beluga,Stella,F,a,2013,Born,2013-07-26,SeaWorld San Antonio,Crissy,Imaq,SeaWorld San Antonio,US,Died,US,2013-07-26
+970,Bottlenose,Halfspeed,M,a,1978,Born,1978-04-14,SeaWorld San Diego,Speedy,Jethro(T.t. gilli),SeaWorld San Diego,US,Died,US,1978-04-14
+971,Bottlenose,Boomer,M,a,1978,Born,1978-05-02,SeaWorld San Diego,Athena,Doc,SeaWorld San Diego,US,Died,US,1978-05-02
+993,Bottlenose,Sundance,M,a,1980,Born,1980-02-14,Marineland of the Pacific,Grid Eye(T.t. gilli),White Pec,SeaWorld San Diego,US,Died,US,1980-02-14
+1003,Bottlenose,Bacardi,F,a,1981,Born,1981-04-14,SeaWorld San Diego,Athena,Jethro(T.t. gilli),SeaWorld San Diego,US,Died,US,1981-04-14
+1005,Bottlenose,Ashleigh,M,a,1982,Born,1982-10-01,SeaWorld San Diego,Scarback,Clicker,SeaWorld San Diego,US,Died,US,1982-10-01
+1022,Bottlenose,Seltzer,F,a,1985,Born,1985-05-19,SeaWorld San Diego,Speedy,Jethro(T.t. gilli),SeaWorld San Diego,US,Died,US,1985-05-19
+1024,Bottlenose,Bodine,M,a,1986,Born,1986-11-23,SeaWorld San Diego,Cindy(T.t. gilli),Jethro(T.t. gilli),SeaWorld San Diego,US,Died,US,1986-11-23
+1029,Bottlenose,Suds,M,a,1987,Born,1987-08-25,SeaWorld San Diego,Sandy,Stein,SeaWorld San Diego,US,Died,US,1987-08-25
+1031,Killer Whale; Orca,Splash,M,a,1989,Born,1989-08-15,Marineland Canada,Nootka V,Kandu VII,SeaWorld San Diego,US,Died,US,1989-08-15
+1032,Bottlenose,Purina,F,a,1991,Born,1991-04-13,SeaWorld San Diego,Athena,Crunch,SeaWorld San Diego,US,Died,US,1991-04-13
+1033,Bottlenose,Duncandnc,M,a,1985,Born,1992-08-29,SeaWorld San Antonio,Yoyo,Duncan,SeaWorld San Diego,US,Died,US,1992-08-29
+1037,Killer Whale; Orca,Sumar,M,a,1998,Born,1998-05-14,SeaWorld Orlando,Taima,Tilikum,SeaWorld San Diego,US,Died,US,1998-05-14
+1038,Bottlenose,Jones,M,a,1998,Born,1998-10-19,SeaWorld San Diego,Gracie(T.t. gilli),Crunch,SeaWorld San Diego,US,Died,US,1998-10-19
+1039,Commerson's,Rachel,F,a,2001,Born,2001-06-08,SeaWorld San Diego,Betsy,Juan,SeaWorld San Diego,US,Died,US,2001-06-08
+1040,Bottlenose,Penny's Calf,F,a,2002,Born,2002-09-03,SeaWorld San Diego,Penny,Crunch,SeaWorld San Diego,US,Died,US,2002-09-03
+1041,Bottlenose,Osa,F,a,2006,Born,2006-04-13,SeaWorld San Diego,Daphne,Razzle,SeaWorld San Diego,US,Died,US,2006-04-13
+1043,Bottlenose,Montenegro,M,a,2009,Born,2009-09-05,SeaWorld San Diego,Cascade,Crunch,SeaWorld San Diego,US,Died,US,2009-09-05
+1053,Beluga,Puiji's Calf,M,a,1999,Born,1999-07-23,Shedd Aquarium,Puiji,Naluark,Shedd Aquarium,US,Died,US,1999-07-23
+1054,Beluga,Naya's Calf,M,a,2009,Born,2009-12-20,Shedd Aquarium,Naya,Naluark,Shedd Aquarium,US,Died,US,2009-12-20
+1063,Bottlenose,Terry's Calf,M,a,1996,Born,1996-05-28,Six Flags Discovery Kingdom,Terry,Merlin,Six Flags Discovery Kingdom,US,Died,US,1996-05-28
+1065,Bottlenose,Stormy's Calf,F,a,2003,Born,2003-05-02,Six Flags Discovery Kingdom,Stormy,Merlin,Six Flags Discovery Kingdom,US,Died,US,2003-05-02
+1067,Bottlenose,Cortez,M,a,2008,Born,2008-07-14,SeaWorld San Diego,Dottie,Crunch,Six Flags Discovery Kingdom,US,Died,US,2008-07-14
+1068,Bottlenose,Titan,M,a,2010,Born,2010-05-23,Six Flags Discovery Kingdom,Jasmine,"A.I., Talon",Six Flags Discovery Kingdom,US,Died,US,2010-05-23
+1069,Bottlenose,Mirabella,F,a,2014,Born,2014-01-09,Six Flags Discovery Kingdom,Bella,Semo,Six Flags Discovery Kingdom,US,Died,US,2014-01-09
+1070,Bottlenose,Cobie,M,a,1992,Born,1992-03-26,National Aquarium,Hailey,Akai,Texas State Aquarium,US,Died,US,1992-03-26
+1086,Bottlenose,Thunder,M,a,1991,Born,1991-08-18,Theater of the Sea,Jeannie III,Nicky,Theater of the Sea,US,Died,US,1991-08-18
+1087,Bottlenose,Ariel,M,a,1993,Born,1993-10-18,Theater of the Sea,Bubbles,Nicky,Theater of the Sea,US,Died,US,1993-10-18
+1088,Bottlenose,Lightning,M,a,1994,Born,1994-11-08,Theater of the Sea,Jeannie III,Nicky,Theater of the Sea,US,Died,US,1994-11-08
+1089,Bottlenose,Echo,M,a,1994,Born,1994-11-12,Theater of the Sea,Sherry,Nicky,Theater of the Sea,US,Died,US,1994-11-12
+1090,Bottlenose,Twister,M,a,1996,Born,1996-11-21,Theater of the Sea,Jeannie III,Nicky,Theater of the Sea,US,Died,US,1996-11-21
+1092,Bottlenose,Savannah,F,a,2000,Born,2000-05-12,Theater of the Sea,Jeannie III,Stormy,Theater of the Sea,US,Died,US,2000-05-12
+1162,Bottlenose,Bobby,M,a,1981,Born,1981-04-03,SeaWorld San Diego,Speedy,Jethro(T.t. gilli),U.S. Navy,US,Died,US,1981-04-03
+1164,Bottlenose,Hapa,M,a,1983,Born,1983-05-15,U.S. Navy MMP,Pandora,Ivan(T.t. gilli),U.S. Navy,US,Died,US,1983-05-15
+1204,Bottlenose,Arielari,F,a,1991,Born,1991-07-20,U.S. Navy,Slooper,Ekahi,U.S. Navy,US,Died,US,1991-07-20
+1205,Bottlenose,Hou,F,a,1992,Born,1992-04-04,U.S. Navy,Lisa,Ben,U.S. Navy,US,Died,US,1992-04-04
+1207,Bottlenose,Jan,F,a,1993,Born,1993-04-20,U.S. Navy,Bertha,Maui,U.S. Navy,US,Died,US,1993-04-20
+1208,Bottlenose,C.J.Cjj,F,a,1993,Born,1993-06-01,U.S. Navy,CUD,Maui,U.S. Navy,US,Died,US,1993-06-01
+1209,Bottlenose,Hly,F,a,1995,Born,1995-09-22,U.S. Navy,Opai,Nemo,U.S. Navy,US,Died,US,1995-09-22
+1210,Bottlenose,Bunsenbun,M,a,1998,Born,1998-08-30,SeaWorld San Diego,Beaker,Bodine(T.t. gilli),U.S. Navy,US,Died,US,1998-08-30
+1211,Bottlenose,Siouxsiu,F,a,1999,Born,1999-07-28,U.S. Navy,CUD,Nihoa,U.S. Navy,US,Died,US,1999-07-28
+1213,Bottlenose,Mli,M,a,2001,Born,2001-10-11,U.S. Navy,Bertha,Ekahi,U.S. Navy,US,Died,US,2001-10-11
+1216,Bottlenose,Tuc,M,a,2007,Born,2007-08-21,U.S. Navy,Slooper,Tacoma,U.S. Navy,US,Died,US,2007-08-21
+1929,Killer Whale; Orca,Takara's Calf,F,a,2017,Born,2017-04-19,SeaWorld San Antonio,Takara,Kyuquot,Sea World San Antonio,US,Alive,US,2017-04-19
