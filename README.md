@@ -1,5 +1,5 @@
 # Regression-Project
-Check out the data description here: https://data.world/the-pudding/cetaceans 
+Data is built into R.
 
 **Formulation of Hypotheses**
 
