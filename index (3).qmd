@@ -1,6 +1,6 @@
 ---
-title: "Your Project Name Here"
-author: "Your Group Name Here"
+title: "Regression Project"
+author: "Group 8"
 format: html
 editor: 
   markdown: 
@@ -9,7 +9,7 @@ editor:
 
 ## Introduction
 
-(Your text here)
+TESTSTSTST
 
 ## Research Questions
 
@@ -135,6 +135,7 @@ scorecard1 %>%
 ```
 
 ##### Correlations
+
 ```{r}
 scorecard$year_num <- as.numeric(scorecard$year)
 library(pheatmap)
