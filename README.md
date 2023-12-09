@@ -2,6 +2,7 @@
 Check out the data description here: https://data.world/the-pudding/cetaceans 
 
 **Formulation of Hypotheses**
+
 **Median income has a positive relationship with number of working graduates.**
 H: Median income will have a positive relationship with the number of working graduates. 
 
