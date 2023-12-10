@@ -106,6 +106,7 @@ glimpse(scorecard)
 ```
 
 #### Region Exploration
+
 A constructed boxplot illustrates trends in median earnings for graduates based on the US region. Graduates situated in the Northeastern US have the highest median of earnings while the South has the lowest median earning. 
 Both the north central and western US have similar median earnings; however, western and northeastern states have a much wider distribution of earnings than southern and the north central states. 
 Northeastern states may have higher median earnings because of an increased concentration of “prestigious” universities (ex. Ivy League) in this region; there may be a “higher” quality of education that is more sought after for employment. This observation, however, requires additional investigation.
