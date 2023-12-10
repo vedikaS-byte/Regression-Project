@@ -8,6 +8,7 @@ editor:
 ---
 
 ## Introduction
+  For decades, a secondary education has been considered the gold standard for ensuring a comfortable career and wage. In recent years however, it is becoming more and more difficult for recent graduates to find careers that match up with their major of study, and therefore the wages that go with it. We found this topic important to study due to the prevalence of career prospects in our own lives as well as society at large. Our data is from an inbuilt RStudio package, causaldata, and has 30401 observations, omitting NAs. Our outcome of interest is median income (earnings_med), while our predictors of interest are degree awarded (pred_degree_awarded_ipeds), working (count_working), not working (count_not_working), year, and region. Degree awarded has 3 different observations: 1 being a less-than-two-year degree, 2 being a two-year degree, and 3 being a four-year degree or more. The year variable goes from 2007 until 2014. The region variable is broken down into Northeast, North Central, South, and West. 
 
 ```{r}
 # all of our packages
@@ -384,7 +385,7 @@ autoplot(best_model)
 
 ## Formal Hypothesis Tests
 
-At the start of the paper we wanted to investigate how the number of working graduates (`count_working`), region of the university (`region`), and degree type (`degree`) relate to the median income of graduates earnings_med.
+To begin the project, we wanted to investigate how the number of working graduates (`count_working`), region of the university (`region`), and degree type (`degree`) relate to the median income of graduates (`earnings_med`).
 In this section, we tested if each of these three variables are significant in predicting the median income.
 Firstly, we used the following equation to represent the relationship between median earnings and the chosen predictors: $$
 Y = \beta_0 + \beta_{r_1}X_{r_1} + \beta_{r_2}X_{r_2} + \beta_{r_3}X_{r_3} + \beta_{d_1}X_{d_2} + \beta_{d_2}X_{d_2} + \beta_yX_y + \beta_nX_n + \beta_wX_w + \epsilon
@@ -440,9 +441,9 @@ Firstly, our model contained only 5 predictors all of which were found to be sig
 However, the inclusion of more predictors can affect the trends of the model and change the significance of each of the original 5 predictors.
 Also, we need to consider the possibility of existence of confounding variables.
 For example, it is possible that graduates who go to elite colleges are more likely to both find a job and earn a higher wage.
-Also, some regions in the US like the Northeast tend to have many states with a significantly higher cost of living which can explain the difference in median earnings.
+Along with this, some regions in the US, like the Northeast, tend to have many states with a significantly higher cost of living which can explain the difference in median earnings.
 It is also important to account for the fact that we performed multiple tests in this section, hence we adjusted our p-values using the Bonferroni correction.
-Firstly, for both region and degree variables, we repeated the pairwise comparisons but using the Bonferroni adjusted p-values.
+Firstly, for both region and degree variables, we repeated the pairwise comparisons using the Bonferroni adjusted p-values.
 In both cases, our conclusions did not change.
 
 ```{r}
