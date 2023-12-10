@@ -86,6 +86,7 @@ scorecard <- na.omit(scorecard)
 -   $H_A$: People with 4 year degrees have higher median salaries compared to other degre
 
 ## Data Exploration
+	The purpose of this project is to analyze a potential relationship between college graduates in the US and median earnings based on year, region, degree length, and working status. Firstly, NA values were removed from the data set. States were grouped into regions using the state.region() base R function, and the degree length was converted to a factor with levels for simplified analysis. Additional tidying was performed utilizing gather(), where “employment_status” was created with the paired variable “working” listing the number of graduates either currently working or not working. The following is a brief analysis of trends among selected predictors (year, employment_status (count_working and count_not_working), degree, and region) and median earnings (earnings_med). 
 
 #### Manipulate Data
 
