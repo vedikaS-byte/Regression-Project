@@ -182,7 +182,7 @@ When compared to both the regression coefficients and the overall range of the a
 
 ## Formal Hypothesis Tests
 
-At the start of the paper we wanted to investigate how the number of working graduates (`count_working`), region of the university (`region`), and degree type (`degree`) relate to the median income of graduates earnings_med.
+To begin the project, we wanted to investigate how the number of working graduates (`count_working`), region of the university (`region`), and degree type (`degree`) relate to the median income of graduates (`earnings_med`).
 In this section, we tested if each of these three variables are significant in predicting the median income.
 Firstly, we used the following equation to represent the relationship between median earnings and the chosen predictors: $$
 Y = \beta_0 + \beta_{r_1}X_{r_1} + \beta_{r_2}X_{r_2} + \beta_{r_3}X_{r_3} + \beta_{d_1}X_{d_2} + \beta_{d_2}X_{d_2} + \beta_yX_y + \beta_nX_n + \beta_wX_w + \epsilon
@@ -238,9 +238,9 @@ Firstly, our model contained only 5 predictors all of which were found to be sig
 However, the inclusion of more predictors can affect the trends of the model and change the significance of each of the original 5 predictors.
 Also, we need to consider the possibility of existence of confounding variables.
 For example, it is possible that graduates who go to elite colleges are more likely to both find a job and earn a higher wage.
-Also, some regions in the US like the Northeast tend to have many states with a significantly higher cost of living which can explain the difference in median earnings.
+Along with this, some regions in the US, like the Northeast, tend to have many states with a significantly higher cost of living which can explain the difference in median earnings.
 It is also important to account for the fact that we performed multiple tests in this section, hence we adjusted our p-values using the Bonferroni correction.
-Firstly, for both region and degree variables, we repeated the pairwise comparisons but using the Bonferroni adjusted p-values.
+Firstly, for both region and degree variables, we repeated the pairwise comparisons using the Bonferroni adjusted p-values.
 In both cases, our conclusions did not change.
 
 ```{r}
