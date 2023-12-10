@@ -103,6 +103,8 @@ glimpse(scorecard)
 ```
 
 #### Region Exploration
+	A constructed boxplot illustrates trends in median earnings for graduates based on the US region. Graduates situated in the Northeastern US have the highest median of earnings while the South has the lowest median earning. Both the north central and western US have similar median earnings; however, western and northeastern states have a much wider distribution of earnings than southern and the north central states. Northeastern states may have higher median earnings because of an increased concentration of “prestigious” universities (ex. Ivy League) in this region; there may be a “higher” quality of education that is more sought after for employment. This observation, however, requires additional investigation.
+
 
 ```{r}
 # Plot for Graduate Median Earnings Based on Region
@@ -124,6 +126,7 @@ scorecard %>%
 ```
 
 #### Employment Status vs. Median Earnings
+	A scatterplot was utilized to determine the distribution of median earnings for graduates based on working status. As seen in the rightmost scatterplot, there are more working graduates than those who do not work; there are notable extremes for count_working, where at least two data points indicate more than 7,500 working graduates were earning. Working graduates seem more numerous and spread out for median earnings compared to those who did not work. Surprisingly, working and non-working graduates seem to have similarly distributed median earnings; this goes against an assumption that working graduates would have higher median salaries than those who do not work. 
 
 ```{r}
 # Create a new dataframe with tidy long performed on status of work
@@ -143,19 +146,10 @@ scorecard1 %>%
   theme(legend.position = "top") +
   geom_smooth(method = "lm", linetype = "dashed", color = "black") 
 
-# Plot for Median Earnings of Graduates Based on Employment Status
-scorecard1 %>% 
-  ggplot(aes(x =  earnings_med, fill = employment_status)) +
-  geom_histogram(bins = 35, col = "black") + facet_grid(~employment_status) +
-  labs(title = "Median Earnings of Graduates Based on Employment Status",
-       x = "Median Earnings") +
-  scale_color_brewer(palette = "Dark2", name = "Employment Status", labels = c("Not Working", "Working")) +
-  theme_minimal()
-
-
 ```
 
 #### Degree Length vs. Median Earnings
+It was expected that the longer the degree length, the higher the median earnings for graduates. Those who completed an undergraduate degree or pursued further education (ex. graduate school) earned much more than those who did not; the median earnings for this group are higher, and there is more spread for median earnings. This visually supports the observation that graduates with at least an undergraduate degree or additional completed schooling have a higher chance of employment because academic and professional skills may be more developed for a selected profession. As such, preference may be given for graduates with an undergraduate degree or higher education status compared to those who have two or less years of completed education. 
 
 ```{r}
 # Plot for Median Earnings of Graduates Based on Degree Length
@@ -168,6 +162,7 @@ scorecard1 %>%
 ```
 
 #### Year vs. Median Earnings
+	Median earnings based on years did not frequently change, and years 2009 and 2011 saw at least one visible outlier among graduates for more than $150,000 earned. Because yearly data for 2008 and post 2014 was omitted due to missing information, the yearly earnings distribution may not be reflective of additional years. However, the trends in the boxplot indicate that median earnings generally decreased after 2009; this may indicate a response to economic effects. Additional research is required to further investigate this observation.
 
 ```{r}
 # changing year to a factor
@@ -182,6 +177,7 @@ scorecard1 %>%
 ```
 
 #### Correlations
+A correlation matrix was generated to visualize correlations between selected numeric variables.The highest correlation was found to be between `count_working` and `count_not_working` at 0.97. This is trivial since the number of graduates that are able to find work directly influences the number of graduates that remained unemployed. The magnitudes of all other correlation factors were below 0.25, suggesting the variables have a quite weak relationship.
 
 ```{r}
 # getting year as a numeric
