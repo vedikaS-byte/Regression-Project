@@ -592,4 +592,7 @@ Once one of the variables is removed the vifs become more balanced and within 1 
 
 ## Conclusions
 
-(Your text here)
+We rejected the null hypotheses of our initial analysis of the data in favor of our alternative hypotheses, which stated that median income differed due to number of working graduates, region, or degree earned. We also found that the correlations between the variables are quite weak. Specifically, it seemed that median earnings increased with the number of working graduates, varied between U.S. regions, and varied between length of degree earned. However, inclusion of more predictors could affect the trends of the model, and there could be confounding variables which could be influencing the trends and results of the tests. 
+	In fitting the model we found that not working and year are both significantly negatively associated with median income. We also found that when held against graduates of Northeastern schools, graduates of Southern, North Central, and Western schools all have decreased median income. When compared to graduates with a less-than-2-year degree, those with a 2 year degree and 4 or more year degree saw increased median earnings. This model however, saw that only about 50% of the variation observed in median earnings was accounted for, meaning that the model is likely improperly fit through overfitting or multicollinearity. 
+	In discovering the improperness of the original model fit, we used a log-dependant transformation in order to see an improvement in fit appropriateness. We found that the log-transformed model had a better appropriateness than the model previously used, as there were fewer violations of model assumptions.  
+
