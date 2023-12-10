@@ -106,7 +106,9 @@ glimpse(scorecard)
 ```
 
 #### Region Exploration
-	A constructed boxplot illustrates trends in median earnings for graduates based on the US region. Graduates situated in the Northeastern US have the highest median of earnings while the South has the lowest median earning. Both the north central and western US have similar median earnings; however, western and northeastern states have a much wider distribution of earnings than southern and the north central states. Northeastern states may have higher median earnings because of an increased concentration of “prestigious” universities (ex. Ivy League) in this region; there may be a “higher” quality of education that is more sought after for employment. This observation, however, requires additional investigation.
+A constructed boxplot illustrates trends in median earnings for graduates based on the US region. Graduates situated in the Northeastern US have the highest median of earnings while the South has the lowest median earning. 
+Both the north central and western US have similar median earnings; however, western and northeastern states have a much wider distribution of earnings than southern and the north central states. 
+Northeastern states may have higher median earnings because of an increased concentration of “prestigious” universities (ex. Ivy League) in this region; there may be a “higher” quality of education that is more sought after for employment. This observation, however, requires additional investigation.
 
 
 ```{r}
@@ -129,7 +131,10 @@ scorecard %>%
 ```
 
 #### Employment Status vs. Median Earnings
-	A scatterplot was utilized to determine the distribution of median earnings for graduates based on working status. As seen in the rightmost scatterplot, there are more working graduates than those who do not work; there are notable extremes for count_working, where at least two data points indicate more than 7,500 working graduates were earning. Working graduates seem more numerous and spread out for median earnings compared to those who did not work. Surprisingly, working and non-working graduates seem to have similarly distributed median earnings; this goes against an assumption that working graduates would have higher median salaries than those who do not work. 
+
+A scatterplot was utilized to determine the distribution of median earnings for graduates based on working status. As seen in the rightmost scatterplot, there are more working graduates than those who do not work; there are notable extremes for count_working, where at least two data points indicate more than 7,500 working graduates were earning. 
+Working graduates seem more numerous and spread out for median earnings compared to those who did not work. 
+Surprisingly, working and non-working graduates seem to have similarly distributed median earnings; this goes against an assumption that working graduates would have higher median salaries than those who do not work. 
 
 ```{r}
 # Create a new dataframe with tidy long performed on status of work
@@ -165,7 +170,8 @@ scorecard1 %>%
 ```
 
 #### Year vs. Median Earnings
-	Median earnings based on years did not frequently change, and years 2009 and 2011 saw at least one visible outlier among graduates for more than $150,000 earned. Because yearly data for 2008 and post 2014 was omitted due to missing information, the yearly earnings distribution may not be reflective of additional years. However, the trends in the boxplot indicate that median earnings generally decreased after 2009; this may indicate a response to economic effects. Additional research is required to further investigate this observation.
+Median earnings based on years did not frequently change, and years 2009 and 2011 saw at least one visible outlier among graduates for more than $150,000 earned. Because yearly data for 2008 and post 2014 was omitted due to missing information, the yearly earnings distribution may not be reflective of additional years. 
+However, the trends in the boxplot indicate that median earnings generally decreased after 2009; this may indicate a response to economic effects. Additional research is required to further investigate this observation.
 
 ```{r}
 # changing year to a factor
