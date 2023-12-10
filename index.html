@@ -105,109 +105,172 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>For decades, a secondary education has been considered the gold standard for ensuring a comfortable career and wage. In recent years however, it is becoming more and more difficult for recent graduates to find careers that match up with their major of study, and therefore the wages that go with it. We found this topic important to study due to the prevalence of career prospects in our own lives as well as society at large. Our data is from an inbuilt RStudio package, causaldata, and has 30401 observations, omitting NAs. Our outcome of interest is median income (earnings_med), while our predictors of interest are degree awarded (pred_degree_awarded_ipeds), working (count_working), not working (count_not_working), year, and region. Degree awarded has 3 different observations: 1 being a less-than-two-year degree, 2 being a two-year degree, and 3 being a four-year degree or more. The year variable goes from 2007 until 2014. The region variable is broken down into Northeast, North Central, South, and West.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(causaldata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># all of our packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(causaldata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'causaldata' was built under R version 4.3.2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-Attaching package: 'dplyr'</code></pre>
+Attaching package: 'MASS'
+
+The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'pheatmap' was built under R version 4.3.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData
+
+Attaching package: 'carData'
+
+The following object is masked from 'package:causaldata':
+
+    Mroz
+
+
+Attaching package: 'car'
+
+The following object is masked from 'package:dplyr':
+
+    recode
+
+The following object is masked from 'package:purrr':
+
+    some</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: zoo
+
+Attaching package: 'zoo'
+
+The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(splines)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'reshape2' was built under R version 4.3.2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
+<pre><code>
+Attaching package: 'reshape2'
 
-    filter, lag</code></pre>
+The following object is masked from 'package:tidyr':
+
+    smiths</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(interactions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
+<pre><code>Warning: package 'interactions' was built under R version 4.3.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'boot'
 
-    intersect, setdiff, setequal, union</code></pre>
+The following object is masked from 'package:car':
+
+    logit</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(scorecard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  unitid                           inst_name state_abbr
-1 100654            Alabama A &amp; M University         AL
-2 100663 University of Alabama at Birmingham         AL
-3 100690                  Amridge University         AL
-4 100706 University of Alabama in Huntsville         AL
-5 100724            Alabama State University         AL
-6 100751           The University of Alabama         AL
-  pred_degree_awarded_ipeds year earnings_med count_not_working count_working
-1                         3 2007        36600               116          1139
-2                         3 2007        40800               366          2636
-3                         3 2007           NA                 6            25
-4                         3 2007        49300               122           975
-5                         3 2007        30500               210          1577
-6                         3 2007        46700               292          2754</code></pre>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simpleboot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Simple Bootstrap Routines (1.1-7)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>scorecard<span class="sc">$</span>region <span class="ot">&lt;-</span> state.region[<span class="fu">match</span>(scorecard<span class="sc">$</span>state_abbr, state.abb)]</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>scorecard <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(scorecard)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(scorecard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  unitid                           inst_name state_abbr
-1 100654            Alabama A &amp; M University         AL
-2 100663 University of Alabama at Birmingham         AL
-4 100706 University of Alabama in Huntsville         AL
-5 100724            Alabama State University         AL
-6 100751           The University of Alabama         AL
-7 100760   Central Alabama Community College         AL
-  pred_degree_awarded_ipeds year earnings_med count_not_working count_working
-1                         3 2007        36600               116          1139
-2                         3 2007        40800               366          2636
-4                         3 2007        49300               122           975
-5                         3 2007        30500               210          1577
-6                         3 2007        46700               292          2754
-7                         2 2007        28100               113           590
-  region
-1  South
-2  South
-4  South
-5  South
-6  South
-7  South</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the functions used in multiple places</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>predict_loo <span class="ot">&lt;-</span> <span class="cf">function</span>(model) {</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">model.frame</span>(model)[,<span class="dv">1</span>]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>loo_r <span class="ot">&lt;-</span> <span class="fu">residuals</span>(model) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(model))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(y <span class="sc">-</span> loo_r)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>rsq_loo <span class="ot">&lt;-</span> <span class="cf">function</span>(model) {</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">model.frame</span>(model)[,<span class="dv">1</span>]</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">predict_loo</span>(model)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">cor</span>(y, yhat)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>p_print <span class="ot">&lt;-</span> <span class="cf">function</span>(object){</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">deparse</span>(<span class="fu">substitute</span>(object)))</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(object)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>as.numeric.l <span class="ot">&lt;-</span> <span class="cf">function</span>(list){</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.factor</span>(list)){</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    list <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(list)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(list)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="do">## cleaning</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co"># making region match which region the state is in</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>scorecard<span class="sc">$</span>region <span class="ot">&lt;-</span> state.region[<span class="fu">match</span>(scorecard<span class="sc">$</span>state_abbr, state.abb)]</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="co"># making the degree a factor</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>scorecard<span class="sc">$</span>degree <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(scorecard<span class="sc">$</span>pred_degree_awarded_ipeds)</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>scorecard <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(scorecard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="research-questions" class="level2">
 <h2 class="anchored" data-anchor-id="research-questions">Research Questions</h2>
 <section id="does-median-income-have-a-positive-relationship-with-the-proportion-of-working-graduates" class="level4">
 <h4 class="anchored" data-anchor-id="does-median-income-have-a-positive-relationship-with-the-proportion-of-working-graduates">1. Does median income have a positive relationship with the proportion of working graduates?</h4>
-<p>H: Median income will have a positive relationship with the number of working graduates.</p>
-<p>A positive relationship and significant p-value will prove this to be true.</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: Median income will have a positive relationship with the number of working graduates.</p></li>
+<li><p><span class="math inline">\(H_A\)</span>: positive relationship and significant p-value will prove this to be true.</p></li>
+</ul>
 </section>
 <section id="which-us-region-contributes-most-to-median-earnings" class="level4">
 <h4 class="anchored" data-anchor-id="which-us-region-contributes-most-to-median-earnings">2. Which US region contributes most to median earnings?</h4>
-<p>H0: All regions do not differ significantly for median earnings</p>
-<p>HA: Eastern region will be the most significant in median earnings compared to other regions.</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: All regions do not differ significantly for median earnings</p></li>
+<li><p><span class="math inline">\(H_A\)</span>: Eastern region will be the most significant in median earnings compared to other regions.</p></li>
+</ul>
 </section>
 <section id="which-degree-length-leads-to-higher-median-salary" class="level4">
 <h4 class="anchored" data-anchor-id="which-degree-length-leads-to-higher-median-salary">3. Which degree length leads to higher median salary?</h4>
-<p>H0: Median salary does not significantly differ between degree lengths.</p>
-<p>HA: People with 4 year degrees have higher median salaries compared to other degre</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: Median salary does not significantly differ between degree lengths.</p></li>
+<li><p><span class="math inline">\(H_A\)</span>: People with 4 year degrees have higher median salaries compared to other degre</p></li>
+</ul>
 </section>
 </section>
 <section id="data-exploration" class="level2">
 <h2 class="anchored" data-anchor-id="data-exploration">Data Exploration</h2>
-<section id="manipulate-data" class="level5">
-<h5 class="anchored" data-anchor-id="manipulate-data">Manipulate Data</h5>
+<section id="manipulate-data" class="level4">
+<h4 class="anchored" data-anchor-id="manipulate-data">Manipulate Data</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Organize states into regions </span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>scorecard<span class="sc">$</span>region <span class="ot">&lt;-</span> state.region[<span class="fu">match</span>(scorecard<span class="sc">$</span>state_abbr, state.abb)]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>scorecard <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(scorecard)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Change variable name to 'degree'</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>scorecard <span class="ot">=</span> scorecard <span class="sc">%&gt;%</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">degree =</span> <span class="fu">as.factor</span>(pred_degree_awarded_ipeds))</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(scorecard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Organize states into regions </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>scorecard<span class="sc">$</span>region <span class="ot">&lt;-</span> state.region[<span class="fu">match</span>(scorecard<span class="sc">$</span>state_abbr, state.abb)]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>scorecard <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(scorecard)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Change variable name to 'degree'</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>scorecard <span class="ot">=</span> scorecard <span class="sc">%&gt;%</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">degree =</span> <span class="fu">as.factor</span>(pred_degree_awarded_ipeds))</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(scorecard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 30,401
 Columns: 10
@@ -224,111 +287,114 @@ $ degree                    &lt;fct&gt; 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 2, 3, 3, 2
 </div>
 </div>
 </section>
-<section id="region-exploration" class="level5">
-<h5 class="anchored" data-anchor-id="region-exploration">Region Exploration</h5>
+<section id="region-exploration" class="level4">
+<h4 class="anchored" data-anchor-id="region-exploration">Region Exploration</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>scorecard <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> region, <span class="at">y =</span> earnings_med, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Graduate Median Earnings Based on Region"</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Region"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Earnings"</span> ) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span>  </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Graduate Median Earnings Based on Region</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>scorecard <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> region, <span class="at">y =</span> earnings_med, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Graduate Median Earnings Based on Region"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Region"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Earnings"</span> ) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span>  </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="ot">&lt;-</span> scorecard <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">"employment_status"</span>, <span class="at">value =</span> <span class="st">"working"</span>, <span class="sc">-</span><span class="fu">c</span>(unitid,inst_name,state_abbr, pred_degree_awarded_ipeds, year, earnings_med,region,degree)) </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="ot">&lt;-</span> scorecard1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">employment_status =</span> <span class="fu">as.factor</span>(employment_status))</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="sc">%&gt;%</span> </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> earnings_med, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">35</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>region) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings Based on Region"</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>region) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Median Earnings Based on Region</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>scorecard <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> earnings_med, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">35</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>region) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings Based on Region"</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>region) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="employment-status-vs.-median-earnings" class="level5">
-<h5 class="anchored" data-anchor-id="employment-status-vs.-median-earnings">Employment Status vs.&nbsp;Median Earnings</h5>
+<section id="employment-status-vs.-median-earnings" class="level4">
+<h4 class="anchored" data-anchor-id="employment-status-vs.-median-earnings">Employment Status vs.&nbsp;Median Earnings</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new dataframe with tidy long performed on status of work</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="ot">&lt;-</span> scorecard <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">"employment_status"</span>, <span class="at">value =</span> <span class="st">"working"</span>, <span class="sc">-</span><span class="fu">c</span>(unitid,inst_name,state_abbr, pred_degree_awarded_ipeds, year, earnings_med,region,degree)) </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="ot">&lt;-</span> scorecard1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">employment_status =</span> <span class="fu">as.factor</span>(employment_status))</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="sc">%&gt;%</span> </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> working, <span class="at">y =</span> earnings_med, <span class="at">color =</span> employment_status)) <span class="sc">+</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>   <span class="fu">facet_grid</span>(<span class="sc">~</span>employment_status) <span class="sc">+</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings of Graduates Based on Employment Status"</span>,</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Number of Graduates"</span>,</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>, <span class="at">name =</span> <span class="st">"Employment Status"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Not Working"</span>, <span class="st">"Working"</span>)) <span class="sc">+</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new dataframe with tidy long performed on status of work</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="ot">&lt;-</span> scorecard <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">"employment_status"</span>, <span class="at">value =</span> <span class="st">"working"</span>, <span class="fu">c</span>(count_not_working, count_working)) </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="ot">&lt;-</span> scorecard1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">employment_status =</span> <span class="fu">as.factor</span>(employment_status))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Median Earnings of Graduates Based on Employment Status</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="sc">%&gt;%</span> </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> working, <span class="at">y =</span> earnings_med, <span class="at">color =</span> employment_status)) <span class="sc">+</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>   <span class="fu">facet_grid</span>(<span class="sc">~</span>employment_status) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings of Graduates Based on Employment Status"</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Number of Graduates"</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>, <span class="at">name =</span> <span class="st">"Employment Status"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Not Working"</span>, <span class="st">"Working"</span>)) <span class="sc">+</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="sc">%&gt;%</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span>  earnings_med, <span class="at">fill =</span> employment_status)) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">35</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>employment_status) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings of Graduates Based on Employment Status"</span>,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>, <span class="at">name =</span> <span class="st">"Employment Status"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Not Working"</span>, <span class="st">"Working"</span>)) <span class="sc">+</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Median Earnings of Graduates Based on Employment Status</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span>  earnings_med, <span class="at">fill =</span> employment_status)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">35</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>employment_status) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings of Graduates Based on Employment Status"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>, <span class="at">name =</span> <span class="st">"Employment Status"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Not Working"</span>, <span class="st">"Working"</span>)) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="degree-length-vs.-median-earnings" class="level5">
-<h5 class="anchored" data-anchor-id="degree-length-vs.-median-earnings">Degree Length vs.&nbsp;Median Earnings</h5>
+<section id="degree-length-vs.-median-earnings" class="level4">
+<h4 class="anchored" data-anchor-id="degree-length-vs.-median-earnings">Degree Length vs.&nbsp;Median Earnings</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> degree, <span class="at">y =</span> earnings_med, <span class="at">fill =</span> degree)) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings of Graduates Based on Degree Length"</span>,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Degree Length"</span>, <span class="at">y =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">'Less than 2 years'</span>, <span class="st">'Two years'</span>, <span class="st">'4+ years'</span>)) <span class="sc">+</span> </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'Less than 2 years'</span>, <span class="st">'Two years'</span>, <span class="st">'4+ years'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Median Earnings of Graduates Based on Degree Length</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> degree, <span class="at">y =</span> earnings_med, <span class="at">fill =</span> degree)) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings of Graduates Based on Degree Length"</span>,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Degree Length"</span>, <span class="at">y =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">'Less than 2 years'</span>, <span class="st">'Two years'</span>, <span class="st">'4+ years'</span>)) <span class="sc">+</span> </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'Less than 2 years'</span>, <span class="st">'Two years'</span>, <span class="st">'4+ years'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="year-vs.-median-earnings" class="level5">
-<h5 class="anchored" data-anchor-id="year-vs.-median-earnings">Year vs.&nbsp;Median Earnings</h5>
+<section id="year-vs.-median-earnings" class="level4">
+<h4 class="anchored" data-anchor-id="year-vs.-median-earnings">Year vs.&nbsp;Median Earnings</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>scorecard1<span class="sc">$</span>year_level <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(scorecard1<span class="sc">$</span>year)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year_level, <span class="at">y =</span> earnings_med, <span class="at">fill =</span> year_level)) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings of Graduates 2007 - 2014"</span>,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># changing year to a factor</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>scorecard1<span class="sc">$</span>year_level <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(scorecard1<span class="sc">$</span>year)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Median Earnings of Graduates 2007 - 2014</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>scorecard1 <span class="sc">%&gt;%</span> </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year_level, <span class="at">y =</span> earnings_med, <span class="at">fill =</span> year_level)) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Earnings of Graduates 2007 - 2014"</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Median Earnings"</span>) <span class="sc">+</span>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="correlations" class="level5">
-<h5 class="anchored" data-anchor-id="correlations">Correlations</h5>
+<section id="correlations" class="level4">
+<h4 class="anchored" data-anchor-id="correlations">Correlations</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>scorecard<span class="sc">$</span>year_num <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(scorecard<span class="sc">$</span>year)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'pheatmap' was built under R version 4.3.2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>scorecard_cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">na.omit</span>(scorecard[,<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)]))</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(scorecard_cor,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">treeheight_col =</span> <span class="dv">0</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">treeheight_row =</span> <span class="dv">0</span>,</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">display_numbers =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">101</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># getting year as a numeric</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>scorecard<span class="sc">$</span>year_num <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(scorecard<span class="sc">$</span>year)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># getting the heat map for the year, earnings_med, count_not_working, count_working</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>scorecard_cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">na.omit</span>(scorecard[,<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)]))</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(scorecard_cor,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">treeheight_col =</span> <span class="dv">0</span>,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">treeheight_row =</span> <span class="dv">0</span>,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">display_numbers =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">101</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -339,8 +405,8 @@ $ degree                    &lt;fct&gt; 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 2, 3, 3, 2
 <h2 class="anchored" data-anchor-id="multiple-linear-regression-model">Multiple Linear Regression Model</h2>
 <p>To assess for the presence of a predictive relationship between the median earnings of individuals graduating from colleges and universities across the United States and characteristics associated with their alma mater and post college lives, we constructed a linear model regressing median earnings on surveyed universities’ regional location, the number of alumni both employed and not working (not necessarily un-employed), the primary degree awarded, and the year that each survey was conducted.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>earnings_lm<span class="ot">&lt;-</span><span class="fu">lm</span>(earnings_med<span class="sc">~</span>region<span class="sc">+</span>degree<span class="sc">+</span>year<span class="sc">+</span>count_not_working<span class="sc">+</span>count_working, <span class="at">data=</span>scorecard) </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(earnings_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>earnings_lm<span class="ot">&lt;-</span><span class="fu">lm</span>(earnings_med<span class="sc">~</span>region<span class="sc">+</span>degree<span class="sc">+</span>year<span class="sc">+</span>count_not_working<span class="sc">+</span>count_working, <span class="at">data=</span>scorecard)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(earnings_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -369,8 +435,8 @@ Residual standard error: 8373 on 30392 degrees of freedom
 Multiple R-squared:  0.4928,    Adjusted R-squared:  0.4927 
 F-statistic:  3691 on 8 and 30392 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>scorecard<span class="sc">$</span>region<span class="ot">&lt;-</span><span class="fu">relevel</span>(scorecard<span class="sc">$</span>region, <span class="at">ref=</span><span class="st">"Northeast"</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Earnings median range:"</span>, <span class="fu">range</span>(scorecard<span class="sc">$</span>earnings_med))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>scorecard<span class="sc">$</span>region<span class="ot">&lt;-</span><span class="fu">relevel</span>(scorecard<span class="sc">$</span>region, <span class="at">ref=</span><span class="st">"Northeast"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Earnings median range:"</span>, <span class="fu">range</span>(scorecard<span class="sc">$</span>earnings_med))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Earnings median range: 8400 171900</code></pre>
 </div>
@@ -379,11 +445,257 @@ F-statistic:  3691 on 8 and 30392 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="improving-the-model" class="level2">
 <h2 class="anchored" data-anchor-id="improving-the-model">Improving the Model</h2>
-<p>(Your text here)</p>
+<section id="setting-up-to-analyze-the-models" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-to-analyze-the-models">Setting up to analyze the models</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>analyze_model <span class="ot">&lt;-</span> <span class="cf">function</span>(model){</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># testing the if errors zero on-average</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># closer to zero is good</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  resid_avg_zero_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="fu">resid</span>(model), <span class="at">mu=</span><span class="dv">0</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># testing for constant variance</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># closer to zero is better </span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  heteroscedasticity_test <span class="ot">&lt;-</span> <span class="fu">bptest</span>(model)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># used for checking for overfitting</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#higher LOOR2 is better but R2 being much greater than LOOR2 incdicates overfitting</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  LOOR2 <span class="ot">&lt;-</span> <span class="fu">rsq_loo</span>(model)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  R2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)[[<span class="st">"r.squared"</span>]]</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ensure the types are compatible</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  model_call_str <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">paste</span>(<span class="fu">deparse</span>(model<span class="sc">$</span>call), <span class="at">collapse =</span> <span class="st">" "</span>))</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  resid_statistic <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resid_avg_zero_test<span class="sc">$</span>statistic)</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>  errors_zero_is_pass <span class="ot">&lt;-</span>resid_avg_zero_test<span class="sc">$</span>p.value <span class="sc">&gt;</span> .<span class="dv">05</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>  bp_statistic <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(heteroscedasticity_test<span class="sc">$</span>statistic)</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>  constant_variance_is_pass <span class="ot">&lt;-</span> heteroscedasticity_test<span class="sc">$</span>p.value <span class="sc">&gt;</span> .<span class="dv">05</span></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>  loor2_value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(LOOR2)</span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>  r2_value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(R2)</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Append the new row </span></span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>  new_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">model=</span>model_call_str, <span class="at">t=</span>resid_statistic, errors_zero_is_pass, <span class="at">bp=</span>bp_statistic, <span class="at">constant_variance_is_pass=</span>constant_variance_is_pass,  <span class="at">R2=</span>r2_value, <span class="at">LOOR2=</span>loor2_value)</span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Making sure that the results are actually getting added</span></span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;&lt;-</span> <span class="fu">rbind</span>(results, new_row)</span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Q: Use diagnostic plots to assess whether any of the assumptions underlying the linear regression model are violated. Are the errors zero on-average for all fitted values? Do they have constant variance? Are the errors normally distributed?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">analyze_model</span>(earnings_lm)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(results[<span class="fu">NROW</span>(results),]) <span class="co"># !!! </span><span class="al">TODO</span><span class="co"> reformat this so it is easier to interpret</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                                                                            model
+BP lm(formula = earnings_med ~ region + degree + year + count_not_working +      count_working, data = scorecard)
+              t errors_zero_is_pass       bp constant_variance_is_pass
+BP 2.343518e-14                TRUE 855.6839                     FALSE
+          R2     LOOR2
+BP 0.4928242 0.4925416</code></pre>
+</div>
+</div>
+<p>A: According to the t.test for mean of average zero, the errors do appear to be zero on-average for all fitted values (t is extremely close to 0 which indicates a p-value close to zero and therefore is not significant evidence that the mean varies from zero). According to the Breusch-Pagan test, the errors do NOT have constant variance and are heteroskedastic (bp of 855.68 which would led to rejecting the test which indicates we reject the null hypthosesis / aka reject that it is homoskedastic). The normality is pretyy bad with the points at the higher quantiles doubling the expected ones.</p>
+<p>Q: If there are any violations of the usual assumptions, see if you can use a transformation of either the outcome or some/all of the predictors to fix it. Then, reassess the diagnostic plots to see how well you did. (Note: it’s often quite diﬀicult to fix all off the assumptions simultaneously; just do the best you can, with the order of importance being mean-zero, then constant variance, then normality).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>log_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(earnings_med) <span class="sc">~</span> region <span class="sc">+</span> degree <span class="sc">+</span> year <span class="sc">+</span> count_not_working <span class="sc">+</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    count_working, <span class="at">data =</span> scorecard)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">analyze_model</span>(log_model)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>results[<span class="fu">NROW</span>(results),]<span class="co"># !!! </span><span class="al">TODO</span><span class="co"> reformat this so it is easier to interpret</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                                                                                  model
+BP1 lm(formula = log(earnings_med) ~ region + degree + year + count_not_working +      count_working, data = scorecard)
+                t errors_zero_is_pass       bp constant_variance_is_pass
+BP1 -3.335675e-14                TRUE 1597.033                     FALSE
+           R2     LOOR2
+BP1 0.5029592 0.5026963</code></pre>
+</div>
+</div>
+<p>A: Log dependent only transformation. According to the t.test for mean of average zero, the erros do appear to be zero on-average. According to the Breusch-Pagan test, the errors do Not have constant variance however the BP is worse than the previous model. The normality is better than the previous model with qq-plot with the residuals being nowhere as far off.</p>
+<p>Q: For one of your numeric predictors, consider replacing the linear term 𝛽𝑗 𝑋𝑖𝑗 with a natural spline using the ns() function from the splines library, and determine if there is evidence supporting the inclusion of a spline. (You may keep or discard to spline part of the model after doing this.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  formula_str <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"lm(earnings_med ~ region + degree + year + ns(count_not_working, df=%d) + ns(count_working, df=%d), data=scorecard)"</span>, k,k)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  spine_both_model <span class="ot">&lt;-</span> <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> formula_str))</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">analyze_model</span>(spine_both_model)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  formula_str <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"lm(earnings_med ~ region + degree + year + ns(count_not_working*count_working, df=%d), data=scorecard)"</span>, k)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  spine_both_int_model <span class="ot">&lt;-</span> <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> formula_str))</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">analyze_model</span>(spine_both_model)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  formula_str <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"lm(log(earnings_med) ~ region + degree + year + ns(count_not_working, df=%d) + ns(count_working, df=%d), data=scorecard)"</span>, k,k)</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  spine_both_model <span class="ot">&lt;-</span> <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> formula_str))</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">analyze_model</span>(spine_both_model)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>  formula_str <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"lm(log(earnings_med) ~ region + degree + year + ns(count_not_working*count_working, df=%d), data=scorecard)"</span>, k)</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>  spine_both_int_model <span class="ot">&lt;-</span> <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> formula_str))</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">analyze_model</span>(spine_both_model)</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A: none of the splines have a good impact on the model so we will not include one in our model !!!T ODO this is a lie??? because i was being dumb</p>
+<p>Q: Hypothesize the existence of an interaction, then check to see if including the interaction is justified on the basis of the data by fitting a model with the interaction.</p>
+<p>A: There is likely an interaction between count_not_working and count_working and year</p>
+<p>Q: Interpret the interaction, regardless of its statistical significance. (You may keep or discard the interaction after doing this.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>count_year_int_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(earnings_med <span class="sc">~</span> region <span class="sc">+</span> degree <span class="sc">+</span> (count_not_working <span class="sc">+</span> count_working) <span class="sc">*</span> year, <span class="at">data=</span>scorecard)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(count_year_int_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = earnings_med ~ region + degree + (count_not_working + 
+    count_working) * year, data = scorecard)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-33267  -5033   -647   3966 130287 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             5.522e+05  4.356e+04  12.676  &lt; 2e-16 ***
+regionSouth            -4.584e+03  1.367e+02 -33.542  &lt; 2e-16 ***
+regionNorth Central    -3.637e+03  1.456e+02 -24.973  &lt; 2e-16 ***
+regionWest             -1.696e+03  1.562e+02 -10.854  &lt; 2e-16 ***
+degree2                 5.923e+03  1.221e+02  48.525  &lt; 2e-16 ***
+degree3                 1.564e+04  1.204e+02 129.899  &lt; 2e-16 ***
+count_not_working      -1.252e+03  2.163e+02  -5.789 7.13e-09 ***
+count_working           1.487e+02  2.953e+01   5.036 4.77e-07 ***
+year                   -2.602e+02  2.166e+01 -12.009  &lt; 2e-16 ***
+count_not_working:year  6.179e-01  1.075e-01   5.747 9.15e-09 ***
+count_working:year     -7.314e-02  1.468e-02  -4.981 6.35e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8368 on 30390 degrees of freedom
+Multiple R-squared:  0.4934,    Adjusted R-squared:  0.4932 
+F-statistic:  2960 on 10 and 30390 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">analyze_model</span>(count_year_int_model)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(earnings_lm, count_year_int_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: earnings_med ~ region + degree + year + count_not_working + count_working
+Model 2: earnings_med ~ region + degree + (count_not_working + count_working) * 
+    year
+  Res.Df        RSS Df  Sum of Sq      F   Pr(&gt;F)    
+1  30392 2.1307e+12                                  
+2  30390 2.1282e+12  2 2445943783 17.463 2.63e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(count_year_int_model, <span class="at">test =</span> <span class="st">"F"</span>) <span class="co"># </span><span class="al">TODO</span><span class="co"> FIX FORMATTING FOR THIS AREA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+earnings_med ~ region + degree + (count_not_working + count_working) * 
+    year
+                       Df  Sum of Sq        RSS    AIC  F value    Pr(&gt;F)    
+&lt;none&gt;                               2.1282e+12 549188                       
+region                  3 9.2840e+10 2.2211e+12 550480  441.905 &lt; 2.2e-16 ***
+degree                  2 1.1864e+12 3.3146e+12 562653 8470.653 &lt; 2.2e-16 ***
+count_not_working:year  1 2.3133e+09 2.1305e+12 549219   33.033 9.149e-09 ***
+count_working:year      1 1.7376e+09 2.1299e+12 549211   24.812 6.354e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>A: count_not_working:year with 6.179e-01 indicates that the model predicts for every 1 increase in count_not_working that the effect of year will increase 6.179e-01. count_working:year with -7.314e-02 indicates that the model predicts for every 1 increase in count_working that the effect of year will increase -7.314e-02.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(results)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>row_names <span class="ot">&lt;-</span> <span class="fu">row.names</span>(results)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> results[<span class="fu">order</span>(<span class="sc">-</span>results<span class="sc">$</span>LOOR2), ]</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>row_names <span class="ot">&lt;-</span> <span class="fu">factor</span>(results<span class="sc">$</span>row_names, <span class="at">levels =</span> results<span class="sc">$</span>row_names)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for 't'</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> row_names, <span class="at">y =</span> t)) <span class="sc">+</span> </span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"t values"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a transformation for 'LOOR2'</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>max_bp <span class="ot">&lt;-</span> <span class="fu">max</span>(results<span class="sc">$</span>bp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>max_LOOR2 <span class="ot">&lt;-</span> <span class="fu">max</span>(results<span class="sc">$</span>LOOR2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>scale_factor <span class="ot">&lt;-</span> max_bp <span class="sc">/</span> max_LOOR2</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the unified scaling to both LOOR2 and R2</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>LOOR2_scaled <span class="ot">&lt;-</span> results<span class="sc">$</span>LOOR2 <span class="sc">*</span> scale_factor</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Update melting to include both scaled LOOR2 and R2</span></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>long_results <span class="ot">&lt;-</span> <span class="fu">melt</span>(results, <span class="at">id.vars =</span> <span class="st">"row_names"</span>, <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="st">"bp"</span>, <span class="st">"LOOR2_scaled"</span>))</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Update variable names for the legend</span></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>long_results<span class="sc">$</span>variable <span class="ot">&lt;-</span> <span class="fu">factor</span>(long_results<span class="sc">$</span>variable, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"BP"</span>, <span class="st">"Scaled LOOR2"</span>))</span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_results, <span class="fu">aes</span>(<span class="at">x =</span> row_names, <span class="at">y =</span> value, <span class="at">fill =</span> variable)) <span class="sc">+</span></span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.7</span>)) <span class="sc">+</span></span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"BP"</span> <span class="ot">=</span> <span class="st">"#87CEFA"</span>, <span class="st">"Scaled LOOR2"</span> <span class="ot">=</span> <span class="st">"#FF6A6A"</span>)) <span class="sc">+</span></span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"BP"</span>, <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">/</span> scale_factor, <span class="at">name =</span> <span class="st">"Scaled LOOR2"</span>)) <span class="sc">+</span></span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"BP and Scaled LOOR2 for each model"</span>) <span class="sc">+</span></span>
+<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Row Names"</span>, <span class="at">y =</span> <span class="st">"BP Value"</span>, <span class="at">fill =</span> <span class="st">"Variable"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>results[<span class="dv">1</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                                                                                                           model
+BP20 lm(formula = log(earnings_med) ~ region + degree + year + ns(count_not_working,      df = 5) + ns(count_working, df = 5), data = scorecard)
+                t errors_zero_is_pass       bp constant_variance_is_pass
+BP20 3.750755e-14                TRUE 4167.365                     FALSE
+            R2     LOOR2 row_names LOOR2_scaled
+BP20 0.6705142 0.6701226      BP20     4167.365</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>best_model <span class="ot">&lt;-</span> <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text=</span>results[<span class="dv">1</span>,<span class="st">"model"</span>]))</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(best_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(earnings_med) ~ region + degree + year + ns(count_not_working, 
+    df = 5) + ns(count_working, df = 5), data = scorecard)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.09080 -0.12070 -0.00725  0.11245  1.60130 
+
+Coefficients:
+                                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                    15.0553770  1.0270091  14.659  &lt; 2e-16 ***
+regionSouth                    -0.0862461  0.0032675 -26.395  &lt; 2e-16 ***
+regionNorth Central            -0.1021554  0.0034527 -29.587  &lt; 2e-16 ***
+regionWest                      0.0285273  0.0037829   7.541 4.79e-14 ***
+degree2                         0.0993290  0.0031403  31.631  &lt; 2e-16 ***
+degree3                         0.2253786  0.0036532  61.694  &lt; 2e-16 ***
+year                           -0.0023121  0.0005115  -4.520 6.20e-06 ***
+ns(count_not_working, df = 5)1 -1.0130723  0.0112104 -90.369  &lt; 2e-16 ***
+ns(count_not_working, df = 5)2 -1.3584820  0.0137695 -98.659  &lt; 2e-16 ***
+ns(count_not_working, df = 5)3 -3.3317829  0.0516781 -64.472  &lt; 2e-16 ***
+ns(count_not_working, df = 5)4 -3.2037915  0.0966333 -33.154  &lt; 2e-16 ***
+ns(count_not_working, df = 5)5 -0.8452659  0.1873692  -4.511 6.47e-06 ***
+ns(count_working, df = 5)1      0.9135139  0.0085746 106.537  &lt; 2e-16 ***
+ns(count_working, df = 5)2      1.3030282  0.0111868 116.479  &lt; 2e-16 ***
+ns(count_working, df = 5)3      3.6453484  0.0528845  68.930  &lt; 2e-16 ***
+ns(count_working, df = 5)4      3.4197801  0.0847634  40.345  &lt; 2e-16 ***
+ns(count_working, df = 5)5      1.2464874  0.1778226   7.010 2.44e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1982 on 30384 degrees of freedom
+Multiple R-squared:  0.6705,    Adjusted R-squared:  0.6703 
+F-statistic:  3865 on 16 and 30384 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(best_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
 </section>
 <section id="formal-hypothesis-tests" class="level2">
 <h2 class="anchored" data-anchor-id="formal-hypothesis-tests">Formal Hypothesis Tests</h2>
-<p>At the start of the paper we wanted to investigate how the number of working graduates (<code>count_working</code>), region of the university (<code>region</code>), and degree type (<code>degree</code>) relate to the median income of graduates earnings_med. In this section, we tested if each of these three variables are significant in predicting the median income. Firstly, we used the following equation to represent the relationship between median earnings and the chosen predictors: <span class="math display">\[
+<p>To begin the project, we wanted to investigate how the number of working graduates (<code>count_working</code>), region of the university (<code>region</code>), and degree type (<code>degree</code>) relate to the median income of graduates (<code>earnings_med</code>). In this section, we tested if each of these three variables are significant in predicting the median income. Firstly, we used the following equation to represent the relationship between median earnings and the chosen predictors: <span class="math display">\[
 Y = \beta_0 + \beta_{r_1}X_{r_1} + \beta_{r_2}X_{r_2} + \beta_{r_3}X_{r_3} + \beta_{d_1}X_{d_2} + \beta_{d_2}X_{d_2} + \beta_yX_y + \beta_nX_n + \beta_wX_w + \epsilon
 \]</span> Where: <span class="math inline">\(Y\)</span> = <code>earnings_med</code> , <span class="math inline">\(X_r\)</span> = <code>region</code>, <span class="math inline">\(X_d\)</span> = <code>degree</code>, <span class="math inline">\(X_y\)</span> = <code>year</code>, <span class="math inline">\(X_n\)</span> = <code>count_not_working</code>, and <span class="math inline">\(X_w\)</span> = <code>count_working</code> Using our final model, <code>earnings_lm</code>, we performed the following hypotheses testing:</p>
 <p>For <code>region</code>:</p>
@@ -403,7 +715,7 @@ Y = \beta_0 + \beta_{r_1}X_{r_1} + \beta_{r_2}X_{r_2} + \beta_{r_3}X_{r_3} + \be
 </ul>
 <p>Using the p-values from the <code>drop1</code> function, we see that <span class="math inline">\(\beta_r\)</span>, <span class="math inline">\(\beta_g\)</span>, and <span class="math inline">\(\beta_w\)</span> are all significant predictors of <code>earnings_med</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(earnings_lm, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(earnings_lm, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Single term deletions
 
@@ -422,7 +734,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Furthermore, using the <code>summary</code> functions we see that <span class="math inline">\(\beta_{r_1}\)</span>, <span class="math inline">\(\beta_{r_2}\)</span>, <span class="math inline">\(\beta_{r_3}\)</span>, <span class="math inline">\(\beta_{d_1}\)</span>, and <span class="math inline">\(\beta_{d_2}\)</span> are all significant predictors of <span class="math inline">\(Y\)</span>. We therefore reject H_0 for both <code>region</code> and <code>degree</code> and conclude that median income changes based on the regional location of the college and the type of degree the college offers. Also, we see that there is significant evidence that <span class="math inline">\(\beta_w\)</span> is positive (which confirms our hypothesis in Part 1). We therefore reject <span class="math inline">\(H_0\)</span> for <code>count_working</code> variable and conclude that median earnings tend to increase as the number of working graduates increases.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(earnings_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(earnings_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -454,11 +766,11 @@ F-statistic:  3691 on 8 and 30392 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>To further investigate the <code>region</code> and <code>degree</code> variables, we ran the respective <code>constrast</code> functions and found that income significantly varies between all regions as well as between all degree types which confirms our initial hypothesis stated in Part 1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Comparing median income between regions:"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Comparing median income between regions:"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Comparing median income between regions: </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(earnings_lm, <span class="sc">~</span> region), <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(earnings_lm, <span class="sc">~</span> region), <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast                  estimate  SE    df t.ratio p.value
  Northeast - South             4613 136 30392  33.816  &lt;.0001
@@ -470,12 +782,12 @@ F-statistic:  3691 on 8 and 30392 DF,  p-value: &lt; 2.2e-16</code></pre>
 
 Results are averaged over the levels of: degree </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,<span class="st">"Comparing median income between degrees:"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,<span class="st">"Comparing median income between degrees:"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Comparing median income between degrees:</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(earnings_lm, <span class="sc">~</span> degree), <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(earnings_lm, <span class="sc">~</span> degree), <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast          estimate  SE    df  t.ratio p.value
  degree1 - degree2    -5892 122 30392  -48.304  &lt;.0001
@@ -485,13 +797,13 @@ Comparing median income between degrees:</code></pre>
 Results are averaged over the levels of: region </code></pre>
 </div>
 </div>
-<p>In conclusion, based on our findings, all of our initial hypotheses seem to be confirmed. The median earnings do seem to increase with the number of graduates that are able to find a job. The earnings also vary based on degree type the graduate received and the geographic region of the US where the college is located. These conclusions do have serious limitations though. Firstly, our model contained only 5 predictors all of which were found to be significant. However, the inclusion of more predictors can affect the trends of the model and change the significance of each of the original 5 predictors. Also, we need to consider the possibility of existence of confounding variables. For example, it is possible that graduates who go to elite colleges are more likely to both find a job and earn a higher wage. Also, some regions in the US like the Northeast tend to have many states with a significantly higher cost of living which can explain the difference in median earnings. It is also important to account for the fact that we performed multiple tests in this section, hence we adjusted our p-values using the Bonferroni correction. Firstly, for both region and degree variables, we repeated the pairwise comparisons but using the Bonferroni adjusted p-values. In both cases, our conclusions did not change.</p>
+<p>In conclusion, based on our findings, all of our initial hypotheses seem to be confirmed. The median earnings do seem to increase with the number of graduates that are able to find a job. The earnings also vary based on degree type the graduate received and the geographic region of the US where the college is located. These conclusions do have serious limitations though. Firstly, our model contained only 5 predictors all of which were found to be significant. However, the inclusion of more predictors can affect the trends of the model and change the significance of each of the original 5 predictors. Also, we need to consider the possibility of existence of confounding variables. For example, it is possible that graduates who go to elite colleges are more likely to both find a job and earn a higher wage. Along with this, some regions in the US, like the Northeast, tend to have many states with a significantly higher cost of living which can explain the difference in median earnings. It is also important to account for the fact that we performed multiple tests in this section, hence we adjusted our p-values using the Bonferroni correction. Firstly, for both region and degree variables, we repeated the pairwise comparisons using the Bonferroni adjusted p-values. In both cases, our conclusions did not change.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Comparing median income between regions:"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Comparing median income between regions:"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Comparing median income between regions: </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(earnings_lm, <span class="sc">~</span> degree), <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"bonferroni"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(earnings_lm, <span class="sc">~</span> degree), <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"bonferroni"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast          estimate  SE    df  t.ratio p.value
  degree1 - degree2    -5892 122 30392  -48.304  &lt;.0001
@@ -501,12 +813,12 @@ Results are averaged over the levels of: region </code></pre>
 Results are averaged over the levels of: region 
 P value adjustment: bonferroni method for 3 tests </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"Comparing median income between degrees:"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"Comparing median income between degrees:"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Comparing median income between degrees:</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(earnings_lm, <span class="sc">~</span> region), <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"bonferroni"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(earnings_lm, <span class="sc">~</span> region), <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"bonferroni"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast                  estimate  SE    df t.ratio p.value
  Northeast - South             4613 136 30392  33.816  &lt;.0001
@@ -524,7 +836,159 @@ P value adjustment: bonferroni method for 6 tests </code></pre>
 </section>
 <section id="robustness-of-results" class="level2">
 <h2 class="anchored" data-anchor-id="robustness-of-results">Robustness of Results</h2>
-<p>(Your text here)</p>
+<p>• Use the function lm.boot in the simpleboot package to compute the bootstrap standard</p>
+<p>errors of the regression coeﬀicients. How do these compare in magnitude to the standard</p>
+<p>errors from the output of summary? Are there any problems suggested by these standard</p>
+<p>errors?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>earnings_boot <span class="ot">&lt;-</span> <span class="fu">lm.boot</span>(earnings_lm, <span class="at">R=</span><span class="dv">500</span>,<span class="dv">000</span>)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(earnings_boot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>BOOTSTRAP OF LINEAR MODEL  (method = residuals)
+
+Original Model Fit
+------------------
+Call:
+lm(formula = earnings_med ~ region + degree + year + count_not_working + 
+    count_working, data = scorecard)
+
+Coefficients:
+        (Intercept)          regionSouth  regionNorth Central  
+         503400.046            -4613.457            -3651.164  
+         regionWest              degree2              degree3  
+          -1761.305             5891.914            15673.119  
+               year    count_not_working        count_working  
+           -235.889               -8.859                1.555  
+
+Bootstrap SD's:
+        (Intercept)          regionSouth  regionNorth Central  
+       4.262499e+04         1.349504e+02         1.391159e+02  
+         regionWest              degree2              degree3  
+       1.489281e+02         1.144888e+02         1.182471e+02  
+               year    count_not_working        count_working  
+       2.119831e+01         2.355493e-01         3.749265e-02  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Compute the T-statistic</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>t_boot <span class="ot">&lt;-</span> <span class="fu">coef</span>(earnings_lm) <span class="sc">/</span> <span class="fu">summary</span>(earnings_boot)[[<span class="st">"stdev.params"</span>]]</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>t_orig <span class="ot">&lt;-</span> <span class="fu">coef</span>(earnings_lm) <span class="sc">/</span> <span class="fu">summary</span>(earnings_lm)<span class="sc">$</span>coefficients[,<span class="dv">2</span>]</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Compute the P-values</span></span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>p_boot <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_boot), <span class="at">df =</span> earnings_lm<span class="sc">$</span>df.residual, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>p_orig <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_orig), <span class="at">df =</span> earnings_lm<span class="sc">$</span>df.residual, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Print T statistics and P-values</span></span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cbind</span>(<span class="st">`</span><span class="at">sd-orig</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>(earnings_lm)<span class="sc">$</span>coefficients[,<span class="dv">2</span>], <span class="st">`</span><span class="at">sd-boot</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>(earnings_boot)[[<span class="st">"stdev.params"</span>]], <span class="st">`</span><span class="at">boot - orig</span><span class="st">`</span><span class="ot">=</span><span class="fu">summary</span>(earnings_boot)[[<span class="st">"stdev.params"</span>]]<span class="sc">-</span><span class="fu">summary</span>(earnings_lm)<span class="sc">$</span>coefficients[,<span class="dv">2</span>], <span class="st">`</span><span class="at">diff / o (%)</span><span class="st">`</span><span class="ot">=</span>(<span class="fu">summary</span>(earnings_boot)[[<span class="st">"stdev.params"</span>]]<span class="sc">-</span><span class="fu">summary</span>(earnings_lm)<span class="sc">$</span>coefficients[,<span class="dv">2</span>])<span class="sc">/</span> <span class="fu">summary</span>(earnings_lm)<span class="sc">$</span>coefficients[,<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         sd-orig      sd-boot   boot - orig diff / o (%)
+(Intercept)         4.173481e+04 4.262499e+04  8.901807e+02    2.1329454
+regionSouth         1.364273e+02 1.349504e+02 -1.476865e+00   -1.0825287
+regionNorth Central 1.456266e+02 1.391159e+02 -6.510685e+00   -4.4708065
+regionWest          1.552075e+02 1.489281e+02 -6.279390e+00   -4.0458027
+degree2             1.219756e+02 1.144888e+02 -7.486779e+00   -6.1379333
+degree3             1.198041e+02 1.182471e+02 -1.556984e+00   -1.2996087
+year                2.075459e+01 2.119831e+01  4.437168e-01    2.1379211
+count_not_working   2.396662e-01 2.355493e-01 -4.116875e-03   -1.7177540
+count_working       3.766204e-02 3.749265e-02 -1.693894e-04   -0.4497616</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cbind</span>(<span class="st">`</span><span class="at">t-orig</span><span class="st">`</span> <span class="ot">=</span> t_orig, <span class="st">`</span><span class="at">P-orig</span><span class="st">`</span> <span class="ot">=</span> p_orig, <span class="st">`</span><span class="at">t-boot</span><span class="st">`</span> <span class="ot">=</span> t_boot, <span class="st">`</span><span class="at">P-boot</span><span class="st">`</span> <span class="ot">=</span> p_boot))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       t-orig        P-orig    t-boot        P-boot
+(Intercept)          12.06187  2.002191e-33  11.80997  4.075569e-32
+regionSouth         -33.81623 4.189453e-246 -34.18630 2.254844e-251
+regionNorth Central -25.07209 2.501101e-137 -26.24547 3.806822e-150
+regionWest          -11.34806  8.705499e-30 -11.82654  3.349198e-32
+degree2              48.30405  0.000000e+00  51.46280  0.000000e+00
+degree3             130.82291  0.000000e+00 132.54548  0.000000e+00
+year                -11.36565  7.125026e-30 -11.12774  1.044681e-28
+count_not_working   -36.96596 1.238241e-292 -37.61204 1.203590e-302
+count_working        41.29013  0.000000e+00  41.47668  0.000000e+00</code></pre>
+</div>
+</div>
+<p>All of the coeficents are very closely related and not outside of a magnitude of each other. With the largest change being in degree 2 with a percent change of -2.83. Due to them being closely related, there appear to be no issues suggested by these.</p>
+<p>• Use cross-validation to estimate the leave-one-out prediction error.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>LOOR2 <span class="ot">&lt;-</span> <span class="fu">rsq_loo</span>(earnings_lm)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>R2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(earnings_lm)[[<span class="st">"r.squared"</span>]]</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cbind</span>(<span class="st">`</span><span class="at">LOOR2</span><span class="st">`</span><span class="ot">=</span>LOOR2, <span class="st">`</span><span class="at">R2</span><span class="st">`</span><span class="ot">=</span>R2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         LOOR2        R2
+[1,] 0.4925416 0.4928242</code></pre>
+</div>
+</div>
+<p>• Comment if there is (or is not) evidence that your model is overfit.</p>
+<p>There does not appear to be evidence that the model is overfit. Especially sin</p>
+<p>• Revisit the output of autoplot to check for any highly influential points. If you find</p>
+<p>any, what features of these observations lead to them having high leverage, and what</p>
+<p>influence does deleting these observations have on your results?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>ap <span class="ot">&lt;-</span> <span class="fu">autoplot</span>(earnings_lm)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>ap[<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using </span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">influencePlot</span>(earnings_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        StudRes          Hat        CookD
+6878  15.630475 0.0002254133 6.071784e-03
+12861 14.978881 0.0001986742 4.917719e-03
+36141 -0.335153 0.0064934965 8.157635e-05
+36374  1.804679 0.0065014905 2.367940e-03</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>ip <span class="ot">&lt;-</span> <span class="fu">influencePlot</span>(earnings_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>hip <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">row.names</span>(ip))</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>earnings_lm<span class="sc">$</span>model[hip,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      earnings_med    region degree year count_not_working count_working
+8100         45400 Northeast      3 2009                54           399
+15075        31100 Northeast      2 2011               151           478
+NA              NA      &lt;NA&gt;   &lt;NA&gt;   NA                NA            NA
+NA.1            NA      &lt;NA&gt;   &lt;NA&gt;   NA                NA            NA</code></pre>
+</div>
+</div>
+<p>• Are there any potential issues with multicolinearity of predictors in your data? Compute variance inflation factors for each of your predictors to assess this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>numeric_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(data.frame, <span class="fu">lapply</span>(earnings_lm<span class="sc">$</span>model, <span class="at">FUN =</span> as.numeric.l))</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(<span class="fu">cor</span>(numeric_df), <span class="at">treeheight_col =</span> <span class="dv">0</span>, <span class="at">treeheight_row =</span> <span class="dv">0</span>, <span class="at">display_numbers =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">101</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>vif_values <span class="ot">&lt;-</span> <span class="fu">vif</span>(earnings_lm)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(vif_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       GVIF Df GVIF^(1/(2*Df))
+region             1.036907  3        1.006059
+degree             1.167530  2        1.039482
+year               1.033172  1        1.016451
+count_not_working 36.115252  1        6.009597
+count_working     36.561674  1        6.046625</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># redoing with better lm</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>earnings_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(earnings_med<span class="sc">~</span>region<span class="sc">+</span>degree<span class="sc">+</span>year<span class="sc">+</span>count_not_working, <span class="at">data=</span>scorecard)</span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>numeric_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(data.frame, <span class="fu">lapply</span>(earnings_lm<span class="sc">$</span>model, <span class="at">FUN =</span> as.numeric.l))</span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(<span class="fu">cor</span>(numeric_df), <span class="at">treeheight_col =</span> <span class="dv">0</span>, <span class="at">treeheight_row =</span> <span class="dv">0</span>, <span class="at">display_numbers =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">101</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>vif_values <span class="ot">&lt;-</span> <span class="fu">vif</span>(earnings_lm)</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(vif_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      GVIF Df GVIF^(1/(2*Df))
+region            1.020995  3        1.003469
+degree            1.039036  2        1.009619
+year              1.010920  1        1.005445
+count_not_working 1.034970  1        1.017335</code></pre>
+</div>
+</div>
+<ul>
+<li><p>high multicolinearity between count_working and count_not_working which is also indicated by the extremely high vif for both of them</p></li>
+<li><p>once you remove one of the variables the vifs become a lot more balanced and within 1 of each other</p></li>
+</ul>
 </section>
 <section id="conclusions" class="level2">
 <h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>

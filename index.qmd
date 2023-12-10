@@ -8,7 +8,15 @@ editor:
 ---
 
 ## Introduction
-  For decades, a secondary education has been considered the gold standard for ensuring a comfortable career and wage. In recent years however, it is becoming more and more difficult for recent graduates to find careers that match up with their major of study, and therefore the wages that go with it. We found this topic important to study due to the prevalence of career prospects in our own lives as well as society at large. Our data is from an inbuilt RStudio package, causaldata, and has 30401 observations, omitting NAs. Our outcome of interest is median income (earnings_med), while our predictors of interest are degree awarded (pred_degree_awarded_ipeds), working (count_working), not working (count_not_working), year, and region. Degree awarded has 3 different observations: 1 being a less-than-two-year degree, 2 being a two-year degree, and 3 being a four-year degree or more. The year variable goes from 2007 until 2014. The region variable is broken down into Northeast, North Central, South, and West. 
+
+For decades, a secondary education has been considered the gold standard for ensuring a comfortable career and wage.
+In recent years however, it is becoming more and more difficult for recent graduates to find careers that match up with their major of study, and therefore the wages that go with it.
+We found this topic important to study due to the prevalence of career prospects in our own lives as well as society at large.
+Our data is from an inbuilt RStudio package, causaldata, and has 30401 observations, omitting NAs.
+Our outcome of interest is median income (earnings_med), while our predictors of interest are degree awarded (pred_degree_awarded_ipeds), working (count_working), not working (count_not_working), year, and region.
+Degree awarded has 3 different observations: 1 being a less-than-two-year degree, 2 being a two-year degree, and 3 being a four-year degree or more.
+The year variable goes from 2007 until 2014.
+The region variable is broken down into Northeast, North Central, South, and West.
 
 ```{r}
 # all of our packages
@@ -233,19 +241,6 @@ analyze_model <- function(model){
   LOOR2 <- rsq_loo(model)
   R2 <- summary(model)[["r.squared"]]
   
-  # checking for influential points
-  p <- length(model$coefficients)-1
-  n <- nrow(model$model)
-  dffits_thresh <- 2*sqrt(p/n)
-  dfbetas_thresh <- 2*sqrt(n)
-  dffits_values <- dffits(model)
-  dfbetas_values <- dfbetas(model)
-  
-  dffits_filtered <- dffits_values[dffits_values > dffits_thresh]
-  dfbetas_filtered <- dfbetas_values[dfbetas_values > dfbetas_thresh]
-  
-  dffits_filtered <- dffits_filtered[order(-dffits_filtered)]
-  dfbetas_filtered <- dfbetas_filtered[order(-dfbetas_filtered)]
   
   # Ensure the types are compatible
   model_call_str <- as.character(paste(deparse(model$call), collapse = " "))
@@ -255,11 +250,9 @@ analyze_model <- function(model){
   constant_variance_is_pass <- heteroscedasticity_test$p.value > .05
   loor2_value <- as.numeric(LOOR2)
   r2_value <- as.numeric(R2)
-  dffits_str <- as.character(paste(deparse(dffits_filtered), collapse = ", "))
-  dfbetas_str <- as.character(paste(deparse(dfbetas_filtered), collapse = ", "))
 
   # Append the new row 
-  new_row <- data.frame(model=model_call_str, t=resid_statistic, errors_zero_is_pass, bp=bp_statistic, constant_variance_is_pass=constant_variance_is_pass,  R2=r2_value, LOOR2=loor2_value, dffits_filtered=dffits_str, dfbetas_filtered=dfbetas_str)
+  new_row <- data.frame(model=model_call_str, t=resid_statistic, errors_zero_is_pass, bp=bp_statistic, constant_variance_is_pass=constant_variance_is_pass,  R2=r2_value, LOOR2=loor2_value)
   
   # Making sure that the results are actually getting added
   results <<- rbind(results, new_row)
@@ -300,7 +293,7 @@ Q: For one of your numeric predictors, consider replacing the linear term 𝛽�
 (You may keep or discard to spline part of the model after doing this.)
 
 ```{r}
-for(k in 1:25){
+for(k in 1:5){
   formula_str <- sprintf("lm(earnings_med ~ region + degree + year + ns(count_not_working, df=%d) + ns(count_working, df=%d), data=scorecard)", k,k)
   spine_both_model <- eval(parse(text = formula_str))
   analyze_model(spine_both_model)
@@ -377,8 +370,6 @@ ggplot(long_results, aes(x = row_names, y = value, fill = variable)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("BP and Scaled LOOR2 for each model") +
   labs(x = "Row Names", y = "BP Value", fill = "Variable")
-
-print(results[order(as.numeric(levels(results$row_names))),])
 
 results[1,]
 best_model <- eval(parse(text=results[1,"model"]))
@@ -461,12 +452,13 @@ However, in all three cases we ended up with a $p-value < 2 * 10^{-16}$ so it fo
 
 ## Robustness of Results
 
-
 • Use the function lm.boot in the simpleboot package to compute the bootstrap standard
 
-errors of the regression coeﬀicients. How do these compare in magnitude to the standard
+errors of the regression coeﬀicients.
+How do these compare in magnitude to the standard
 
-errors from the output of summary? Are there any problems suggested by these standard
+errors from the output of summary?
+Are there any problems suggested by these standard
 
 errors?
 
@@ -487,7 +479,9 @@ print(cbind(`sd-orig` = summary(earnings_lm)$coefficients[,2], `sd-boot` = summa
 print(cbind(`t-orig` = t_orig, `P-orig` = p_orig, `t-boot` = t_boot, `P-boot` = p_boot))
 ```
 
-All of the coeficents are very closely related and not outside of a magnitude of each other. With the largest change being in degree 2 with a percent change of -2.83. Due to them being closely related, there appear to be no issues suggested by these.
+All of the coeficents are very closely related and not outside of a magnitude of each other.
+With the largest change being in degree 2 with a percent change of -2.83.
+Due to them being closely related, there appear to be no issues suggested by these.
 
 • Use cross-validation to estimate the leave-one-out prediction error.
 
@@ -501,9 +495,11 @@ print(cbind(`LOOR2`=LOOR2, `R2`=R2))
 
 • Comment if there is (or is not) evidence that your model is overfit.
 
-There does not appear to be evidence that the model is overfit. Especially since
+There does not appear to be evidence that the model is overfit.
+Especially sin
 
-• Revisit the output of autoplot to check for any highly influential points. If you find
+• Revisit the output of autoplot to check for any highly influential points.
+If you find
 
 any, what features of these observations lead to them having high leverage, and what
 
@@ -520,7 +516,8 @@ hip <- as.numeric(row.names(ip))
 earnings_lm$model[hip,]
 ```
 
-• Are there any potential issues with multicolinearity of predictors in your data? Compute variance inflation factors for each of your predictors to assess this.
+• Are there any potential issues with multicolinearity of predictors in your data?
+Compute variance inflation factors for each of your predictors to assess this.
 
 ```{r}
 numeric_df <- do.call(data.frame, lapply(earnings_lm$model, FUN = as.numeric.l))
@@ -529,7 +526,6 @@ pheatmap(cor(numeric_df), treeheight_col = 0, treeheight_row = 0, display_number
 
 vif_values <- vif(earnings_lm)
 print(vif_values)
-barplot(vif_values, main = "VIF Values", col = "steelblue")
 
 # redoing with better lm
 
@@ -540,7 +536,6 @@ pheatmap(cor(numeric_df), treeheight_col = 0, treeheight_row = 0, display_number
 
 vif_values <- vif(earnings_lm)
 print(vif_values)
-barplot(vif_values, main = "VIF Values", col = "steelblue")
 
 
 ```
