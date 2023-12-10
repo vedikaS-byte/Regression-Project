@@ -21,7 +21,7 @@ are classified as discrete numeric values, and the degree awarded and region pre
 Degree awarded has 3 different observations: 1 indicates granting a less-than-two-year degree, 
 2 designates primarily awarding two-year degrees, and 3 denoting a typical four-year bachelors degree or greater.
 
-Our sed predictor, year, contains data for 2007 until 2016, 
+Our second predictor, year, contains data for 2007 until 2016, 
 but upon the omission of NA values it primarily encompasses years from 2007 to 2014.
 The region variable was one that we generated from state level data for ease of analysis,
 and it is broken down into Northeast, North Central, South, and West.
@@ -225,8 +225,8 @@ To assess for the presence of a predictive relationship between the median earni
 
 ```{r}
 earnings_lm<-lm(earnings_med~region+degree+year+count_not_working+count_working, data=scorecard)
-summary(earnings_lm)
 scorecard$region<-relevel(scorecard$region, ref="Northeast")
+summary(earnings_lm)
 cat("Earnings median range:", range(scorecard$earnings_med))
 ```
 
@@ -278,7 +278,7 @@ analyze_model <- function(model){
 }
 ```
 
-#### Accessing the Basic Model
+#### Assessing the Basic Model
 
 ```{r}
 analyze_model(earnings_lm)
