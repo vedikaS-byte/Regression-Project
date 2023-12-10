@@ -1,0 +1,261 @@
+---
+title: "Regression Project"
+author: "Group 8"
+format: html
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+## Introduction
+
+```{r}
+library(causaldata)
+library(datasets)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(emmeans)
+head(scorecard)
+
+# cleaning
+scorecard$region <- state.region[match(scorecard$state_abbr, state.abb)]
+scorecard <- na.omit(scorecard)
+
+head(scorecard)
+```
+
+## Research Questions
+
+#### 1. Does median income have a positive relationship with the proportion of working graduates?
+
+H: Median income will have a positive relationship with the number of working graduates.
+
+A positive relationship and significant p-value will prove this to be true.
+
+#### 2. Which US region contributes most to median earnings?
+
+H0: All regions do not differ significantly for median earnings
+
+HA: Eastern region will be the most significant in median earnings compared to other regions.
+
+#### 3. Which degree length leads to higher median salary?
+
+H0: Median salary does not significantly differ between degree lengths.
+
+HA: People with 4 year degrees have higher median salaries compared to other degre
+
+## Data Exploration
+
+##### Manipulate Data
+
+```{r}
+# Organize states into regions 
+scorecard$region <- state.region[match(scorecard$state_abbr, state.abb)]
+scorecard <- na.omit(scorecard)
+
+# Change variable name to 'degree'
+scorecard = scorecard %>%
+  mutate(degree = as.factor(pred_degree_awarded_ipeds))
+
+glimpse(scorecard)
+```
+
+##### Region Exploration
+
+```{r}
+scorecard %>% ggplot(aes(x = region, y = earnings_med, fill = region)) +
+  geom_boxplot() +
+  labs(title = "Graduate Median Earnings Based on Region",
+       x = "Region",
+       y = "Median Earnings" ) +
+  scale_fill_brewer(palette = "Set2") +  
+  theme_minimal()
+
+scorecard1 <- scorecard %>% gather(key = "employment_status", value = "working", -c(unitid,inst_name,state_abbr, pred_degree_awarded_ipeds, year, earnings_med,region,degree)) 
+
+scorecard1 <- scorecard1 %>% mutate(employment_status = as.factor(employment_status))
+
+scorecard1 %>% 
+  ggplot(aes(x = earnings_med, fill = region)) +
+  geom_histogram(bins = 35, col = "black") + facet_grid(~region) +
+  labs(title = "Median Earnings Based on Region",
+       x = "Median Earnings") + facet_grid(~region) + theme_minimal()
+
+```
+
+##### Employment Status vs. Median Earnings
+
+```{r}
+# Create a new dataframe with tidy long performed on status of work
+scorecard1 <- scorecard %>% gather(key = "employment_status", value = "working", -c(unitid,inst_name,state_abbr, pred_degree_awarded_ipeds, year, earnings_med,region,degree)) 
+
+scorecard1 <- scorecard1 %>% mutate(employment_status = as.factor(employment_status))
+
+scorecard1 %>% 
+  ggplot(aes(x = working, y = earnings_med, color = employment_status)) +
+  geom_point() +   facet_grid(~employment_status) +
+  labs(title = "Median Earnings of Graduates Based on Employment Status",
+       x = "Number of Graduates",
+       y = "Median Earnings") +
+  scale_color_brewer(palette = "Dark2", name = "Employment Status", labels = c("Not Working", "Working")) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  geom_smooth(method = "lm", linetype = "dashed", color = "black") 
+
+scorecard1 %>% 
+  ggplot(aes(x =  earnings_med, fill = employment_status)) +
+  geom_histogram(bins = 35, col = "black") + facet_grid(~employment_status) +
+  labs(title = "Median Earnings of Graduates Based on Employment Status",
+       x = "Median Earnings") +
+  scale_color_brewer(palette = "Dark2", name = "Employment Status", labels = c("Not Working", "Working")) +
+  theme_minimal()
+
+
+```
+
+##### Degree Length vs. Median Earnings
+
+```{r}
+scorecard1 %>% 
+  ggplot(aes(x = degree, y = earnings_med, fill = degree)) +
+  geom_boxplot() +
+  labs(title = "Median Earnings of Graduates Based on Degree Length",
+       x = "Degree Length", y = "Median Earnings") +  theme_minimal() + scale_fill_discrete(labels=c('Less than 2 years', 'Two years', '4+ years')) + 
+  scale_x_discrete(labels = c('Less than 2 years', 'Two years', '4+ years'))
+```
+
+##### Year vs. Median Earnings
+
+```{r}
+scorecard1$year_level <- as.factor(scorecard1$year)
+scorecard1 %>% 
+  ggplot(aes(x = year_level, y = earnings_med, fill = year_level)) +
+  geom_boxplot() +
+  labs(title = "Median Earnings of Graduates 2007 - 2014",
+       x = "Year", y = "Median Earnings") +  theme_minimal()
+```
+
+##### Correlations
+
+```{r}
+scorecard$year_num <- as.numeric(scorecard$year)
+library(pheatmap)
+scorecard_cor <- cor(na.omit(scorecard[,c(5, 6, 7, 8)]))
+pheatmap(scorecard_cor,
+        treeheight_col = 0,
+        treeheight_row = 0,
+        display_numbers = TRUE,
+        breaks = seq(-1, 1, length = 101))
+```
+
+## Multiple Linear Regression Model
+
+To assess for the presence of a predictive relationship between the median earnings of individuals graduating from colleges and universities across the United States and characteristics associated with their alma mater and post college lives, we constructed a linear model regressing median earnings on surveyed universities' regional location, the number of alumni both employed and not working (not necessarily un-employed), the primary degree awarded, and the year that each survey was conducted.
+
+```{r}
+earnings_lm<-lm(earnings_med~region+degree+year+count_not_working+count_working, data=scorecard) 
+summary(earnings_lm)
+scorecard$region<-relevel(scorecard$region, ref="Northeast")
+cat("Earnings median range:", range(scorecard$earnings_med))
+```
+
+The substantial F-statistic generated by the linear model of 3691 on 8 and 30392 degrees of freedom allowed us to reject the null hypothesis that none of the chosen variables possess any relationship to median earnings (all slopes are equal to zero) in favor of the alternative hypothesis that at least one of the predictive variables influences the earnings of American college graduates (at least one slope is not equal to zero).
+Given the confirmation of, at minimum, one of our independent variables' predictive power, we further explored the more nuanced ways in which each contributed to variation from the baseline predicted income of \$503,340, as denoted by the intercept regression coefficient.
+Holding the influence of region, degrees typically awarded, year, and the number of graduates not actively employed constant, a one person increase in the number of gainfully employed graduates contributed to an institution results in a marginal \$1.56 increase in predicted median earnings.
+Conversely, when controlling for the effect of all other predictors, the addition of a single non-working alumni unsurprisingly elicits a predicted \$8.86 decline in predicted income.
+Assessment of the regression coefficient assigned to the year variable in the same manner revealed a slightly more impactful association between the year participants were surveyed and median earnings, with the passage of one year resulting in a loss of \$235.90.
+Due to the categorical nature of the predominant degree awarded by collegiate study participants and the region in which each institution of higher learning resides, the analysis of their influence on predicted monetary outcomes diverged from that of aforementioned variables.
+As a hub for a variety of prestigious Universities, we anticipated that graduates from Northeastern schools would likely possess the highest median earnings and we accordingly designated it as the reference for our analysis of regional impacts.
+When controlling for the effects of all other variables and regions, prior attendance of a Southern school resulted in an average median earnings reduction of \$4,613 from the Northeastern baseline.
+Upon similar evaluation, graduation from North Central and Western colleges comparably resulted in an average loss of \$3,651 and \$1,761, respectively.
+In considering the impact of the predominant degree awarded we identified the widest range of variation between predicted monetary outcomes, with the reference of less than 2 years differing by ampler amounts than the deviations observed between the regional categories.
+Controlling for all other variables and education levels, completion of a 2 year degree improved average predicted median income by \$5,892, while graduation with a bachelor's degree raised income by an average of \$15,670 after comparison to the baseline.
+Though all of the regression coefficients for both numeric and categorical variables possessed p-values significant at the zero level (p \<2\*10-16), the multiple R2 value of 0.498 indicates that only approximately 50% of the variation observed in median earnings for those surveyed is accounted for by the collegiate attributes analyzed above.
+This is reflected by the substantial residual standard error of 8373 on 30,392 degrees of freedom, meaning that the predicted values produced by the linear model deviate from actual monetary outcomes by an average of \$8373.
+When compared to both the regression coefficients and the overall range of the actual median earnings values (\$8604-\$171900), the level of error observed in the estimates produced by the model is concerning and likely indicative of improper model fit through overfitting or multicollinearity.
+
+## Improving the Model
+
+(Your text here)
+
+## Formal Hypothesis Tests
+
+At the start of the paper we wanted to investigate how the number of working graduates (`count_working`), region of the university (`region`), and degree type (`degree`) relate to the median income of graduates earnings_med.
+In this section, we tested if each of these three variables are significant in predicting the median income.
+Firstly, we used the following equation to represent the relationship between median earnings and the chosen predictors: $$
+Y = \beta_0 + \beta_{r_1}X_{r_1} + \beta_{r_2}X_{r_2} + \beta_{r_3}X_{r_3} + \beta_{d_1}X_{d_2} + \beta_{d_2}X_{d_2} + \beta_yX_y + \beta_nX_n + \beta_wX_w + \epsilon
+$$ Where: $Y$ = `earnings_med` , $X_r$ = `region`, $X_d$ = `degree`, $X_y$ = `year`, $X_n$ = `count_not_working`, and $X_w$ = `count_working` Using our final model, `earnings_lm`, we performed the following hypotheses testing:
+
+For `region`:
+
+-   $H_0$: $\beta_{r_1} = \beta_{r_2} = \beta_{r_3} = 0$
+
+-   $H_a$: $\beta_{r1} \ne \beta_{r2} \ne \beta_{r3} \ne 0$
+
+For `degree`:
+
+-   $H_0$: $\beta_{d_1} = \beta_{d_2} = 0$
+
+-   $H_a$: $\beta_{d_1} \ne \beta_{d_2} \ne 0$
+
+For `count_working`:
+
+-   $H_0$: $\beta_w = 0$
+
+-   $H_a$: $\beta_w \ne 0$
+
+Using the p-values from the `drop1` function, we see that $\beta_r$, $\beta_g$, and $\beta_w$ are all significant predictors of `earnings_med`.
+
+```{r}
+drop1(earnings_lm, test = "F")
+```
+
+Furthermore, using the `summary` functions we see that $\beta_{r_1}$, $\beta_{r_2}$, $\beta_{r_3}$, $\beta_{d_1}$, and $\beta_{d_2}$ are all significant predictors of $Y$.
+We therefore reject H_0 for both `region` and `degree` and conclude that median income changes based on the regional location of the college and the type of degree the college offers.
+Also, we see that there is significant evidence that $\beta_w$ is positive (which confirms our hypothesis in Part 1).
+We therefore reject $H_0$ for `count_working` variable and conclude that median earnings tend to increase as the number of working graduates increases.
+
+```{r}
+summary(earnings_lm)
+```
+
+To further investigate the `region` and `degree` variables, we ran the respective `constrast` functions and found that income significantly varies between all regions as well as between all degree types which confirms our initial hypothesis stated in Part 1.
+
+```{r}
+cat("Comparing median income between regions:", "\n")
+contrast(emmeans(earnings_lm, ~ region), method = "pairwise", adjust = "none")
+cat("\n","Comparing median income between degrees:", "\n", sep = "")
+contrast(emmeans(earnings_lm, ~ degree), method = "pairwise", adjust = "none")
+```
+
+In conclusion, based on our findings, all of our initial hypotheses seem to be confirmed.
+The median earnings do seem to increase with the number of graduates that are able to find a job.
+The earnings also vary based on degree type the graduate received and the geographic region of the US where the college is located.
+These conclusions do have serious limitations though.
+Firstly, our model contained only 5 predictors all of which were found to be significant.
+However, the inclusion of more predictors can affect the trends of the model and change the significance of each of the original 5 predictors.
+Also, we need to consider the possibility of existence of confounding variables.
+For example, it is possible that graduates who go to elite colleges are more likely to both find a job and earn a higher wage.
+Also, some regions in the US like the Northeast tend to have many states with a significantly higher cost of living which can explain the difference in median earnings.
+It is also important to account for the fact that we performed multiple tests in this section, hence we adjusted our p-values using the Bonferroni correction.
+Firstly, for both region and degree variables, we repeated the pairwise comparisons but using the Bonferroni adjusted p-values.
+In both cases, our conclusions did not change.
+
+```{r}
+cat("Comparing median income between regions:", "\n")
+contrast(emmeans(earnings_lm, ~ degree), method = "pairwise", adjust = "bonferroni")
+cat("\n", "Comparing median income between degrees:", "\n", sep="")
+contrast(emmeans(earnings_lm, ~ region), method = "pairwise", adjust = "bonferroni")
+```
+
+Then, since we tested three separate sets of hypotheses, the resulting p-values had to be multiplied by a factor of 3 to perform the Bonferroni correction.
+However, in all three cases we ended up with a $p-value < 2 * 10^{-16}$ so it follows that we still must reject $H_0$ in all three cases.
+
+## Robustness of Results
+
+(Your text here)
+
+## Conclusions
+
+(Your text here)
