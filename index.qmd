@@ -10,44 +10,75 @@ editor:
 ## Introduction
 
 ```{r}
+# all of our packages
 library(causaldata)
 library(datasets)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+library(tidyverse)
+library(ggfortify)
+library(MASS)
+library(pheatmap)
+library(car)
+library(lmtest)
+library(splines)
+library(reshape2)
+library(interactions)
+library(boot)
+library(simpleboot)
 library(emmeans)
-head(scorecard)
 
-# cleaning
+# the functions used in multiple places
+predict_loo <- function(model) {
+y <- model.frame(model)[,1]
+loo_r <- residuals(model) / (1 - hatvalues(model))
+return(y - loo_r)
+}
+rsq_loo <- function(model) {
+y <- model.frame(model)[,1]
+yhat <- predict_loo(model)
+return(cor(y, yhat)^2)
+}
+p_print <- function(object){
+  print(deparse(substitute(object)))
+  print(object)
+}
+as.numeric.l <- function(list){
+  if(is.factor(list)){
+    list <- as.numeric(list)
+  }
+  return(list)
+}
+
+## cleaning
+# making region match which region the state is in
 scorecard$region <- state.region[match(scorecard$state_abbr, state.abb)]
+# making the degree a factor
+scorecard$degree <- as.factor(scorecard$pred_degree_awarded_ipeds)
 scorecard <- na.omit(scorecard)
-
-head(scorecard)
 ```
 
 ## Research Questions
 
 #### 1. Does median income have a positive relationship with the proportion of working graduates?
 
-H: Median income will have a positive relationship with the number of working graduates.
+-   $H_0$: Median income will have a positive relationship with the number of working graduates.
 
-A positive relationship and significant p-value will prove this to be true.
+-   $H_A$: positive relationship and significant p-value will prove this to be true.
 
 #### 2. Which US region contributes most to median earnings?
 
-H0: All regions do not differ significantly for median earnings
+-   $H_0$: All regions do not differ significantly for median earnings
 
-HA: Eastern region will be the most significant in median earnings compared to other regions.
+-   $H_A$: Eastern region will be the most significant in median earnings compared to other regions.
 
 #### 3. Which degree length leads to higher median salary?
 
-H0: Median salary does not significantly differ between degree lengths.
+-   $H_0$: Median salary does not significantly differ between degree lengths.
 
-HA: People with 4 year degrees have higher median salaries compared to other degre
+-   $H_A$: People with 4 year degrees have higher median salaries compared to other degre
 
 ## Data Exploration
 
-##### Manipulate Data
+#### Manipulate Data
 
 ```{r}
 # Organize states into regions 
@@ -61,9 +92,10 @@ scorecard = scorecard %>%
 glimpse(scorecard)
 ```
 
-##### Region Exploration
+#### Region Exploration
 
 ```{r}
+# Plot for Graduate Median Earnings Based on Region
 scorecard %>% ggplot(aes(x = region, y = earnings_med, fill = region)) +
   geom_boxplot() +
   labs(title = "Graduate Median Earnings Based on Region",
@@ -72,11 +104,8 @@ scorecard %>% ggplot(aes(x = region, y = earnings_med, fill = region)) +
   scale_fill_brewer(palette = "Set2") +  
   theme_minimal()
 
-scorecard1 <- scorecard %>% gather(key = "employment_status", value = "working", -c(unitid,inst_name,state_abbr, pred_degree_awarded_ipeds, year, earnings_med,region,degree)) 
-
-scorecard1 <- scorecard1 %>% mutate(employment_status = as.factor(employment_status))
-
-scorecard1 %>% 
+# Plot for Median Earnings Based on Region
+scorecard %>% 
   ggplot(aes(x = earnings_med, fill = region)) +
   geom_histogram(bins = 35, col = "black") + facet_grid(~region) +
   labs(title = "Median Earnings Based on Region",
@@ -84,14 +113,15 @@ scorecard1 %>%
 
 ```
 
-##### Employment Status vs. Median Earnings
+#### Employment Status vs. Median Earnings
 
 ```{r}
 # Create a new dataframe with tidy long performed on status of work
-scorecard1 <- scorecard %>% gather(key = "employment_status", value = "working", -c(unitid,inst_name,state_abbr, pred_degree_awarded_ipeds, year, earnings_med,region,degree)) 
+scorecard1 <- scorecard %>% gather(key = "employment_status", value = "working", c(count_not_working, count_working)) 
 
 scorecard1 <- scorecard1 %>% mutate(employment_status = as.factor(employment_status))
 
+# Plot for Median Earnings of Graduates Based on Employment Status
 scorecard1 %>% 
   ggplot(aes(x = working, y = earnings_med, color = employment_status)) +
   geom_point() +   facet_grid(~employment_status) +
@@ -103,6 +133,7 @@ scorecard1 %>%
   theme(legend.position = "top") +
   geom_smooth(method = "lm", linetype = "dashed", color = "black") 
 
+# Plot for Median Earnings of Graduates Based on Employment Status
 scorecard1 %>% 
   ggplot(aes(x =  earnings_med, fill = employment_status)) +
   geom_histogram(bins = 35, col = "black") + facet_grid(~employment_status) +
@@ -114,9 +145,10 @@ scorecard1 %>%
 
 ```
 
-##### Degree Length vs. Median Earnings
+#### Degree Length vs. Median Earnings
 
 ```{r}
+# Plot for Median Earnings of Graduates Based on Degree Length
 scorecard1 %>% 
   ggplot(aes(x = degree, y = earnings_med, fill = degree)) +
   geom_boxplot() +
@@ -125,10 +157,13 @@ scorecard1 %>%
   scale_x_discrete(labels = c('Less than 2 years', 'Two years', '4+ years'))
 ```
 
-##### Year vs. Median Earnings
+#### Year vs. Median Earnings
 
 ```{r}
+# changing year to a factor
 scorecard1$year_level <- as.factor(scorecard1$year)
+
+# Plot for Median Earnings of Graduates 2007 - 2014
 scorecard1 %>% 
   ggplot(aes(x = year_level, y = earnings_med, fill = year_level)) +
   geom_boxplot() +
@@ -136,11 +171,13 @@ scorecard1 %>%
        x = "Year", y = "Median Earnings") +  theme_minimal()
 ```
 
-##### Correlations
+#### Correlations
 
 ```{r}
+# getting year as a numeric
 scorecard$year_num <- as.numeric(scorecard$year)
-library(pheatmap)
+
+# getting the heat map for the year, earnings_med, count_not_working, count_working
 scorecard_cor <- cor(na.omit(scorecard[,c(5, 6, 7, 8)]))
 pheatmap(scorecard_cor,
         treeheight_col = 0,
@@ -154,7 +191,7 @@ pheatmap(scorecard_cor,
 To assess for the presence of a predictive relationship between the median earnings of individuals graduating from colleges and universities across the United States and characteristics associated with their alma mater and post college lives, we constructed a linear model regressing median earnings on surveyed universities' regional location, the number of alumni both employed and not working (not necessarily un-employed), the primary degree awarded, and the year that each survey was conducted.
 
 ```{r}
-earnings_lm<-lm(earnings_med~region+degree+year+count_not_working+count_working, data=scorecard) 
+earnings_lm<-lm(earnings_med~region+degree+year+count_not_working+count_working, data=scorecard)
 summary(earnings_lm)
 scorecard$region<-relevel(scorecard$region, ref="Northeast")
 cat("Earnings median range:", range(scorecard$earnings_med))
@@ -177,7 +214,173 @@ When compared to both the regression coefficients and the overall range of the a
 
 ## Improving the Model
 
-(Your text here)
+### Setting up to analyze the models
+
+```{r}
+results <- data.frame()
+analyze_model <- function(model){
+  # testing the if errors zero on-average
+  # closer to zero is good
+  resid_avg_zero_test <- t.test(resid(model), mu=0)
+  
+  # testing for constant variance
+  # closer to zero is better 
+  heteroscedasticity_test <- bptest(model)
+  
+  # used for checking for overfitting
+  #higher LOOR2 is better but R2 being much greater than LOOR2 incdicates overfitting
+  LOOR2 <- rsq_loo(model)
+  R2 <- summary(model)[["r.squared"]]
+  
+  # checking for influential points
+  p <- length(model$coefficients)-1
+  n <- nrow(model$model)
+  dffits_thresh <- 2*sqrt(p/n)
+  dfbetas_thresh <- 2*sqrt(n)
+  dffits_values <- dffits(model)
+  dfbetas_values <- dfbetas(model)
+  
+  dffits_filtered <- dffits_values[dffits_values > dffits_thresh]
+  dfbetas_filtered <- dfbetas_values[dfbetas_values > dfbetas_thresh]
+  
+  dffits_filtered <- dffits_filtered[order(-dffits_filtered)]
+  dfbetas_filtered <- dfbetas_filtered[order(-dfbetas_filtered)]
+  
+  # Ensure the types are compatible
+  model_call_str <- as.character(paste(deparse(model$call), collapse = " "))
+  resid_statistic <- as.numeric(resid_avg_zero_test$statistic)
+  bp_statistic <- as.numeric(heteroscedasticity_test$statistic)
+  loor2_value <- as.numeric(LOOR2)
+  r2_value <- as.numeric(R2)
+  dffits_str <- as.character(paste(deparse(dffits_filtered), collapse = ", "))
+  dfbetas_str <- as.character(paste(deparse(dfbetas_filtered), collapse = ", "))
+
+  # Append the new row 
+  new_row <- data.frame(model=model_call_str, t=resid_statistic, bp=bp_statistic, R2=r2_value, LOOR2=loor2_value, dffits_filtered=dffits_str, dfbetas_filtered=dfbetas_str)
+  
+  # Making sure that the results are actually getting added
+  results <<- rbind(results, new_row)
+}
+```
+
+Q: Use diagnostic plots to assess whether any of the assumptions underlying the linear regression model are violated.
+Are the errors zero on-average for all fitted values?
+Do they have constant variance?
+Are the errors normally distributed?
+
+```{r}
+analyze_model(earnings_lm)
+print(results[NROW(results),]) # !!! TODO reformat this so it is easier to interpret
+```
+
+A: According to the t.test for mean of average zero, the errors do appear to be zero on-average for all fitted values (t is extremely close to 0 which indicates a p-value close to zero and therefore is not significant evidence that the mean varies from zero).
+According to the Breusch-Pagan test, the errors do NOT have constant variance and are heteroskedastic (bp of 855.68 which would led to rejecting the test which indicates we reject the null hypthosesis / aka reject that it is homoskedastic).
+The normality is pretyy bad with the points at the higher quantiles doubling the expected ones.
+
+Q: If there are any violations of the usual assumptions, see if you can use a transformation of either the outcome or some/all of the predictors to fix it.
+Then, reassess the diagnostic plots to see how well you did.
+(Note: it's often quite diﬀicult to fix all off the assumptions simultaneously; just do the best you can, with the order of importance being mean-zero, then constant variance, then normality).
+
+```{r}
+log_model <- lm(log(earnings_med) ~ region + degree + year + count_not_working + 
+    count_working, data = scorecard)
+analyze_model(log_model)
+results[NROW(results),]# !!! TODO reformat this so it is easier to interpret
+```
+
+A: Log dependent only transformation.
+According to the t.test for mean of average zero, the erros do appear to be zero on-average.
+According to the Breusch-Pagan test, the errors do Not have constant variance however the BP is worse than the previous model.
+The normality is better than the previous model with qq-plot with the residuals being nowhere as far off.
+
+Q: For one of your numeric predictors, consider replacing the linear term 𝛽𝑗 𝑋𝑖𝑗 with a natural spline using the ns() function from the splines library, and determine if there is evidence supporting the inclusion of a spline.
+(You may keep or discard to spline part of the model after doing this.)
+
+```{r}
+for(k in 1:25){
+  formula_str <- sprintf("lm(earnings_med ~ region + degree + year + ns(count_not_working, df=%d) + ns(count_working, df=%d), data=scorecard)", k,k)
+  spine_both_model <- eval(parse(text = formula_str))
+  analyze_model(spine_both_model)
+  
+  formula_str <- sprintf("lm(earnings_med ~ region + degree + year + ns(count_not_working*count_working, df=%d), data=scorecard)", k)
+  spine_both_int_model <- eval(parse(text = formula_str))
+  analyze_model(spine_both_model)
+  
+  
+  formula_str <- sprintf("lm(log(earnings_med) ~ region + degree + year + ns(count_not_working, df=%d) + ns(count_working, df=%d), data=scorecard)", k,k)
+  spine_both_model <- eval(parse(text = formula_str))
+  analyze_model(spine_both_model)
+  
+  formula_str <- sprintf("lm(log(earnings_med) ~ region + degree + year + ns(count_not_working*count_working, df=%d), data=scorecard)", k)
+  spine_both_int_model <- eval(parse(text = formula_str))
+  analyze_model(spine_both_model)
+}
+```
+
+A: none of the splines have a good impact on the model so we will not include one in our model !!!T
+ODO this is a lie???
+because i was being dumb
+
+Q: Hypothesize the existence of an interaction, then check to see if including the interaction is justified on the basis of the data by fitting a model with the interaction.
+
+A: There is likely an interaction between count_not_working and count_working and year
+
+Q: Interpret the interaction, regardless of its statistical significance.
+(You may keep or discard the interaction after doing this.)
+
+```{R}
+count_year_int_model <- lm(earnings_med ~ region + degree + (count_not_working + count_working) * year, data=scorecard)
+summary(count_year_int_model)
+analyze_model(count_year_int_model)
+anova(earnings_lm, count_year_int_model)
+drop1(count_year_int_model, test = "F") # TODO FIX FORMATTING FOR THIS AREA
+```
+
+A: count_not_working:year with 6.179e-01 indicates that the model predicts for every 1 increase in count_not_working that the effect of year will increase 6.179e-01.
+count_working:year with -7.314e-02 indicates that the model predicts for every 1 increase in count_working that the effect of year will increase -7.314e-02.
+
+```{r}
+results <- na.omit(results)
+results$row_names <- row.names(results)
+results <- results[order(-results$LOOR2), ]
+results$row_names <- factor(results$row_names, levels = results$row_names)
+
+# Plot for 't'
+ggplot(results, aes(x = row_names, y = t)) + 
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ggtitle("t values")
+
+
+# Create a transformation for 'LOOR2'
+max_bp <- max(results$bp, na.rm = TRUE)
+max_LOOR2 <- max(results$LOOR2, na.rm = TRUE)
+scale_factor <- max_bp / max_LOOR2
+
+# Apply the unified scaling to both LOOR2 and R2
+results$LOOR2_scaled <- results$LOOR2 * scale_factor
+
+# Update melting to include both scaled LOOR2 and R2
+long_results <- melt(results, id.vars = "row_names", measure.vars = c("bp", "LOOR2_scaled"))
+
+# Update variable names for the legend
+long_results$variable <- factor(long_results$variable, labels = c("BP", "Scaled LOOR2"))
+
+# Plot
+ggplot(long_results, aes(x = row_names, y = value, fill = variable)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.7)) +
+  scale_fill_manual(values = c("BP" = "#87CEFA", "Scaled LOOR2" = "#FF6A6A")) +
+  scale_y_continuous("BP", sec.axis = sec_axis(~ . / scale_factor, name = "Scaled LOOR2")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ggtitle("BP and Scaled LOOR2 for each model") +
+  labs(x = "Row Names", y = "BP Value", fill = "Variable")
+
+print(results[order(as.numeric(levels(results$row_names))),])
+
+best_model <- eval(parse(text=results[1,"model"]))
+summary(best_model)
+autoplot(best_model)
+```
 
 ## Formal Hypothesis Tests
 
