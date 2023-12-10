@@ -223,7 +223,7 @@ When compared to both the regression coefficients and the overall range of the a
 
 ## Improving the Model
 
-### Setting up to analyze the models
+#### Setting Up to Analyze the Models
 
 ```{r}
 results <- data.frame()
@@ -258,24 +258,16 @@ analyze_model <- function(model){
   results <<- rbind(results, new_row)
 }
 ```
-
-Q: Use diagnostic plots to assess whether any of the assumptions underlying the linear regression model are violated.
-Are the errors zero on-average for all fitted values?
-Do they have constant variance?
-Are the errors normally distributed?
+#### Diagnostic Plots
 
 ```{r}
 analyze_model(earnings_lm)
 print(results[NROW(results),]) # !!! TODO reformat this so it is easier to interpret
 ```
 
-A: According to the t.test for mean of average zero, the errors do appear to be zero on-average for all fitted values (t is extremely close to 0 which indicates a p-value close to zero and therefore is not significant evidence that the mean varies from zero).
-According to the Breusch-Pagan test, the errors do NOT have constant variance and are heteroskedastic (bp of 855.68 which would led to rejecting the test which indicates we reject the null hypthosesis / aka reject that it is homoskedastic).
-The normality is pretyy bad with the points at the higher quantiles doubling the expected ones.
+According to the T-test for mean of average zero, the errors appear to be zero on-average for all fitted values. The value of T is extremely close to zero, which indicates a p-value close to zero and therefore is not significant evidence that the mean varies from zero. According to the Breusch-Pagan test, the errors do not have constant variance and are heteroskedastic with a bp of 855.68, which would led to rejecting the test. This indicates that we must reject the null hypothesis. The normality is not passible, with points at the higher quantiles doubling the expected values.
 
-Q: If there are any violations of the usual assumptions, see if you can use a transformation of either the outcome or some/all of the predictors to fix it.
-Then, reassess the diagnostic plots to see how well you did.
-(Note: it's often quite diﬀicult to fix all off the assumptions simultaneously; just do the best you can, with the order of importance being mean-zero, then constant variance, then normality).
+#### Transformations
 
 ```{r}
 log_model <- lm(log(earnings_med) ~ region + degree + year + count_not_working + 
@@ -284,13 +276,9 @@ analyze_model(log_model)
 results[NROW(results),]# !!! TODO reformat this so it is easier to interpret
 ```
 
-A: Log dependent only transformation.
-According to the t.test for mean of average zero, the erros do appear to be zero on-average.
-According to the Breusch-Pagan test, the errors do Not have constant variance however the BP is worse than the previous model.
-The normality is better than the previous model with qq-plot with the residuals being nowhere as far off.
+We used a log-dependent transformation. According to the T-test for mean of average zero, the errors appear to be zero on average. According to the Breusch-Pagan test, the errors do not have constant variance. However the BP is worse than that of the previous model. The normality is better than the previous model as the qq-plot shows less violation of the assumption.
 
-Q: For one of your numeric predictors, consider replacing the linear term 𝛽𝑗 𝑋𝑖𝑗 with a natural spline using the ns() function from the splines library, and determine if there is evidence supporting the inclusion of a spline.
-(You may keep or discard to spline part of the model after doing this.)
+#### Evidence Supporting the Inclusion of A Spline
 
 ```{r}
 for(k in 1:5){
@@ -313,16 +301,10 @@ for(k in 1:5){
 }
 ```
 
-A: none of the splines have a good impact on the model so we will not include one in our model !!!T
-ODO this is a lie???
-because i was being dumb
+None of the splines have a significantly good impact on the model, so we will not include one in our model !!! TODO this is a lie??? because i was being dumb
 
-Q: Hypothesize the existence of an interaction, then check to see if including the interaction is justified on the basis of the data by fitting a model with the interaction.
-
-A: There is likely an interaction between count_not_working and count_working and year
-
-Q: Interpret the interaction, regardless of its statistical significance.
-(You may keep or discard the interaction after doing this.)
+#### Interpret Interaction
+There is likely an interaction between count_not_working, count_working, and year.
 
 ```{R}
 count_year_int_model <- lm(earnings_med ~ region + degree + (count_not_working + count_working) * year, data=scorecard)
@@ -332,8 +314,7 @@ anova(earnings_lm, count_year_int_model)
 drop1(count_year_int_model, test = "F") # TODO FIX FORMATTING FOR THIS AREA
 ```
 
-A: count_not_working:year with 6.179e-01 indicates that the model predicts for every 1 increase in count_not_working that the effect of year will increase 6.179e-01.
-count_working:year with -7.314e-02 indicates that the model predicts for every 1 increase in count_working that the effect of year will increase -7.314e-02.
+The model predicts that for every 1 increase in count_not_working that the effect of year will increase 6.179e-01 units. The model also predicts for every 1 unit increase in count_working that the effect of year will decrease 7.314e-02 units.
 
 ```{r}
 results <- na.omit(results)
@@ -452,15 +433,7 @@ However, in all three cases we ended up with a $p-value < 2 * 10^{-16}$ so it fo
 
 ## Robustness of Results
 
-• Use the function lm.boot in the simpleboot package to compute the bootstrap standard
-
-errors of the regression coeﬀicients.
-How do these compare in magnitude to the standard
-
-errors from the output of summary?
-Are there any problems suggested by these standard
-
-errors?
+#### Compute Bootstrap Standard Errors
 
 ```{r}
 earnings_boot <- lm.boot(earnings_lm, R=500,000)
@@ -479,11 +452,9 @@ print(cbind(`sd-orig` = summary(earnings_lm)$coefficients[,2], `sd-boot` = summa
 print(cbind(`t-orig` = t_orig, `P-orig` = p_orig, `t-boot` = t_boot, `P-boot` = p_boot))
 ```
 
-All of the coeficents are very closely related and not outside of a magnitude of each other.
-With the largest change being in degree 2 with a percent change of -2.83.
-Due to them being closely related, there appear to be no issues suggested by these.
+All of the coefficients are very closely related and not outside of a magnitude of each other. The largest change was in degree 2, with a percent change of -2.83. Due to the close relation, they appear to suggest no issues. 
 
-• Use cross-validation to estimate the leave-one-out prediction error.
+#### Leave-one-out Prediction Error
 
 ```{r}
 
@@ -493,17 +464,9 @@ R2 <- summary(earnings_lm)[["r.squared"]]
 print(cbind(`LOOR2`=LOOR2, `R2`=R2))
 ```
 
-• Comment if there is (or is not) evidence that your model is overfit.
+There does not appear to be evidence that the model is overfit. 
 
-There does not appear to be evidence that the model is overfit.
-Especially sin
-
-• Revisit the output of autoplot to check for any highly influential points.
-If you find
-
-any, what features of these observations lead to them having high leverage, and what
-
-influence does deleting these observations have on your results?
+#### Check for Influential Points
 
 ```{r}
 
@@ -516,8 +479,7 @@ hip <- as.numeric(row.names(ip))
 earnings_lm$model[hip,]
 ```
 
-• Are there any potential issues with multicolinearity of predictors in your data?
-Compute variance inflation factors for each of your predictors to assess this.
+#### Multicolinearity
 
 ```{r}
 numeric_df <- do.call(data.frame, lapply(earnings_lm$model, FUN = as.numeric.l))
@@ -539,10 +501,7 @@ print(vif_values)
 
 
 ```
-
--   high multicolinearity between count_working and count_not_working which is also indicated by the extremely high vif for both of them
-
--   once you remove one of the variables the vifs become a lot more balanced and within 1 of each other
+There is high multicolinearity between count_working and count_not_working. This is also indicated by the high vif for each. Once one of the variables is removed the vifs become more balanced and within 1 of each other. 
 
 ## Conclusions
 
