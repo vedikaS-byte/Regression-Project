@@ -291,7 +291,7 @@ print(cbind(`R2`, `RSE`, `P.value`))
 
 Our Basic model is `earnings_med ~ region + degree + year + count_not_working + count_working`.
 It had an $R^2$ of .493; this indicates that 49.3% of the variance of the data was accounted for by our model.
-The basic model has a Residual Standard Error (RSE) of \$8372.924; this indicates that the average error of the basic model for all points is \~\$8372.924 (aka the predicted valuse are on average off by \$8372.924 from the expected values).
+The basic model has a Residual Standard Error (RSE) of \$8372.924; this indicates that the average error of the basic model for all points is \~\$8372.924 (aka the predicted valuES are on average off by \$8372.924 from the expected values).
 
 The F-test for the Basic model compares two hypotheses: the null hypothesis suggests that a simple intercept-only model is sufficient, while the alternative hypothesis argues that the Basic model is a better fit.
 Given that the overall p-value is 0, which is below the threshold for statistical significance, we reject the null hypothesis.
@@ -311,7 +311,7 @@ The final assumption under scrutiny is normality. The qqplot reveals clear devia
 
 #### Transformations
 
-The most important transformation for this data is to try the a log transformation since there primary issue is with constant variance.
+Given that the primary issue with the model is with constant variance, we will attempt a log transformation.
 
 ```{r}
 log_model <- lm(log(earnings_med) ~ region + degree + year + count_not_working + 
@@ -325,7 +325,7 @@ P.value <- pf(log_summary$fstatistic[1],log_summary$fstatistic[2],log_summary$fs
 print(cbind(`R2`, `RSE`, `P.value`))
 ```
 
-A log-dependent transformation was applied, resulting in the model: log(earnings_med) \~ region + degree + year + count_not_working + count_working. This transformation yielded a marginally improved \$R\^2\$ value of 0.503. The model's RSE is 0.243, indicating that the predicted values deviate on average by \$e\^{0.243}\$ from the expected values.The F-test for the Log Model, similar to the Basic model, compares an intercept-only model against the Log model. With a p-value of 0, the null hypothesis is rejected, suggesting that the Log model is more suitable for this data than the intercept-only model.
+A log-dependent transformation was applied, resulting in the model: log(earnings_med) \~ region + degree + year + count_not_working + count_working. This transformation yielded a marginally improved $R^2$ value of 0.503. The model's RSE is 0.243, indicating that the predicted values deviate on average by $e^{0.243}$ from the expected values.The F-test for the Log Model, similar to the Basic model, compares an intercept-only model against the Log model. With a p-value of 0, the null hypothesis is rejected, suggesting that the Log model is more suitable for this data than the intercept-only model.
 
 ```{r}
 autoplot(log_model)
@@ -579,5 +579,5 @@ We rejected the null hypotheses of our initial analysis of the data in favor of 
 
 In fitting the model we found that not working and year are both significantly negatively associated with median income. We also found that when held against graduates of Northeastern schools, graduates of Southern, North Central, and Western schools all have decreased median income. When compared to graduates with a less-than-2-year degree, those with a 2 year degree and 4 or more year degree saw increased median earnings. This model however, saw that only about 50% of the variation observed in median earnings was accounted for, meaning that the model is likely improperly fit through overfitting or multicollinearity. 
 
-In discovering the improperness of the original model fit, we used a log-dependant transformation in order to see an improvement in fit appropriateness. We found that the log-transformed model had a better appropriateness than the model previously used, as there were fewer violations of model assumptions.  
+In discovering the improperness of the original model fit, we used a log-dependant transformation in order to see an improvement in fit appropriateness. We found that the log-transformed model did not lessen the violation of the constant variance assumption, and therefore was not beneficial.  
 
