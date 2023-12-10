@@ -68,7 +68,7 @@ scorecard <- na.omit(scorecard)
 ```
 
 ## Research Questions
-
+To effectively determine the impact of count working, count not working, year, degree awarded, and region on the median earnings of college graduates, we outlined three research questions as a framework for our analysis:
 #### 1. Does median income have a positive relationship with the proportion of working graduates?
 
 -   $H_0$: Median income will have a positive relationship with the number of working graduates.
