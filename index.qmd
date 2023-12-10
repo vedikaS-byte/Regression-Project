@@ -9,16 +9,9 @@ editor:
 
 ## Introduction
 
-For decades, a secondary education has been considered the gold standard
-for ensuring a comfortable career and wage.
-In recent years however, it is becoming more and more difficult for recent
-graduates to find careers corresponding to their area of expertise, 
-and therefore the wages that go with it.
+For decades, a secondary education has been considered the gold standard for ensuring a comfortable career and wage. In recent years however, it is becoming more and more difficult for recent graduates to find careers corresponding to their area of expertise, and therefore the wages that go with it.
 
-We decided upon this topic as an important area of study due to the relevance of 
-career prospects in our own lives as well as society at large.
-Our data is from an inbuilt RStudio package, causaldata, that originally
-contains 8 columns and 48445 observations, but after the removal of NA values it is reduced to 30401 data points.
+We decided upon this topic as an important area of study due to the relevance of career prospects in our own lives as well as society at large. Our data is from an inbuilt RStudio package, causaldata, that originally contains 8 columns and 48445 observations, but after the removal of NA values it is reduced to 30401 data points.
 
 Our outcome of interest is the median income of college graduates (earnings_med), 
 while our predictors of interest are the degree awarded by each university (pred_degree_awarded_ipeds), 
