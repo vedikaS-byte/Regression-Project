@@ -68,8 +68,9 @@ scorecard <- na.omit(scorecard)
 ```
 
 ## Research Questions
-To effectively determine the impact of count working, count not working, year, degree awarded, and region on the median earnings of college graduates, we outlined three research questions as a framework for our analysis:
-#### 1. Does median income have a positive relationship with the proportion of working graduates?
+
+To effectively determine the impact of count working, count not working, year, degree awarded, and region on the median earnings of college graduates, we outlined three research questions as a framework for our analysis: \#### 1.
+Does median income have a positive relationship with the proportion of working graduates?
 
 -   $H_0$: Median income will have a positive relationship with the number of working graduates.
 
@@ -321,9 +322,9 @@ The final assumption under scrutiny is normality.
 The qqplot reveals clear deviations, with the data straying significantly from the expected 1-1 line, indicating issues with normality.
 However, given the substantial volume of data in the model, some might contend that the normality concern is less critical.
 
-#### Transformations
+#### Accessing Log Transformation
 
-The most important transformation for this data is to try the a log transformation since there primary issue is with constant variance.
+The most important transformation for this data is to try the log transformation since the primary issue is constant variance.
 
 ```{r}
 log_model <- lm(log(earnings_med) ~ region + degree + year + count_not_working + 
@@ -359,44 +360,65 @@ Given the importance of assumptions, especially constant variance which is more 
 #### Evidence Supporting the Inclusion of A Spline
 
 ```{r}
-for(k in 1:5){
+# testing variations of splines on count_not_working and count_working from 2:10
+for(k in 2:10){
   formula_str <- sprintf("lm(earnings_med ~ region + degree + year + ns(count_not_working, df=%d) + ns(count_working, df=%d), data=scorecard)", k,k)
   spine_both_model <- eval(parse(text = formula_str))
   analyze_model(spine_both_model)
   
-  formula_str <- sprintf("lm(earnings_med ~ region + degree + year + ns(count_not_working*count_working, df=%d), data=scorecard)", k)
-  spine_both_int_model <- eval(parse(text = formula_str))
-  analyze_model(spine_both_model)
-  
-  
-  formula_str <- sprintf("lm(log(earnings_med) ~ region + degree + year + ns(count_not_working, df=%d) + ns(count_working, df=%d), data=scorecard)", k,k)
-  spine_both_model <- eval(parse(text = formula_str))
-  analyze_model(spine_both_model)
-  
-  formula_str <- sprintf("lm(log(earnings_med) ~ region + degree + year + ns(count_not_working*count_working, df=%d), data=scorecard)", k)
-  spine_both_int_model <- eval(parse(text = formula_str))
-  analyze_model(spine_both_model)
 }
 ```
 
-None of the splines have a significantly good impact on the model, so we will not include one in our model !!!
-TODO this is a lie???
-because i was being dumb
+```{r}
+# the best model in later analyis was the 10 model
+spine_both_model <- lm(earnings_med ~ region + degree + year + ns(count_not_working, df=10) + ns(count_working, df=10), data=scorecard)
+
+spine_summary <- summary(spine_both_model)
+R2 <- spine_summary[["r.squared"]]
+RSE <- spine_summary$sigma
+P.value <- pf(spine_summary$fstatistic[1],spine_summary$fstatistic[2],spine_summary$fstatistic[3], lower.tail = FALSE)
+print(cbind(`R2`, `RSE`, `P.value`))
+autoplot(spine_both_model)
+t.test(resid(spine_both_model), mu=0)
+bptest(spine_both_model)
+```
+
+Upon assessing natural splines with degrees of freedom ranging from 2 to 10 for `count_not_working` and 'count_working', the optimal model identified was: `lm(earnings_med ~ region + degree + year + ns(count_not_working, df=10) + ns(count_working, df=10))`.
+Despite its merits, this model, similar to the log model, exhibits too many drawbacks to outweigh its benefits.
+The t-test results confirm that the true mean is zero, and the F-test shows this spline model is superior to an intercept-only model.
+However, the model demonstrates an even more pronounced issue with constant variance, as evidenced by a Breusch-Pagan statistic of 1912.2, suggesting a greater degree of heteroscedasticity compared to the log model.
+Consequently, due to these significant issues in critical aspects, the use of the spline model is not justified, despite its advantages in less crucial areas.
 
 #### Interpret Interaction
 
-There is likely an interaction between count_not_working, count_working, and year.
+A possible interaction that could exist in the model is between count_not_working and count_working; the Plot for Median Earnings of Graduates Based on Employment Status shows that the two slopes are expected to overlap which is atypical indicater for interaction
 
 ```{R}
-count_year_int_model <- lm(earnings_med ~ region + degree + (count_not_working + count_working) * year, data=scorecard)
-summary(count_year_int_model)
-analyze_model(count_year_int_model)
-anova(earnings_lm, count_year_int_model)
-drop1(count_year_int_model, test = "F") # TODO FIX FORMATTING FOR THIS AREA
+count_year_int_model <- lm(earnings_med ~ region + degree + (count_not_working * count_working) + year, data=scorecard)
+
+int_summary <- summary(count_year_int_model)
+int_summary
+R2 <- int_summary[["r.squared"]]
+RSE <- int_summary$sigma
+P.value <- pf(int_summary$fstatistic[1],int_summary$fstatistic[2],int_summary$fstatistic[3], lower.tail = FALSE)
+print(cbind(`R2`, `RSE`, `P.value`))
+autoplot(count_year_int_model)
+t.test(resid(count_year_int_model), mu=0)
+bptest(count_year_int_model)
 ```
 
-The model predicts that for every 1 increase in count_not_working that the effect of year will increase 6.179e-01 units.
-The model also predicts for every 1 unit increase in count_working that the effect of year will decrease 7.314e-02 units.
+The chosen intercept model, lm(earnings_med \~ region + degree + (count_not_working \* count_working) + year, exhibits issues similar to those in the Log and Spine models.
+This model does not significantly improve upon the Basic model in terms of \$R\^2\$ or RSE.
+Like the other models, its F-test results suggest it is more effective than an intercept-only model.
+The t-test for mean-zero residuals yields a p-value of 1, affirming the mean-zero assumption.
+However, it closely aligns with the Basic model regarding the Breusch-Pagan statistic, with values of 945.38 compared to 855.68 for the Basic model.
+Yet, like the previous two models, its shortcomings, mainly significant errors, outweigh its benefits, making it unsuitable for drawing conclusions.
+
+The interpretation of interaction in this model is as follows: for each unit increase in 'count_not_working', the slope of 'count_working' is altered by -1.567e-05, assuming all other variables are held constant.
+
+### Extra analysis
+
+The following is an extra analysis of the results of each model analyzed: the results of all of their mean-0 assumptions and how they compare for LOOR2 and BP.
 
 ```{r}
 results <- na.omit(results)
@@ -433,11 +455,6 @@ ggplot(long_results, aes(x = row_names, y = value, fill = variable)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("BP and Scaled LOOR2 for each model") +
   labs(x = "Row Names", y = "BP Value", fill = "Variable")
-
-results[1,]
-best_model <- eval(parse(text=results[1,"model"]))
-summary(best_model)
-autoplot(best_model)
 ```
 
 ## Formal Hypothesis Tests
@@ -519,49 +536,142 @@ However, in all three cases we ended up with a $p-value < 2 * 10^{-16}$ so it fo
 
 ```{r}
 earnings_boot <- lm.boot(earnings_lm, R=500,000)
-summary(earnings_boot)
 
-## Compute the T-statistic
-t_boot <- coef(earnings_lm) / summary(earnings_boot)[["stdev.params"]]
-t_orig <- coef(earnings_lm) / summary(earnings_lm)$coefficients[,2]
+earnings_lm_sigma <- sqrt(diag(vcov(earnings_lm)))
+boot_sigma <- summary(earnings_boot)[["stdev.params"]]
+print("Bootstrap SEs: ")
+boot_sigma
 
-## Compute the P-values
-p_boot <- 2 * pt(abs(t_boot), df = earnings_lm$df.residual, lower.tail = FALSE)
-p_orig <- 2 * pt(abs(t_orig), df = earnings_lm$df.residual, lower.tail = FALSE)
-
-## Print T statistics and P-values
-print(cbind(`sd-orig` = summary(earnings_lm)$coefficients[,2], `sd-boot` = summary(earnings_boot)[["stdev.params"]], `boot - orig`=summary(earnings_boot)[["stdev.params"]]-summary(earnings_lm)$coefficients[,2], `diff / o (%)`=(summary(earnings_boot)[["stdev.params"]]-summary(earnings_lm)$coefficients[,2])/ summary(earnings_lm)$coefficients[,2] * 100))
-print(cbind(`t-orig` = t_orig, `P-orig` = p_orig, `t-boot` = t_boot, `P-boot` = p_boot))
+print("\nBootstrap SEs percent change from Basic SEs")
+(earnings_lm_sigma - boot_sigma) / boot_sigma * 100
 ```
 
-All of the coefficients are very closely related and not outside of a magnitude of each other.
-The largest change was in degree 2, with a percent change of -2.83.
-Due to the close relation, they appear to suggest no issues.
+The resulting SEs and percent change from Basic SEs are shown above.
+The percent changes display that there are not that significant changes for any of them except `regionNorth Central`, where there is a percent change of -7.09%.
+This is still not that large of a change for the SEs.
+
+#### Check for Influential Points
+
+```{r}
+p <- length(earnings_lm$coefficients)-1
+n <- nrow(scorecard)
+dffitts_thresh <- 2*sqrt(p/n)
+dfbetas_thresh <- 2/sqrt(n)
+
+dffitts_values <- dffits(earnings_lm)
+dfbetas_values <- dfbetas(earnings_lm)
+
+dffitts_filter <- dffitts_values[abs(dffitts_values) > dffitts_thresh]
+dfbetas_filter <- dfbetas_values[apply(dfbetas_values, 1, function(x) any(abs(x) > dfbetas_thresh)), ]
+
+num_influential_for_dffits <- NROW(dffitts_filter)
+num_influential_for_dfbetas <- NROW(dfbetas_filter)
+cbind(`num_influential_for_dffits`, `num_influential_for_dfbetas`)
+
+plot(dffitts_values, type = 'o', main = "DFFITS Values", xlab = "Index", ylab = "DFFITS Value")
+abline(h = c(-dffitts_thresh, dffitts_thresh), col = "red", lwd = 2)
+dffitts_outlier_indices <- which(abs(dffitts_values) > dffitts_thresh)
+points(dffitts_outlier_indices, dffitts_values[dffitts_outlier_indices], col = "blue", pch = 20)
+
+for (i in 1:ncol(dfbetas_values)) {
+  plot(dfbetas_values[,i], type = 'o', main = paste("DFBETAS for", colnames(dfbetas_values)[i]), xlab = "Index", ylab = "DFBETAS Value")
+  abline(h = c(-dfbetas_thresh, dfbetas_thresh), col = "red", lwd = 2)
+  
+  outlier_indices <- which(abs(dfbetas_values[,i]) > dfbetas_thresh)
+  points(outlier_indices, dfbetas_values[outlier_indices, i], col = "blue", pch = 20)
+  
+}
+
+
+```
+
+As made blatant by the graphs for DFFITS and each dfbetas graph, there are many points that are highly influential.
+For the following analysis, it will only focus on the outliers found by dffitts so as not to bloat the outliers with points that do not truly affect the data.
+
+```{r}
+# Preparing the plotting area
+par(mfrow=c(1, 1))
+
+for (i in 1:ncol(scorecard)) {
+  # Extract the column name for labeling
+  column_name <- colnames(scorecard)[i]
+
+  # Identifying non-outlier indices
+  non_outlier_indices <- setdiff(1:nrow(scorecard), dffitts_outlier_indices)
+
+  # Calculate the common ylim for both non-outliers and outliers
+  common_ylim <- range(scorecard[, "earnings_med"], na.rm = TRUE)
+
+  # Plotting for non-outliers
+  plot(scorecard[non_outlier_indices, "earnings_med"] ~ 
+         (if(is.numeric(scorecard[non_outlier_indices, i])) 
+            scorecard[non_outlier_indices, i] 
+          else 
+            as.factor(scorecard[non_outlier_indices, i])),
+       main = paste("Non-Outliers: Earnings_med vs", column_name),
+       ylab = "Earnings_med", xlab = column_name, pch = 20, col = "grey",
+       ylim = common_ylim)
+
+  # Plotting for outliers
+  plot(scorecard[dffitts_outlier_indices, "earnings_med"] ~ 
+         (if(is.numeric(scorecard[dffitts_outlier_indices, i])) 
+            scorecard[dffitts_outlier_indices, i] 
+          else 
+            as.factor(scorecard[dffitts_outlier_indices, i])),
+       main = paste("Outliers: Earnings_med vs", column_name),
+       ylab = "Earnings_med", xlab = column_name, pch = 46, col = "red",
+       ylim = common_ylim)
+}
+
+
+
+range(scorecard[non_outlier_indices, "earnings_med"])
+range(scorecard[dffitts_outlier_indices, "earnings_med"])
+scorecard_outliers <- scorecard[dffitts_outlier_indices, 1:ncol(scorecard)]
+num_outliers <- NROW(scorecard_outliers)
+num_income_outliers <- NROW(scorecard_outliers[scorecard$earnings_med < 8500  | scorecard$earnings_med > 63600, ])
+non_income_outliers <- scorecard_outliers[!(scorecard_outliers$earnings_med < 8500  | scorecard_outliers$earnings_med > 63600), ]
+num_non_income_outliers <- NROW(non_income_outliers)
+cbind(`num_outliers`, `num_income_outliers`, `num_non_income_outliers`)
+
+```
+
+The range of non-outliers vs. outliers for earnings med appears to be a big contributor to which points are in outliers.
+The non-outliers are all contained inside \[8500, 63600\], while the outliers consist of \[8400, 171900\].
+There are 1332 influential outliers and only 492 outside of the non_outlier range.
+meaning there are are only 840 left to explain.
+
+Examining all of the plots and comparing each variable to income, The blatan outliers appear in count_not_working and count_working, where the places with higher values of those are typically outliers.
+For region and degree, it appears that any outliers on the boxplots are also outliers for the data.
+The most interesting pattern appears for the institution name and state name.
+
+```{r}
+count_threshold <- round(nrow(non_income_outliers) / length(unique(non_income_outliers$state_abbr)))
+count_threshold
+counts_state_abbr <- non_income_outliers %>% count(state_abbr, sort=TRUE)
+counts_state_abbr
+higher_income_states <- counts_state_abbr[counts_state_abbr$n > count_threshold, "state_abbr"]
+higher_income_states
+
+non_income_not_state_outliers <- non_income_outliers[non_income_outliers$state_abbr %in% higher_income_states, ]
+NROW(non_income_not_state_outliers)
+```
+
+After looking at state after only including outliers that are within the income range of non_outliers, there are some states that have a lot more outliers than would be guessed, even distribution against all of them: "PA" "NY" "CA" "MI" "NJ" "IL" "MA" "OH" "VA" "ME" "TX".
+After filtering out those states, there are 563 left.
+
+These determinations were all the influential outlier parts that could be identified for this dataset and model.
 
 #### Leave-one-out Prediction Error
 
 ```{r}
-
 LOOR2 <- rsq_loo(earnings_lm)
 R2 <- summary(earnings_lm)[["r.squared"]]
 
 print(cbind(`LOOR2`=LOOR2, `R2`=R2))
 ```
 
-There does not appear to be evidence that the model is overfit.
-
-#### Check for Influential Points
-
-```{r}
-
-ap <- autoplot(earnings_lm)
-ap[4]
-# using 
-influencePlot(earnings_lm)
-ip <- influencePlot(earnings_lm)
-hip <- as.numeric(row.names(ip))
-earnings_lm$model[hip,]
-```
+There does not appear to be evidence that the model is overfit since the `LOOR^2` is so close to the $R^2$ value.
 
 #### Multicolinearity
 
@@ -587,8 +697,10 @@ print(vif_values)
 ```
 
 There is high multicolinearity between count_working and count_not_working.
-This is also indicated by the high vif for each.
-Once one of the variables is removed the vifs become more balanced and within 1 of each other.
+This is also indicated by the high vifs for each, 36.115252 and 36.561674, which are much greater than the typical threshold of 10.
+The 36 indicates the two variables are coupled and highly sensitive to changes in the model and data; they have much higher SE due to multicolinearity than true variance.
+Also, this means that whenever you try to predict count_not_working using all the other variables, it has a very high R\^2, leading to $\frac{1}{1-R^2}$ approaching 0 on the bottom and therefore infinity.
+Once one of the variables is removed, the variables become more balanced and within 1 of each other.
 
 ## Conclusions
 
