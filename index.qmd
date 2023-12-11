@@ -13,14 +13,14 @@ For decades, a secondary education has been considered the gold standard for ens
 In recent years however, it is becoming more and more difficult for recent graduates to find careers corresponding to their area of expertise, and therefore the wages that go with it.
 
 We decided upon this topic as an important area of study due to the relevance of career prospects in our own lives as well as society at large.
-Our data is from an inbuilt RStudio package, causaldata, that originally contains 8 columns and 48445 observations, but after the removal of NA values it is reduced to 30401 data points.
+Our data is from an inbuilt RStudio package, causaldata, and originally contained 8 columns and 48445 observations, but after the removal of NA values it is reduced to 30401 data points.
 
-Our outcome of interest is the median income of college graduates (earnings_med), while our predictors of interest are the degree awarded by each university (pred_degree_awarded_ipeds), the number of graduates actively working (count_working), those not working (count_not_working), year of data collection, and region of residence.The year, count working, and count not working variables are classified as discrete numeric values, and the degree awarded and region predictors are considered categorical.
+Our outcome of interest is the median income of college graduates (earnings_med), while our predictors of interest are the type of degree awarded to each graduate (pred_degree_awarded_ipeds), the number of graduates actively working (count_working), those not working (count_not_working), year of data collection, and region of residence. The year, count working, and count not working variables are classified as discrete numeric values, and the degree awarded and region predictors are considered categorical.
 Degree awarded has 3 different observations: 1 indicates granting a less-than-two-year degree, 2 designates primarily awarding two-year degrees, and 3 denoting a typical four-year bachelors degree or greater.
 
 Our second predictor, year, contains data for 2007 until 2016, but upon the omission of NA values it primarily encompasses years from 2007 to 2014.
 The region variable was one that we generated from state level data for ease of analysis, and it is broken down into Northeast, North Central, South, and West.
-Through an exploration of the relationships between our selected predictors and median earnings , our goal is to develop a robust and effective model for forecasting the monetary outcomes associated with various types of college degrees earned across the United States.
+Through an exploration of the relationships between our selected predictors and median earnings, our goal is to develop a robust and effective model for forecasting the monetary outcomes associated with various types of college degrees earned across the United States.
 
 ```{r}
 # all of our packages
@@ -118,7 +118,7 @@ glimpse(scorecard)
 A constructed boxplot illustrates trends in median earnings for graduates based on the US region.
 Graduates situated in the Northeastern US have the highest median of earnings while the South has the lowest median earnings.
 Both the North central and western US have similar median earnings; however, western and northeastern states have a much wider distribution of earnings than southern and the North central states.
-Northeastern states may have higher median earnings because of an increased concentration of "prestigious" universities (ex. Ivy League) in this region; there may be a "higher" quality of education that is more sought after for employment.
+Northeastern states may have higher median earnings because of an increased concentration of "prestigious" universities (ex. Ivy League) in this region. There may be a "higher" quality of education that is more sought after for employment within this region.
 This observation, however, requires additional investigation.
 
 ```{r}
@@ -143,7 +143,7 @@ scorecard %>%
 #### Employment Status vs. Median Earnings
 
 A scatterplot was utilized to determine the distribution of median earnings for graduates based on working status.
-As seen in the rightmost scatterplot, there are more working graduates than those who do not work; there are notable extremes for count_working, where at least two data points indicate more than 7,500 working graduates were earning.
+As seen in the rightmost scatterplot, there are more working graduates than those who do not work; there are notable extremes for count_working, where at least two data points indicate more than 7,500 working graduates.
 Working graduates seem more numerous and spread out for median earnings compared to those who did not work.
 Surprisingly, working and non-working graduates seem to have similarly distributed median earnings; this goes against an assumption that working graduates would have higher median salaries than those who do not work.
 
@@ -186,7 +186,7 @@ scorecard1 %>%
 
 #### Year vs. Median Earnings
 
-Median earnings based on years did not frequently change, and years 2009 and 2011 saw at least one visible outlier among graduates for more than \$150,000 earned.
+Median earnings based on years did not frequently change, and years 2009 and 2011 saw at least one visible outlier among graduates for more than $150,000 earned.
 Because yearly data for 2008 and post 2014 was omitted due to missing information, the yearly earnings distribution may not be reflective of additional years.
 However, the trends in the boxplot indicate that median earnings generally decreased after 2009; this may indicate a response to economic effects.
 Additional research is required to further investigate this observation.
@@ -205,7 +205,7 @@ scorecard1 %>%
 
 #### Correlations
 
-A correlation matrix was generated to visualize correlations between selected numeric variables.The highest correlation was found to be between `count_working` and `count_not_working` at 0.97.This is trivial since the number of graduates that are able to find work directly influences the number of graduates that remained unemployed.
+A correlation matrix was generated to visualize correlations between selected numeric variables.The highest correlation was found to be between `count_working` and `count_not_working` at 0.97. This is trivial since the number of graduates that are able to find work directly influences the number of graduates that remained non-working.
 The magnitudes of all other correlation factors were below 0.25, suggesting the variables have a quite weak relationship.
 
 ```{r}
@@ -301,8 +301,8 @@ print(cbind(`R2`, `RSE`, `P.value`))
 ```
 
 Our Basic model is `earnings_med ~ region + degree + year + count_not_working + count_working`.
-It had an $R^2$ of .493; this indicates that 49.3% of the variance of the data was accounted for by our model.
-The basic model has a Residual Standard Error (RSE) of \$8372.924; this indicates that the average error of the basic model for all points is \~\$8372.924 (aka the predicted valuES are on average off by \$8372.924 from the expected values).
+It had an $R^2$ of 0.493; this indicates that 49.3% of the variance of the data was accounted for by our model.
+The basic model has a Residual Standard Error (RSE) of \$8372.924; this indicates that the average error of the basic model for all points is \~\$8372.924 (the predicted values are on average off from the expected values by \$8372.924).
 
 The F-test for the Basic model compares two hypotheses: the null hypothesis suggests that a simple intercept-only model is sufficient, while the alternative hypothesis argues that the Basic model is a better fit.
 Given that the overall p-value is 0, which is below the threshold for statistical significance, we reject the null hypothesis.
@@ -317,7 +317,7 @@ bptest(earnings_lm)
 In the diagnostic analysis of the basic model, the primary concern identified was the assumption of normality.
 The plots of residuals versus fitted values suggested ambiguity in confirming the mean-zero assumption.
 To clarify, a t-test on the residuals was conducted.
-The resulting p-value of 1 implies insufficient evidence to refute the null hypothesis, suggesting that the residuals are, on average, mean-zero.
+The resulting p-value of 1 implies insufficient evidence to reject the null hypothesis, suggesting that the residuals are, on average, mean-zero.
 
 Next, the assumption of constant variance was evaluated.
 Initial observations from the plot indicated homoscedasticity.
@@ -346,7 +346,7 @@ print(cbind(`R2`, `RSE`, `P.value`))
 
 A log-dependent transformation was applied, resulting in the model: log(earnings_med) \~ region + degree + year + count_not_working + count_working.
 This transformation yielded a marginally improved $R^2$ value of 0.503.
-The model's RSE is 0.243, indicating that the predicted values deviate on average by $e^{0.243}$ from the expected values.The F-test for the Log Model, similar to the Basic model, compares an intercept-only model against the Log model.
+The model's RSE is 0.243, indicating that the predicted values deviate on average by $e^{0.243}$ from the expected values. The F-test for the Log Model, similar to that of the Basic model, compares an intercept-only model against the Log model.
 With a p-value of 0, the null hypothesis is rejected, suggesting that the Log model is more suitable for this data than the intercept-only model.
 
 ```{r}
@@ -361,7 +361,7 @@ Moreover, the Log model displays a higher Breusch-Pagan statistic (1597) compare
 
 While the Log model shows improvement in normality, this assumption is often considered less critical, leading to a perspective that its improvement is not significant.
 
-Given the importance of assumptions, especially constant variance which is more significantly violated in the Log model as indicated by both plot and test, the log transformation is deemed not beneficial for use in this context.
+Given the importance of assumptions, especially constant variance, which is more significantly violated in the Log model as indicated by both plot and test, the log transformation is deemed not beneficial for use in this context.
 
 #### Evidence Supporting the Inclusion of A Spline
 
@@ -397,7 +397,7 @@ Consequently, due to these significant issues in critical aspects, the use of th
 
 #### Interpret Interaction
 
-A possible interaction that could exist in the model is between count_not_working and count_working; the Plot for Median Earnings of Graduates Based on Employment Status shows that the two slopes are expected to overlap which is atypical indicater for interaction
+A possible interaction that could exist in the model is between count_not_working and count_working. The plot of Median Earnings of Graduates Based on Employment Status shows that the two slopes are expected to overlap which is a typical indicater for interaction.
 
 ```{R}
 count_year_int_model <- lm(earnings_med ~ region + degree + (count_not_working * count_working) + year, data=scorecard)
@@ -413,18 +413,18 @@ t.test(resid(count_year_int_model), mu=0)
 bptest(count_year_int_model)
 ```
 
-The chosen intercept model, lm(earnings_med \~ region + degree + (count_not_working \* count_working) + year, exhibits issues similar to those in the Log and Spine models.
-This model does not significantly improve upon the Basic model in terms of \$R\^2\$ or RSE.
+The chosen intercept model, lm(earnings_med \~ region + degree + (count_not_working \* count_working) + year, exhibits issues similar to those in the Log and Spline models.
+This model does not significantly improve upon the Basic model in terms of $R^2$ or RSE.
 Like the other models, its F-test results suggest it is more effective than an intercept-only model.
 The t-test for mean-zero residuals yields a p-value of 1, affirming the mean-zero assumption.
-However, it closely aligns with the Basic model regarding the Breusch-Pagan statistic, with values of 945.38 compared to 855.68 for the Basic model.
+However, it closely aligns with the Basic model regarding the Breusch-Pagan statistic, with a value of 945.38 compared to 855.68 for the Basic model.
 Yet, like the previous two models, its shortcomings, mainly significant errors, outweigh its benefits, making it unsuitable for drawing conclusions.
 
 The interpretation of interaction in this model is as follows: for each unit increase in 'count_not_working', the slope of 'count_working' is altered by -1.567e-05, assuming all other variables are held constant.
 
 ### Extra analysis
 
-The following is an extra analysis of the results of each model analyzed: the results of all of their mean-0 assumptions and how they compare for LOOR2 and BP.
+The following is an extra analysis of the results of each model analyzed showing the results of all of their mean zero assumptions and how they compare for LOOR2 and BP.
 
 ```{r}
 results <- na.omit(results)
@@ -517,9 +517,9 @@ In conclusion, based on our findings, all of our initial hypotheses seem to be c
 The median earnings seem to increase with the number of graduates that are able to find a job.
 The earnings also vary based on degree type the graduate received and the geographic region of the US where the college is located.
 These conclusions do have serious limitations though.
-Firstly, our model contained only 5 predictors all of which were found to be significant.
+Firstly, our model contained only 5 predictors, all of which were found to be significant.
 However, the inclusion of more predictors can affect the trends of the model and change the significance of each of the original 5 predictors.
-Also, we need to consider the possibility of existence of confounding variables.
+It is also important to consider the possibility of existence of confounding variables.
 For example, it is possible that graduates who go to elite colleges are more likely to both find a job and earn a higher wage.
 Along with this, some regions in the US, like the Northeast, tend to have many states with a significantly higher cost of living which can explain the difference in median earnings.
 It is also important to account for the fact that we performed multiple tests in this section, hence we adjusted our p-values using the Bonferroni correction.
@@ -553,8 +553,8 @@ print("\nBootstrap SEs percent change from Basic SEs")
 ```
 
 The resulting SEs and percent change from Basic SEs are shown above.
-The percent changes display that there are not that significant changes for any of them except `regionNorth Central`, where there is a percent change of -7.09%.
-This is still not that large of a change for the SEs.
+The percent changes display that there are not significant changes except for `regionNorth Central`, where there is a percent change of -7.09%.
+This is still not a large change for the SEs.
 
 #### Check for Influential Points
 
@@ -642,13 +642,13 @@ cbind(`num_outliers`, `num_income_outliers`, `num_non_income_outliers`)
 
 ```
 
-The range of non-outliers vs. outliers for earnings med appears to be a big contributor to which points are in outliers.
+The range of non-outliers vs. outliers for earnings appears to be a large contributor to which points are outliers.
 The non-outliers are all contained inside \[8500, 63600\], while the outliers consist of \[8400, 171900\].
 There are 1332 influential outliers and only 492 outside of the non_outlier range.
-meaning there are are only 840 left to explain.
+meaning there are are only 840 left that are not explained.
 
-Examining all of the plots and comparing each variable to income, The blatan outliers appear in count_not_working and count_working, where the places with higher values of those are typically outliers.
-For region and degree, it appears that any outliers on the boxplots are also outliers for the data.
+Examining all of the plots and comparing each variable to income, the blatan outliers appear in count_not_working and count_working, where those with higher values of those are typically outliers.
+For the variables region and degree, it appears that any outliers on the boxplots are also outliers for the data.
 The most interesting pattern appears for the institution name and state name.
 
 ```{r}
@@ -663,10 +663,10 @@ non_income_not_state_outliers <- non_income_outliers[non_income_outliers$state_a
 NROW(non_income_not_state_outliers)
 ```
 
-After looking at state after only including outliers that are within the income range of non_outliers, there are some states that have a lot more outliers than would be guessed, even distribution against all of them: "PA" "NY" "CA" "MI" "NJ" "IL" "MA" "OH" "VA" "ME" "TX".
-After filtering out those states, there are 563 left.
+After looking at state after only including outliers that are within the income range of non_outliers, there are some states that have a lot more outliers than would be expected, even distribution against all of them: "PA" "NY" "CA" "MI" "NJ" "IL" "MA" "OH" "VA" "ME" "TX".
+After filtering out these states, there are 563 left.
 
-These determinations were all the influential outlier parts that could be identified for this dataset and model.
+These determinations were all the influential outliers that could be identified for this dataset and model.
 
 #### Leave-one-out Prediction Error
 
@@ -705,20 +705,19 @@ print(vif_values)
 There is high multicolinearity between count_working and count_not_working.
 This is also indicated by the high vifs for each, 36.115252 and 36.561674, which are much greater than the typical threshold of 10.
 The 36 indicates the two variables are coupled and highly sensitive to changes in the model and data; they have much higher SE due to multicolinearity than true variance.
-Also, this means that whenever you try to predict count_not_working using all the other variables, it has a very high R\^2, leading to $\frac{1}{1-R^2}$ approaching 0 on the bottom and therefore infinity.
+Also, this means that whenever a prediction of count_not_working using all the other variables is attempted, it has a very high R\^2, leading to $\frac{1}{1-R^2}$ approaching 0 on the bottom and therefore infinity.
 Once one of the variables is removed, the variables become more balanced and within 1 of each other.
 
 ## Conclusions
 
 We rejected the null hypotheses of our initial analysis of the data in favor of our alternative hypotheses, which stated that median income differed due to number of working graduates, region, or degree earned.
-We also found that the correlations between the variables are quite weak.
 Specifically, it seemed that median earnings increased with the number of working graduates, varied between U.S. regions, and varied between length of degree earned.
-However, inclusion of more predictors could affect the trends of the model, and there could be confounding variables which could be influencing the trends and results of the tests.
+However, inclusion of more predictors could affect the trends of the model, and there could be confounding variables which could be influencing the trends and results of the tests. We also found that the correlations between the variables are quite weak.
 
 In fitting the model we found that not working and year are both significantly negatively associated with median income.
 We also found that when held against graduates of Northeastern schools, graduates of Southern, North Central, and Western schools all have decreased median income.
 When compared to graduates with a less-than-2-year degree, those with a 2 year degree and 4 or more year degree saw increased median earnings.
-This model however, saw that only about 50% of the variation observed in median earnings was accounted for, meaning that the model is likely improperly fit through overfitting or multicollinearity.
+This model however, saw that only about 50% of the variation observed in median earnings was accounted for, meaning that the model is likely improperly fit. We found that this was not due to the model being overfit, but that there was high multiocolinearity between count_working and count_not_working. 
 
-In discovering the improperness of the original model fit, we used a log-dependant transformation in order to see an improvement in fit appropriateness.
-We found that the log-transformed model did not lessen the violation of the constant variance assumption, and therefore was not beneficial.
+In attempting to create a better fitting model, we atempted a log-dependant transformation, interaction model, and spline model.
+We found that the log-transformed model did not lessen the violation of the constant variance assumption, and therefore was not beneficial. The spline model and interaction model also proved to be non-beneficial. 
