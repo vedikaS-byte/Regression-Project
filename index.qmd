@@ -9,16 +9,25 @@ editor:
 
 ## Introduction
 
-For decades, a secondary education has been considered the gold standard for ensuring a comfortable career and wage.
-In recent years however, it is becoming more and more difficult for recent graduates to find careers corresponding to their area of expertise, and therefore the wages that go with it.
-We decided upon this topic as an important area of study due to the relevance of career prospects in our own lives as well as society at large.
-Our data is from an inbuilt RStudio package, causaldata, that originally contains 8 columns and 48445 observations, but after the removal of NA values it is reduced to 30401 data points.
-Our outcome of interest is the median income of college graduates (earnings_med), while our predictors of interest are the degree awarded by each university (pred_degree_awarded_ipeds), the number of graduates actively working (count_working), those not working (count_not_working), year of data collection, and region of residence.
-The year, count working, and count not working variables are classified as discrete numeric values, and the degree awarded and region predictors are considered categorical.
-Degree awarded has 3 different observations: 1 indicates granting a less-than-two-year degree, 2 designates primarily awarding two-year degrees, and 3 denoting a typical four-year bachelors degree or greater.
-Our sed predictor, year, contains data for 2007 until 2016, but upon the omission of NA values it primarily encompasses years from 2007 to 2014.
-The region variable was one that we generated from state level data fo ease of analysis, and it is broken down into Northeast, North Central, South, and West.
-Through an exploration of the relationships between our selected predictors and median earnings, our goal is to develop a robust and effective model for forecasting the monetary outcomes associated with various types of college degrees earned across the United States.
+For decades, a secondary education has been considered the gold standard for ensuring a comfortable career and wage. In recent years however, it is becoming more and more difficult for recent graduates to find careers corresponding to their area of expertise, and therefore the wages that go with it.
+
+We decided upon this topic as an important area of study due to the relevance of career prospects in our own lives as well as society at large. Our data is from an inbuilt RStudio package, causaldata, that originally contains 8 columns and 48445 observations, but after the removal of NA values it is reduced to 30401 data points.
+
+Our outcome of interest is the median income of college graduates (earnings_med), 
+while our predictors of interest are the degree awarded by each university (pred_degree_awarded_ipeds), 
+the number of graduates actively working (count_working), those not working (count_not_working), 
+year of data collection, and region of residence.The year, count working, and count not working variables
+are classified as discrete numeric values, and the degree awarded and region predictors are considered categorical.
+Degree awarded has 3 different observations: 1 indicates granting a less-than-two-year degree, 
+2 designates primarily awarding two-year degrees, and 3 denoting a typical four-year bachelors degree or greater.
+
+Our second predictor, year, contains data for 2007 until 2016, 
+but upon the omission of NA values it primarily encompasses years from 2007 to 2014.
+The region variable was one that we generated from state level data for ease of analysis,
+and it is broken down into Northeast, North Central, South, and West.
+Through an exploration of the relationships between our selected predictors and median earnings
+, our goal is to develop a robust and effective model for forecasting the monetary outcomes 
+associated with various types of college degrees earned across the United States.
 
 ```{r}
 # all of our packages
@@ -68,9 +77,11 @@ scorecard <- na.omit(scorecard)
 ```
 
 ## Research Questions
+To effectively determine the impact of count working, count not working, year,
+degree awarded, and region on the median earnings of college graduates,
+we outlined three research questions as a framework for our analysis:
 
-To effectively determine the impact of count working, count not working, year, degree awarded, and region on the median earnings of college graduates, we outlined three research questions as a framework for our analysis: \#### 1.
-Does median income have a positive relationship with the proportion of working graduates?
+#### 1. Does median income have a positive relationship with the proportion of working graduates?
 
 -   $H_0$: Median income will have a positive relationship with the number of working graduates.
 
@@ -90,11 +101,14 @@ Does median income have a positive relationship with the proportion of working g
 
 ## Data Exploration
 
-The purpose of this project is to analyze a potential relationship between college graduates in the US and median earnings based on year, region, degree length, and working status.
-Firstly, NA values were removed from the data set.
-States were grouped into regions using the state.region() base R function, and the degree length was converted to a factor with levels for simplified analysis.
-Additional tidying was performed utilizing gather(), where "employment_status" was created with the paired variable "working" listing the number of graduates either currently working or not working.
-The following is a brief analysis of trends among selected predictors (year, employment_status (count_working and count_not_working), degree, and region) and median earnings (earnings_med).
+The purpose of this project is to analyze a potential relationship
+between college graduates in the US and median earnings based on year, region, degree length,
+and working status. Firstly, NA values were removed from the data set. States were grouped into
+regions using the state.region() base R function, and the degree length was converted to a factor
+with levels for simplified analysis. Additional tidying was performed utilizing gather(), where 
+"employment_status" was created with the paired variable "working" listing the number of graduates
+either currently working or not working. The following is a brief analysis of trends among 
+selected predictors (year, employment_status (count_working and count_not_working), degree, and region) and median earnings (earnings_med).
 
 #### Manipulate Data
 
@@ -112,11 +126,7 @@ glimpse(scorecard)
 
 #### Region Exploration
 
-A constructed boxplot illustrates trends in median earnings for graduates based on the US region.
-Graduates situated in the Northeastern US have the highest median of earnings while the South has the lowest median earning.
-Both the north central and western US have similar median earnings; however, western and northeastern states have a much wider distribution of earnings than southern and the north central states.
-Northeastern states may have higher median earnings because of an increased concentration of "prestigious" universities (ex. Ivy League) in this region; there may be a "higher" quality of education that is more sought after for employment.
-This observation, however, requires additional investigation.
+A constructed boxplot illustrates trends in median earnings for graduates based on the US region. Graduates situated in the Northeastern US have the highest median of earnings while the South has the lowest median earnings. Both the North central and western US have similar median earnings; however, western and northeastern states have a much wider distribution of earnings than southern and the North central states. Northeastern states may have higher median earnings because of an increased concentration of "prestigious" universities (ex. Ivy League) in this region; there may be a "higher" quality of education that is more sought after for employment. This observation, however, requires additional investigation.
 
 ```{r}
 # Plot for Graduate Median Earnings Based on Region
@@ -139,10 +149,7 @@ scorecard %>%
 
 #### Employment Status vs. Median Earnings
 
-A scatterplot was utilized to determine the distribution of median earnings for graduates based on working status.
-As seen in the rightmost scatterplot, there are more working graduates than those who do not work; there are notable extremes for count_working, where at least two data points indicate more than 7,500 working graduates were earning.
-Working graduates seem more numerous and spread out for median earnings compared to those who did not work.
-Surprisingly, working and non-working graduates seem to have similarly distributed median earnings; this goes against an assumption that working graduates would have higher median salaries than those who do not work.
+A scatterplot was utilized to determine the distribution of median earnings for graduates based on working status. As seen in the rightmost scatterplot, there are more working graduates than those who do not work; there are notable extremes for count_working, where at least two data points indicate more than 7,500 working graduates were earning. Working graduates seem more numerous and spread out for median earnings compared to those who did not work. Surprisingly, working and non-working graduates seem to have similarly distributed median earnings; this goes against an assumption that working graduates would have higher median salaries than those who do not work.
 
 ```{r}
 # Create a new dataframe with tidy long performed on status of work
@@ -166,10 +173,7 @@ scorecard1 %>%
 
 #### Degree Length vs. Median Earnings
 
-It was expected that the longer the degree length, the higher the median earnings for graduates.
-Those who completed an undergraduate degree or pursued further education (ex. graduate school) earned much more than those who did not; the median earnings for this group are higher, and there is more spread for median earnings.
-This visually supports the observation that graduates with at least an undergraduate degree or additional completed schooling have a higher chance of employment because academic and professional skills may be more developed for a selected profession.
-As such, preference may be given for graduates with an undergraduate degree or higher education status compared to those who have two or less years of completed education.
+It was expected that the longer the degree length, the higher the median earnings for graduates. Those who completed an undergraduate degree or pursued further education (ex. graduate school) earned much more than those who did not; the median earnings for this group are higher, and there is more spread for median earnings. This visually supports the observation that graduates with at least an undergraduate degree or additional completed schooling have a higher chance of employment because academic and professional skills may be more developed for a selected profession. As such, preference may be given for graduates with an undergraduate degree or higher education status compared to those who have two or less years of completed education.
 
 ```{r}
 # Plot for Median Earnings of Graduates Based on Degree Length
@@ -184,9 +188,7 @@ scorecard1 %>%
 #### Year vs. Median Earnings
 
 Median earnings based on years did not frequently change, and years 2009 and 2011 saw at least one visible outlier among graduates for more than \$150,000 earned.
-Because yearly data for 2008 and post 2014 was omitted due to missing information, the yearly earnings distribution may not be reflective of additional years.
-However, the trends in the boxplot indicate that median earnings generally decreased after 2009; this may indicate a response to economic effects.
-Additional research is required to further investigate this observation.
+Because yearly data for 2008 and post 2014 was omitted due to missing information, the yearly earnings distribution may not be reflective of additional years. However, the trends in the boxplot indicate that median earnings generally decreased after 2009; this may indicate a response to economic effects. Additional research is required to further investigate this observation.
 
 ```{r}
 # changing year to a factor
@@ -202,9 +204,7 @@ scorecard1 %>%
 
 #### Correlations
 
-A correlation matrix was generated to visualize correlations between selected numeric variables.The highest correlation was found to be between `count_working` and `count_not_working` at 0.97.
-This is trivial since the number of graduates that are able to find work directly influences the number of graduates that remained unemployed.
-The magnitudes of all other correlation factors were below 0.25, suggesting the variables have a quite weak relationship.
+A correlation matrix was generated to visualize correlations between selected numeric variables.The highest correlation was found to be between `count_working` and `count_not_working` at 0.97.This is trivial since the number of graduates that are able to find work directly influences the number of graduates that remained unemployed. The magnitudes of all other correlation factors were below 0.25, suggesting the variables have a quite weak relationship.
 
 ```{r}
 # getting year as a numeric
@@ -225,25 +225,20 @@ To assess for the presence of a predictive relationship between the median earni
 
 ```{r}
 earnings_lm<-lm(earnings_med~region+degree+year+count_not_working+count_working, data=scorecard)
-summary(earnings_lm)
 scorecard$region<-relevel(scorecard$region, ref="Northeast")
+summary(earnings_lm)
 cat("Earnings median range:", range(scorecard$earnings_med))
 ```
 
 The substantial F-statistic generated by the linear model of 3691 on 8 and 30392 degrees of freedom allowed us to reject the null hypothesis that none of the chosen variables possess any relationship to median earnings (all slopes are equal to zero) in favor of the alternative hypothesis that at least one of the predictive variables influences the earnings of American college graduates (at least one slope is not equal to zero).
-Given the confirmation of, at minimum, one of our independent variables' predictive power, we further explored the more nuanced ways in which each contributed to variation from the baseline predicted income of \$503,340, as denoted by the intercept regression coefficient.
-Holding the influence of region, degrees typically awarded, year, and the number of graduates not actively employed constant, a one person increase in the number of gainfully employed graduates contributed to an institution results in a marginal \$1.56 increase in predicted median earnings.
-Conversely, when controlling for the effect of all other predictors, the addition of a single non-working alumni unsurprisingly elicits a predicted \$8.86 decline in predicted income.
-Assessment of the regression coefficient assigned to the year variable in the same manner revealed a slightly more impactful association between the year participants were surveyed and median earnings, with the passage of one year resulting in a loss of \$235.90.
-Due to the categorical nature of the predominant degree awarded by collegiate study participants and the region in which each institution of higher learning resides, the analysis of their influence on predicted monetary outcomes diverged from that of aforementioned variables.
-As a hub for a variety of prestigious Universities, we anticipated that graduates from Northeastern schools would likely possess the highest median earnings and we accordingly designated it as the reference for our analysis of regional impacts.
-When controlling for the effects of all other variables and regions, prior attendance of a Southern school resulted in an average median earnings reduction of \$4,613 from the Northeastern baseline.
-Upon similar evaluation, graduation from North Central and Western colleges comparably resulted in an average loss of \$3,651 and \$1,761, respectively.
-In considering the impact of the predominant degree awarded we identified the widest range of variation between predicted monetary outcomes, with the reference of less than 2 years differing by ampler amounts than the deviations observed between the regional categories.
-Controlling for all other variables and education levels, completion of a 2 year degree improved average predicted median income by \$5,892, while graduation with a bachelor's degree raised income by an average of \$15,670 after comparison to the baseline.
-Though all of the regression coefficients for both numeric and categorical variables possessed p-values significant at the zero level (p \<2\*10-16), the multiple R2 value of 0.498 indicates that only approximately 50% of the variation observed in median earnings for those surveyed is accounted for by the collegiate attributes analyzed above.
-This is reflected by the substantial residual standard error of 8373 on 30,392 degrees of freedom, meaning that the predicted values produced by the linear model deviate from actual monetary outcomes by an average of \$8373.
-When compared to both the regression coefficients and the overall range of the actual median earnings values (\$8604-\$171900), the level of error observed in the estimates produced by the model is concerning and likely indicative of improper model fit through overfitting or multicollinearity.
+
+Given the confirmation of, at minimum, one of our independent variables' predictive power, we further explored the more nuanced ways in which each contributed to variation from the baseline predicted income of \$503,340, as denoted by the intercept regression coefficient. Holding the influence of region, degrees typically awarded, year, and the number of graduates not actively employed constant, a one person increase in the number of gainfully employed graduates contributed to an institution results in a marginal \$1.56 increase in predicted median earnings. Conversely, when controlling for the effect of all other predictors, the addition of a single non-working alumni unsurprisingly elicits a predicted \$8.86 decline in predicted income. Assessment of the regression coefficient assigned to the year variable in the same manner revealed a slightly more impactful association between the year participants were surveyed and median earnings, with the passage of one year resulting in a loss of \$235.90.
+
+Due to the categorical nature of the predominant degree awarded by collegiate study participants and the region in which each institution of higher learning resides, the analysis of their influence on predicted monetary outcomes diverged from that of aforementioned variables. As a hub for a variety of prestigious Universities, we anticipated that graduates from Northeastern schools would likely possess the highest median earnings and we accordingly designated it as the reference for our analysis of regional impacts. When controlling for the effects of all other variables and regions, prior attendance of a Southern school resulted in an average median earnings reduction of \$4,613 from the Northeastern baseline. Upon similar evaluation, graduation from North Central and Western colleges comparably resulted in an average loss of \$3,651 and \$1,761, respectively.
+
+In considering the impact of the predominant degree awarded we identified the widest range of variation between predicted monetary outcomes, with the reference of less than 2 years differing by ampler amounts than the deviations observed between the regional categories. Controlling for all other variables and education levels, completion of a 2 year degree improved average predicted median income by \$5,892, while graduation with a bachelor's degree raised income by an average of \$15,670 after comparison to the baseline.
+
+Though all of the regression coefficients for both numeric and categorical variables possessed p-values significant at the zero level (p \<2\*10-16), the multiple R2 value of 0.498 indicates that only approximately 50% of the variation observed in median earnings for those surveyed is accounted for by the collegiate attributes analyzed above. This is reflected by the substantial residual standard error of 8373 on 30,392 degrees of freedom, meaning that the predicted values produced by the linear model deviate from actual monetary outcomes by an average of \$8373. When compared to both the regression coefficients and the overall range of the actual median earnings values (\$8604-\$171900), the level of error observed in the estimates produced by the model is concerning and likely indicative of improper model fit through overfitting or multicollinearity.
 
 ## Improving the Model
 
@@ -283,7 +278,7 @@ analyze_model <- function(model){
 }
 ```
 
-#### Accessing the Basic Model
+#### Assessing the Basic Model
 
 ```{r}
 analyze_model(earnings_lm)
@@ -296,7 +291,7 @@ print(cbind(`R2`, `RSE`, `P.value`))
 
 Our Basic model is `earnings_med ~ region + degree + year + count_not_working + count_working`.
 It had an $R^2$ of .493; this indicates that 49.3% of the variance of the data was accounted for by our model.
-The basic model has a Residual Standard Error (RSE) of \$8372.924; this indicates that the average error of the basic model for all points is \~\$8372.924 (aka the predicted valuse are on average off by \$8372.924 from the expected values).
+The basic model has a Residual Standard Error (RSE) of \$8372.924; this indicates that the average error of the basic model for all points is \~\$8372.924 (aka the predicted valuES are on average off by \$8372.924 from the expected values).
 
 The F-test for the Basic model compares two hypotheses: the null hypothesis suggests that a simple intercept-only model is sufficient, while the alternative hypothesis argues that the Basic model is a better fit.
 Given that the overall p-value is 0, which is below the threshold for statistical significance, we reject the null hypothesis.
@@ -308,23 +303,15 @@ t.test(resid(earnings_lm), mu=0)
 bptest(earnings_lm)
 ```
 
-In the diagnostic analysis of the basic model, the primary concern identified was the assumption of normality.
-The plots of residuals versus fitted values suggested ambiguity in confirming the mean-zero assumption.
-To clarify, a t-test on the residuals was conducted.
-The resulting p-value of 1 implies insufficient evidence to refute the null hypothesis, suggesting that the residuals are, on average, mean-zero.
+In the diagnostic analysis of the basic model, the primary concern identified was the assumption of normality. The plots of residuals versus fitted values suggested ambiguity in confirming the mean-zero assumption. To clarify, a t-test on the residuals was conducted. The resulting p-value of 1 implies insufficient evidence to refute the null hypothesis, suggesting that the residuals are, on average, mean-zero.
 
-Next, the assumption of constant variance was evaluated.
-Initial observations from the plot indicated homoscedasticity.
-However, a subsequent Breusch-Pagan test yielded a p-value significantly less than 2.2e-16.
-This result leads to the rejection of the null hypothesis of homoscedasticity, indicating the presence of heteroscedasticity in the model.
+Next, the assumption of constant variance was evaluated. Initial observations from the plot indicated homoscedasticity. However, a subsequent Breusch-Pagan test yielded a p-value significantly less than 2.2e-16. This result leads to the rejection of the null hypothesis of homoscedasticity, indicating the presence of heteroscedasticity in the model.
 
-The final assumption under scrutiny is normality.
-The qqplot reveals clear deviations, with the data straying significantly from the expected 1-1 line, indicating issues with normality.
-However, given the substantial volume of data in the model, some might contend that the normality concern is less critical.
+The final assumption under scrutiny is normality. The qqplot reveals clear deviations, with the data straying significantly from the expected 1-1 line, indicating issues with normality. However, given the substantial volume of data in the model, some might contend that the normality concern is less critical.
 
 #### Accessing Log Transformation
 
-The most important transformation for this data is to try the log transformation since the primary issue is constant variance.
+Given that the primary issue with the model is with constant variance, we will attempt a log transformation.
 
 ```{r}
 log_model <- lm(log(earnings_med) ~ region + degree + year + count_not_working + 
@@ -338,10 +325,7 @@ P.value <- pf(log_summary$fstatistic[1],log_summary$fstatistic[2],log_summary$fs
 print(cbind(`R2`, `RSE`, `P.value`))
 ```
 
-A log-dependent transformation was applied, resulting in the model: log(earnings_med) \~ region + degree + year + count_not_working + count_working.
-This transformation yielded a marginally improved \$R\^2\$ value of 0.503.
-The model's RSE is 0.243, indicating that the predicted values deviate on average by \$e\^{0.243}\$ from the expected values.The F-test for the Log Model, similar to the Basic model, compares an intercept-only model against the Log model.
-With a p-value of 0, the null hypothesis is rejected, suggesting that the Log model is more suitable for this data than the intercept-only model.
+A log-dependent transformation was applied, resulting in the model: log(earnings_med) \~ region + degree + year + count_not_working + count_working. This transformation yielded a marginally improved $R^2$ value of 0.503. The model's RSE is 0.243, indicating that the predicted values deviate on average by $e^{0.243}$ from the expected values.The F-test for the Log Model, similar to the Basic model, compares an intercept-only model against the Log model. With a p-value of 0, the null hypothesis is rejected, suggesting that the Log model is more suitable for this data than the intercept-only model.
 
 ```{r}
 autoplot(log_model)
@@ -349,9 +333,7 @@ t.test(resid(log_model), mu=0)
 bptest(log_model)
 ```
 
-For the Log model, the p-value is 1, providing insufficient evidence to reject the null hypothesis and suggesting that the residuals are mean-zero, similar to the Basic model.
-In terms of constant variance, the Log model's p-value is significantly below 2.2e-16.
-Moreover, the Log model displays a higher Breusch-Pagan statistic (1597) compared to the Basic model (855.68), indicating stronger evidence of heteroscedasticity.
+For the Log model, the p-value is 1, providing insufficient evidence to reject the null hypothesis and suggesting that the residuals are mean-zero, similar to the Basic model. In terms of constant variance, the Log model's p-value is significantly below 2.2e-16. Moreover, the Log model displays a higher Breusch-Pagan statistic (1597) compared to the Basic model (855.68), indicating stronger evidence of heteroscedasticity.
 
 While the Log model shows improvement in normality, this assumption is often considered less critical, leading to a perspective that its improvement is not significant.
 
@@ -508,7 +490,7 @@ contrast(emmeans(earnings_lm, ~ degree), method = "pairwise", adjust = "none")
 ```
 
 In conclusion, based on our findings, all of our initial hypotheses seem to be confirmed.
-The median earnings do seem to increase with the number of graduates that are able to find a job.
+The median earnings seem to increase with the number of graduates that are able to find a job.
 The earnings also vary based on degree type the graduate received and the geographic region of the US where the college is located.
 These conclusions do have serious limitations though.
 Firstly, our model contained only 5 predictors all of which were found to be significant.
@@ -704,4 +686,9 @@ Once one of the variables is removed, the variables become more balanced and wit
 
 ## Conclusions
 
-(Your text here)
+We rejected the null hypotheses of our initial analysis of the data in favor of our alternative hypotheses, which stated that median income differed due to number of working graduates, region, or degree earned. We also found that the correlations between the variables are quite weak. Specifically, it seemed that median earnings increased with the number of working graduates, varied between U.S. regions, and varied between length of degree earned. However, inclusion of more predictors could affect the trends of the model, and there could be confounding variables which could be influencing the trends and results of the tests. 
+
+In fitting the model we found that not working and year are both significantly negatively associated with median income. We also found that when held against graduates of Northeastern schools, graduates of Southern, North Central, and Western schools all have decreased median income. When compared to graduates with a less-than-2-year degree, those with a 2 year degree and 4 or more year degree saw increased median earnings. This model however, saw that only about 50% of the variation observed in median earnings was accounted for, meaning that the model is likely improperly fit through overfitting or multicollinearity. 
+
+In discovering the improperness of the original model fit, we used a log-dependant transformation in order to see an improvement in fit appropriateness. We found that the log-transformed model did not lessen the violation of the constant variance assumption, and therefore was not beneficial.  
+
