@@ -596,7 +596,7 @@ for (i in 1:ncol(dfbetas_values)) {
 
 ```
 
-As made blatant by the graphs for DFFITS and each dfbetas graph, there are many points that are highly influential.
+As made blatant by the graphs for dffits and each dfbetas graph, there are many points that are highly influential.
 For the following analysis, it will only focus on the outliers found by dffitts so as not to bloat the outliers with points that do not truly affect the data.
 
 ```{r}
