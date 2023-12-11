@@ -142,8 +142,8 @@ scorecard %>%
 
 #### Employment Status vs. Median Earnings
 
-A scatterplot was utilized to determine the distribution of median earnings for graduates based on working status.
-As seen in the rightmost scatterplot, there are more working graduates than those who do not work; there are notable extremes for count_working, where at least two data points indicate more than 7,500 working graduates.
+A scatter plot was utilized to determine the distribution of median earnings for graduates based on working status.
+As seen in the rightmost scatter plot, there are more working graduates than those who do not work; there are notable extremes for count_working, where at least two data points indicate more than 7,500 working graduates.
 Working graduates seem more numerous and spread out for median earnings compared to those who did not work.
 Surprisingly, working and non-working graduates seem to have similarly distributed median earnings; this goes against an assumption that working graduates would have higher median salaries than those who do not work.
 
